@@ -25,5 +25,6 @@ module.exports = {
     },
     devServer: {
         port: 9001,
-    }
+    },
+    devtool: '#source-map',
 };
