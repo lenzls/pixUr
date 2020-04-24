@@ -19,10 +19,10 @@ export function CreateBoard() {
         },
         removePiece({ piece, index }) {},
         updatePieceRenderingPositions() {
-            spaces[0].forEach(piece => {
+            spaces[0].forEach((piece, index) => {
                 piece.sprite.position.set(
                     10,
-                    piece.player.type === TYPE.WHITE ? 50 : 100
+                    (piece.player.type === TYPE.WHITE ? 50 : 280) + index * 10
                 );
             });
         },

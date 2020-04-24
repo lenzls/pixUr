@@ -5,7 +5,7 @@ import { utils, Application, Container, loader } from './engine.js';
 
 console.log(`WebGL is supported by your browser: ${utils.isWebGLSupported()}`);
 
-const app = new Application({ width: 256, height: 256 });
+const app = new Application({ width: 640, height: 480 });
 document.body.appendChild(app.view);
 
 

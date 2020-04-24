@@ -15,6 +15,12 @@ function CreatePlayer({ name, pieceTexture, type }) {
         type,
     };
     pieces.push(CreatePiece({ player, sprite: new Sprite(pieceTexture) }));
+    pieces.push(CreatePiece({ player, sprite: new Sprite(pieceTexture) }));
+    pieces.push(CreatePiece({ player, sprite: new Sprite(pieceTexture) }));
+    pieces.push(CreatePiece({ player, sprite: new Sprite(pieceTexture) }));
+    pieces.push(CreatePiece({ player, sprite: new Sprite(pieceTexture) }));
+    pieces.push(CreatePiece({ player, sprite: new Sprite(pieceTexture) }));
+    pieces.push(CreatePiece({ player, sprite: new Sprite(pieceTexture) }));
     return player;
 }
 
