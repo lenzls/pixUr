@@ -1,1 +1,1 @@
-console.log('let us try the auto deploy - now fm npm');
+console.log('let us try the auto deploy - now fm npm (again)');
