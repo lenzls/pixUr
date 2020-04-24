@@ -1,9 +1,11 @@
 {
   "name": "pixur",
   "version": "0.0.1",
+  "private": true,
   "description": "Recreation of the Royal Game of Ur",
   "main": "index.js",
   "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --progress --config build/webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/lenzls/pixUr/issues"
   },
-  "homepage": "https://github.com/lenzls/pixUr#readme"
+  "homepage": "https://github.com/lenzls/pixUr#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
 }
