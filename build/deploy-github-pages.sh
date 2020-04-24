@@ -1,7 +1,6 @@
 #! /bin/sh
 # inspired by https://stackoverflow.com/a/48591941/376172
 
-npm run build
 git stash
 git branch --delete --force gh-pages
 git checkout --orphan gh-pages
