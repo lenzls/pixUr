@@ -1,7 +1,8 @@
 export function CreatePiece({ player, sprite }) {
-    sprite.player = player;
-    return {
+    const piece = {
         player,
         sprite
     };
+    sprite.piece = piece;
+    return piece;
 }

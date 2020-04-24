@@ -39,7 +39,7 @@ addAssets({ loader })
                 gameScene.addChild(sprite);
                 sprite.interactive = true;
                 sprite.on('click', (event) => {
-                    console.log(event.target.player);
+                    game.moveAttempt({ piece: event.target.piece });
                 });
             });
 
