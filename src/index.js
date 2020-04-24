@@ -1,1 +1,1 @@
-console.log('teeeest2 :)');
+console.log('let us try the auto deploy');
