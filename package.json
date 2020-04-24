@@ -21,10 +21,13 @@
     "url": "https://github.com/lenzls/pixUr/issues"
   },
   "homepage": "https://github.com/lenzls/pixUr#readme",
-  "dependencies": {},
+  "dependencies": {
+    "pixi.js": "^5.2.3"
+  },
   "devDependencies": {
     "cross-env": "^7.0.2",
     "eslint": "^6.8.0",
+    "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.2.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"

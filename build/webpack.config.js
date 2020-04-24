@@ -11,4 +11,16 @@ module.exports = {
     },
     mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
     plugins: [new HtmlWebpackPlugin()],
+    module: {
+        rules: [
+            {
+                test: /\.png$/,
+                use: [
+                    { 
+                        loader: 'file-loader' ,
+                    },
+                ]
+            }
+        ]
+    },
 };
