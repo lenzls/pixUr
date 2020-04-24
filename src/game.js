@@ -33,7 +33,7 @@ loader
     })
     .load(() => {
         menuScene.visible = false;
-        gameScene.visible = false;
+        gameScene.visible = true;
 
         whitePieces.push(new Sprite(loader.resources[white].texture));
         blackPieces.push(new Sprite(loader.resources[black].texture));
