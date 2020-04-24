@@ -33,7 +33,13 @@ addAssets({ loader })
             ...game.white.pieces.map(p => p.sprite), 
             ...game.black.pieces.map(p => p.sprite)
         ]
-            .forEach(sprite => gameScene.addChild(sprite));
+            .forEach(sprite => {
+                gameScene.addChild(sprite);
+                sprite.interactive = true;
+                sprite.on('click', (event) => {
+                    console.log(event.target.player);
+                });
+            });
 
         app.stage.addChild(menuScene);
         app.stage.addChild(gameScene);
