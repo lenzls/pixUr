@@ -14,8 +14,10 @@ const gameScene = new Container();
 
 const state = play;
 
+let game;
+
 function play(delta) {
-    // whitePieces.forEach(sprite => sprite.x += 1 * delta);
+    game.update();
 }
 
 addAssets({ loader })
@@ -27,7 +29,7 @@ addAssets({ loader })
         menuScene.visible = false;
         gameScene.visible = true;
 
-        const game = CreateGame();
+        game = CreateGame();
 
         [
             ...game.white.pieces.map(p => p.sprite), 

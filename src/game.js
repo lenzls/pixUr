@@ -14,5 +14,9 @@ export function CreateGame() {
         board,
         white,
         black,
+        moveAttempt({ piece, pips }) {},
+        update() { 
+            board.updatePieceRenderingPositions();
+        },
     };
 }
