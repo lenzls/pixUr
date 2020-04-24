@@ -1,19 +1,15 @@
-import black from './assets/graphics/black.png';
-import white from './assets/graphics/white.png';
+import { addAssets } from './sprites.js';
 
-import * as PIXI from 'pixi.js';
+import { CreateWhitePlayer, CreateBlackPlayer } from './player.js';
+import { utils, Application, Container, loader } from './engine.js';
 
-console.log(`WebGL is supported by your browser: ${PIXI.utils.isWebGLSupported()}`);
 
-const app = new PIXI.Application({ width: 256, height: 256 });
+
+console.log(`WebGL is supported by your browser: ${utils.isWebGLSupported()}`);
+
+const app = new Application({ width: 256, height: 256 });
 document.body.appendChild(app.view);
 
-const loader = PIXI.Loader.shared;
-const Sprite = PIXI.Sprite;
-const Container = PIXI.Container;
-
-const whitePieces = [];
-const blackPieces = [];
 
 const menuScene = new Container();
 const gameScene = new Container();
@@ -21,12 +17,10 @@ const gameScene = new Container();
 const state = play;
 
 function play(delta) {
-    whitePieces.forEach(sprite => sprite.x += 1 * delta);
+    // whitePieces.forEach(sprite => sprite.x += 1 * delta);
 }
 
-loader
-    .add(black)
-    .add(white)
+addAssets({ loader })
     .on('progress', (loader, resource) => {
         console.log(`loading ${resource.url}`);
         console.log(`progress: ${loader.progress}%`);
@@ -35,10 +29,10 @@ loader
         menuScene.visible = false;
         gameScene.visible = true;
 
-        whitePieces.push(new Sprite(loader.resources[white].texture));
-        blackPieces.push(new Sprite(loader.resources[black].texture));
+        const white = CreateWhitePlayer();
+        const black = CreateBlackPlayer();
         
-        [...whitePieces, ...blackPieces].forEach(sprite => gameScene.addChild(sprite));
+        [...white.pieceSprites, ...black.pieceSprites].forEach(sprite => gameScene.addChild(sprite));
 
         app.stage.addChild(menuScene);
         app.stage.addChild(gameScene);
