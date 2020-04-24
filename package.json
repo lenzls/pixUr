@@ -7,6 +7,7 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --progress --config build/webpack.config.js",
     "dev": "cross-env NODE_ENV=development npm run build -- --watch",
+    "deploy": "sh build/deploy-github-pages.sh",
     "lint": "eslint src/*.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
