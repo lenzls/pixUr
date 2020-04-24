@@ -38,8 +38,7 @@ loader
         whitePieces.push(new Sprite(loader.resources[white].texture));
         blackPieces.push(new Sprite(loader.resources[black].texture));
         
-        whitePieces.forEach(sprite => gameScene.addChild(sprite));
-        blackPieces.forEach(sprite => gameScene.addChild(sprite));
+        [...whitePieces, ...blackPieces].forEach(sprite => gameScene.addChild(sprite));
 
         app.stage.addChild(menuScene);
         app.stage.addChild(gameScene);
