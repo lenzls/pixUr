@@ -1,13 +1,18 @@
 import { loader, Sprite } from './engine.js';
+import { CreatePiece } from './piece.js';
 import { ASSETS } from './sprites.js';
 
-function CreatePlayer({ name, pieceTexture }) {
-    const pieceSprites = [];
-    pieceSprites.push(new Sprite(pieceTexture));
-    return {
+function CreatePlayer({ name, pieceTexture, board }) {
+    const pieces = [];
+    const player = {
         name,
-        pieceSprites,
+        pieces,
     };
+    pieces.push(CreatePiece({ player, sprite: new Sprite(pieceTexture) }));
+    return player;
+    // const pieceSprites = [];
+    // pieceSprites.push(new Sprite(pieceTexture));
+    // board.resetBlackPieces({ sprites: pieceSprites });
 }
 
 export function CreateBlackPlayer() {
