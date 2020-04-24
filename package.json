@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --progress --config build/webpack.config.js",
-    "dev": "cross-env NODE_ENV=development npm run build -- --watch",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.js",
     "deploy": "npm run build && sh build/deploy-github-pages.sh",
     "lint": "eslint src/*.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -30,6 +30,7 @@
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.2.0",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   }
 }
