@@ -8,5 +8,8 @@ export function CreateBoard() {
     ];
     return {
         spaces,
+        clear() {},
+        setPiece({ piece, index }) {},
+        removePiece({ piece, index }) {},
     };
 }

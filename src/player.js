@@ -2,7 +2,7 @@ import { loader, Sprite } from './engine.js';
 import { CreatePiece } from './piece.js';
 import { ASSETS } from './sprites.js';
 
-function CreatePlayer({ name, pieceTexture, board }) {
+function CreatePlayer({ name, pieceTexture }) {
     const pieces = [];
     const player = {
         name,
@@ -10,9 +10,6 @@ function CreatePlayer({ name, pieceTexture, board }) {
     };
     pieces.push(CreatePiece({ player, sprite: new Sprite(pieceTexture) }));
     return player;
-    // const pieceSprites = [];
-    // pieceSprites.push(new Sprite(pieceTexture));
-    // board.resetBlackPieces({ sprites: pieceSprites });
 }
 
 export function CreateBlackPlayer() {
