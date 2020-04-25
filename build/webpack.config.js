@@ -10,7 +10,9 @@ module.exports = {
         path: targetFolder,
     },
     mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
-    plugins: [new HtmlWebpackPlugin()],
+    plugins: [new HtmlWebpackPlugin({
+        template: 'src/index.html',
+    })],
     module: {
         rules: [
             {
