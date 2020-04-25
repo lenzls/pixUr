@@ -14,7 +14,7 @@ export function createGameScene({ stateMachine, game }) {
         .forEach(sprite => {
             container.addChild(sprite);
             sprite.interactive = true;
-            sprite.on('click', (event) => {
+            sprite.on('pointerdown', (event) => {
                 game.moveAttempt({ piece: event.target.piece });
             });
         });
