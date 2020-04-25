@@ -16,23 +16,34 @@ export function CreateGame() {
         board,
         white,
         black,
-        moveAttempt({ piece, pips = 1 }) {
+        rollDice() {
+            const rollDice = () => {
+                const coinToss = () => Math.random() > 0.5;
+                return coinToss() + coinToss() + coinToss() + coinToss();
+            };
+            this.currentPlayer.currentRoll = rollDice();
+        },
+        moveAttempt({ piece }) {
             const player = piece.player;
             
             if (player !== this.currentPlayer) {
                 alert("It's not your turn, pal");
                 return;
             }
+            if (!player.currentRoll) {
+                alert('Roll the dice first, pal');
+                return;
+            }
             // is it the player's turn?
             console.log('attempting to move', piece);
             const index = board.getIndex({ piece });
             console.log('current index', index);
-            const aim = index + pips;
+            const aim = index + player.currentRoll;
             
             const movePiece = ({ piece, start, aim }) => {
                 board.removePiece({ piece, index: start });
                 board.addPiece({ piece, index: aim });
-                this.currentPlayer = this.currentPlayer === white ? black : white;
+                this.switchPlayer();
             };
             if (aim <= 4 || (aim > 12 && aim <= 14)) {
                 if (board.getPieces({ index: aim }).filter(p => p.player === player).length === 0) {
@@ -50,6 +61,10 @@ export function CreateGame() {
             else {
                 console.log('Too far, pal.');
             }
+        },
+        switchPlayer() {
+            this.currentPlayer.currentRoll = null;
+            this.currentPlayer = this.currentPlayer === white ? black : white;
         },
         update() {
             if (hasPlayerWon(black)) {

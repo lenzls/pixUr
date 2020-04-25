@@ -24,6 +24,13 @@ export function createGameScene({ stateMachine, game }) {
     container.addChild(currentPlayerIndicator);
 
     container.addChild(createButton({
+        text: '⚄',
+        color: 0x66CC66,
+        position: { x: 450, y: 25 },
+        onClick: () => game.rollDice(),
+        transparency: 0.25,
+    }));
+    container.addChild(createButton({
         text: '☰',
         color: 0x66CC66,
         position: { x: 535, y: 10 },

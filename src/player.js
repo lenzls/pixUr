@@ -13,6 +13,7 @@ function CreatePlayer({ name, pieceTexture, type }) {
         name,
         pieces,
         type,
+        currentRoll: null,
     };
     pieces.push(CreatePiece({ player, sprite: new Sprite(pieceTexture) }));
     pieces.push(CreatePiece({ player, sprite: new Sprite(pieceTexture) }));
