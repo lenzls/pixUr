@@ -1,11 +1,8 @@
-import { CreateGame } from '../game.js';
 import { createBackgroundSprite } from '../board-renderer.js';
 import { Container } from '../engine.js';
 
-export function createGameScene() {
+export function createGameScene({ game }) {
     const container = new Container();
-
-    const game = CreateGame();
         
     container.addChild(createBackgroundSprite());
     [
