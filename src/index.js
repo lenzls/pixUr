@@ -6,10 +6,14 @@ import { resize } from './resizer.js';
 
 console.log(`WebGL is supported by your browser: ${utils.isWebGLSupported()}`);
 
-const parentElement = document.querySelector('#canvas-parent');
-const app = new Application({ 
+const DIMENSIONS = {
     width: 640,
     height: 480,
+};
+
+const parentElement = document.querySelector('#canvas-parent');
+const app = new Application({ 
+    ...DIMENSIONS,
     backgroundColor: 0xEEEEEE,
 });
 parentElement.appendChild(app.view);
@@ -26,7 +30,7 @@ addAssets({ loader })
         app.stage.addChild(createButton({
             text: '⛶',
             color: 0xFF00FF,
-            position: { x: 450, y: 30 },
+            position: { x: 585, y: 10 },
             onClick: () => toggleFullscreen({ element: parentElement }),
         }));
         CreateStateMachine({ app });
