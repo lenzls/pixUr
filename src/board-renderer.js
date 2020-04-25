@@ -51,8 +51,8 @@ function randomInt(minInclusive, maxExclusive) {
 }
 
 function setSpriteToPositionWithinRect({ sprite, top, bottom, left, right }) {
-    const x = randomInt(left, right - SPACE_SIZE);
-    const y = randomInt(top, bottom - SPACE_SIZE);
+    const x = randomInt(left, right - sprite.width);
+    const y = randomInt(top, bottom - sprite.height);
     sprite.position.set(x, y);
 }
 
