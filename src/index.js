@@ -1,7 +1,7 @@
 import { CreateGame } from './game.js';
 import { addAssets } from './sprites.js';
 import { createBackgroundSprite } from './board-renderer.js';
-import { utils, Application, Container, loader } from './engine.js';
+import { utils, Application, Container, Graphics, Text, loader } from './engine.js';
 
 
 console.log(`WebGL is supported by your browser: ${utils.isWebGLSupported()}`);
@@ -14,7 +14,7 @@ const app = new Application({
 document.body.appendChild(app.view);
 
 
-const menuScene = new Container();
+const menuScene = createMenuScene();
 const gameScene = new Container();
 
 const state = play;
@@ -31,8 +31,7 @@ addAssets({ loader })
         console.log(`progress: ${loader.progress}%`);
     })
     .load(() => {
-        menuScene.visible = false;
-        gameScene.visible = true;
+        switchToMenu();
 
         game = CreateGame();
         
@@ -54,3 +53,32 @@ addAssets({ loader })
 
         app.ticker.add(state);
     });
+
+function switchToMenu() {
+    menuScene.visible = true;
+    gameScene.visible = false;
+}
+function switchToGame() {
+    menuScene.visible = false;
+    gameScene.visible = true;
+}
+
+function createMenuScene() {
+    const container = new Container();
+    const START_GAME_BUTTON_POS = { x: 230, y: 300 };
+
+    const startGameButton = new Graphics();
+    startGameButton.beginFill(0x66CCFF);
+    startGameButton.drawRect(0, 0, 165, 50);
+    startGameButton.endFill();
+    startGameButton.interactive = true;
+    startGameButton.buttonMode = true;
+    startGameButton.on('pointerdown', (e) => console.log(e));
+
+    const buttonText = new Text('Start Game');
+    buttonText.position.set(15, 12);
+    startGameButton.addChild(buttonText);
+    startGameButton.position.set(START_GAME_BUTTON_POS.x, START_GAME_BUTTON_POS.y);
+    container.addChild(startGameButton);
+    return container;
+}
