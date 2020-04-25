@@ -51,7 +51,7 @@ function randomInt(minInclusive, maxExclusive) {
     return Math.floor(minInclusive + Math.random() * (maxExclusive - minInclusive));
 }
 
-function setSpriteToPositionWithinRect({ otherPiecesInSpace, sprite, top, bottom, left, right, maxTriesToPreventOverlaps = 200 }) {
+function setSpriteToPositionWithinRect({ otherPiecesInSpace, sprite, top, bottom, left, right }) {
     const generatePositionCandidate = () => ({
         x: randomInt(left, right - sprite.width),
         y: randomInt(top, bottom - sprite.height),

@@ -25,10 +25,8 @@ export function CreateGame() {
             const aim = index + pips;
             
             const movePiece = ({ piece, start, aim }) => {
-                console.log('move piece ', piece, start, aim)
                 board.removePiece({ piece, index: start });
                 board.addPiece({ piece, index: aim });
-                console.log(`new position is ${aim}`);
             };
             if (aim <= 4 || (aim > 12 && aim <= 14)) {
                 if (board.getPieces({ index: aim }).filter(p => p.player === player).length === 0) {
