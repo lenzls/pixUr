@@ -1,7 +1,8 @@
 import { createBackgroundSprite } from '../board-renderer.js';
-import { Container } from '../engine.js';
+import { Container, Text } from '../engine.js';
 import { STATES } from '../state-machine.js';
 import { createButton } from './common.js';
+import { TYPE } from '../player.js';
 
 export function createGameScene({ stateMachine, game }) {
     const container = new Container();
@@ -19,6 +20,9 @@ export function createGameScene({ stateMachine, game }) {
             });
         });
 
+    const currentPlayerIndicator = new Text('→');
+    container.addChild(currentPlayerIndicator);
+
     container.addChild(createButton({
         text: '☰',
         color: 0x66CC66,
@@ -27,5 +31,15 @@ export function createGameScene({ stateMachine, game }) {
         transparency: 0.25,
     }));
 
-    return container;
+    return {
+        container,
+        update() {
+            if (game.currentPlayer.type === TYPE.BLACK) {
+                currentPlayerIndicator.position.set(10, 300);
+            }
+            else if (game.currentPlayer.type === TYPE.WHITE) {
+                currentPlayerIndicator.position.set(10, 100);
+            }
+        }
+    };
 }
