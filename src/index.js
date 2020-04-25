@@ -14,8 +14,8 @@ const app = new Application({
 document.body.appendChild(app.view);
 
 
-const menuScene = createMenuScene();
-const gameScene = new Container();
+let menuScene;
+let gameScene;
 
 const state = play;
 
@@ -31,25 +31,13 @@ addAssets({ loader })
         console.log(`progress: ${loader.progress}%`);
     })
     .load(() => {
-        switchToMenu();
-
-        game = CreateGame();
+        menuScene = createMenuScene();
+        gameScene = createGameScene();
         
-        gameScene.addChild(createBackgroundSprite());
-        [
-            ...game.white.pieces.map(p => p.sprite), 
-            ...game.black.pieces.map(p => p.sprite)
-        ]
-            .forEach(sprite => {
-                gameScene.addChild(sprite);
-                sprite.interactive = true;
-                sprite.on('click', (event) => {
-                    game.moveAttempt({ piece: event.target.piece });
-                });
-            });
-
         app.stage.addChild(menuScene);
         app.stage.addChild(gameScene);
+
+        switchToMenu();
 
         app.ticker.add(state);
     });
@@ -63,6 +51,27 @@ function switchToGame() {
     gameScene.visible = true;
 }
 
+function createGameScene() {
+    const container = new Container();
+
+    game = CreateGame();
+        
+    container.addChild(createBackgroundSprite());
+    [
+        ...game.white.pieces.map(p => p.sprite), 
+        ...game.black.pieces.map(p => p.sprite)
+    ]
+        .forEach(sprite => {
+            container.addChild(sprite);
+            sprite.interactive = true;
+            sprite.on('click', (event) => {
+                game.moveAttempt({ piece: event.target.piece });
+            });
+        });
+
+    return container;
+}
+
 function createMenuScene() {
     const container = new Container();
     const START_GAME_BUTTON_POS = { x: 230, y: 300 };
@@ -73,7 +82,7 @@ function createMenuScene() {
     startGameButton.endFill();
     startGameButton.interactive = true;
     startGameButton.buttonMode = true;
-    startGameButton.on('pointerdown', (e) => console.log(e));
+    startGameButton.on('pointerdown', (e) => switchToGame());
 
     const buttonText = new Text('Start Game');
     buttonText.position.set(15, 12);
