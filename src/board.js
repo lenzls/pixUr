@@ -36,38 +36,45 @@ export function CreateBoard() {
                 return player.type === TYPE.WHITE ? 50 : 340;
             };
 
+            const getPlayerBaselineYPos = ({ player }) => {
+                return player.type === TYPE.WHITE ? 10 : 420;
+            };
+            const getPlayerYPos = ({ player }) => {
+                return player.type === TYPE.WHITE ? 130 : 260;
+            };
+
             spaces.forEach((space, index) => {
                 if (index === 0) {
                     space.forEach(piece => {
                         const localIndex = spaces[0].filter(p => p.player === piece.player).indexOf(piece);
-                        piece.sprite.position.set(10, calcYPos({ ...piece, index }) + localIndex * 10);
+                        piece.sprite.position.set(10 + localIndex * 10, getPlayerBaselineYPos({ ...piece }));
                     });
                 }
                 else if (index <= 4) {
                     const piece = spaces[index][0];
                     if (piece) { 
-                        const x = 10 + (4 - index) * 36;
-                        piece.sprite.position.set(x, calcYPos({ ...piece, index })); 
+                        const x = 255 - (index - 1) * 65;
+                        piece.sprite.position.set(x, getPlayerYPos({ ...piece })); 
                     }
                 }
                 else if (index <= 12) {
                     const piece = spaces[index][0];
                     if (piece) { 
-                        const x = 10 + (index - 5) * 36;
-                        piece.sprite.position.set(x, calcYPos({ ...piece, index })); 
+                        const x = 65 + (index - 5) * 65;
+                        piece.sprite.position.set(x, 190); 
                     }
                 }
                 else if (index <= 14) {
                     const piece = spaces[index][0];
                     if (piece) { 
-                        const x = 500 + (14 - index) * 36;
-                        piece.sprite.position.set(x, calcYPos({ ...piece, index })); 
+                        const x = 650 - (index - 11) * 65;
+                        piece.sprite.position.set(x, getPlayerYPos({ ...piece })); 
                     }
                 }
                 else if (index === 15) {
                     space.forEach(piece => {
                         const localIndex = spaces[15].filter(p => p.player === piece.player).indexOf(piece);
-                        piece.sprite.position.set(600, calcYPos({ ...piece, index }) + localIndex * 10);
+                        piece.sprite.position.set(600 + localIndex * 10, getPlayerBaselineYPos({ ...piece }));
                     });
                 }
 
