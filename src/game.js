@@ -10,6 +10,8 @@ export function CreateGame() {
     [...white.pieces, ...black.pieces]
         .forEach(piece => board.addPiece({ piece, index: 0 }));
 
+    const hasPlayerWon = (player) => player.pieces.every(piece => board.getIndex({ piece }) === 15);
+
     return {
         board,
         white,
@@ -45,7 +47,13 @@ export function CreateGame() {
                 console.log('reject move attempt');
             }
         },
-        update() { 
+        update() {
+            if (hasPlayerWon(black)) {
+                console.log('black has won!');
+            }
+            if (hasPlayerWon(white)) {
+                console.log('white has won!');
+            }
         },
     };
 }
