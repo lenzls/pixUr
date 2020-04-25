@@ -14,6 +14,7 @@ const HOME_ROW_RECT = {
 };
 
 const SPACE_SIZE = 64;
+const PIECE_SIZE = 32;
 
 function getRectInGrid({ column, row }) {
     // topleft square (index 4) is col:1 row:1
@@ -41,7 +42,7 @@ function getGridPosition({ index, player }) {
 }
 
 function getRect({ index, player }) {
-    if (index === 0) return { ...HOME_ROW_RECT[player.type], left: 36, right: 270 };
+    if (index === 0) return { ...HOME_ROW_RECT[player.type], left: 36, right: 350 };
     if (index === 15) return { ...HOME_ROW_RECT[player.type], left: 430, right: 610 };
     return getRectInGrid(getGridPosition({ index, player }));
 }
@@ -50,18 +51,52 @@ function randomInt(minInclusive, maxExclusive) {
     return Math.floor(minInclusive + Math.random() * (maxExclusive - minInclusive));
 }
 
-function setSpriteToPositionWithinRect({ sprite, top, bottom, left, right }) {
-    const x = randomInt(left, right - sprite.width);
-    const y = randomInt(top, bottom - sprite.height);
-    sprite.position.set(x, y);
+function setSpriteToPositionWithinRect({ otherPiecesInSpace, sprite, top, bottom, left, right, maxTriesToPreventOverlaps = 200 }) {
+    const generatePositionCandidate = () => ({
+        x: randomInt(left, right - sprite.width),
+        y: randomInt(top, bottom - sprite.height),
+    });
+    const playersOtherPiecesInSpace = otherPiecesInSpace.filter(piece => piece.player === sprite.piece.player);
+    const position = tryUntil({
+        generator: generatePositionCandidate,
+        condition: (candidate) => 
+            playersOtherPiecesInSpace
+                .every(piece => !overlap(piece.sprite, { ...candidate, width: PIECE_SIZE, height: PIECE_SIZE })),
+        maxTries: 200,
+    });
+    sprite.position.set(position.x, position.y);
+}
+
+function tryUntil({ generator, condition, maxTries }) {
+    let candidate;
+    let counter = 0;
+    do {
+        candidate = generator();
+        counter++;
+    }
+    while (
+        counter < maxTries &&
+        !condition(candidate)
+    );
+    return candidate;
+}
+
+function overlap(sprite1, sprite2) {
+    if (
+        (sprite1.x + sprite1.width < sprite2.x) ||
+        (sprite1.x > sprite2.x + sprite2.width) ||
+        (sprite1.y + sprite2.height < sprite2.y) ||
+        (sprite1.y > sprite2.y + sprite2.height)
+    ) return false;
+    return true;
 }
 
 export function removePieceFromBoard({ piece }) {
     piece.sprite.visible = false;
 }
 
-export function addPieceToBoard({ piece, index }) {    
-    setSpriteToPositionWithinRect({ sprite: piece.sprite, ...getRect({ player: piece.player, index }) });
+export function addPieceToBoard({ otherPiecesInSpace, piece, index }) {
+    setSpriteToPositionWithinRect({ otherPiecesInSpace, sprite: piece.sprite, ...getRect({ player: piece.player, index }) });
     piece.sprite.visible = true;
 }
 

@@ -11,7 +11,7 @@ export function CreateBoard() {
         clear() {},
         addPiece({ piece, index }) {
             spaces[index].push(piece);
-            addPieceToBoard({ piece, index });
+            addPieceToBoard({ otherPiecesInSpace: spaces[index], piece, index });
         },
         getPieces({ index }) {
             return spaces[index];
