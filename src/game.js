@@ -18,8 +18,8 @@ export function CreateGame() {
         black,
         rollDice() {
             const rollDice = () => {
-                const coinToss = () => Math.random() > 0.5;
-                return coinToss() + coinToss() + coinToss() + coinToss();
+                const zeroOrOne = () => Math.floor(Math.random() * 2);
+                return [zeroOrOne(), zeroOrOne(), zeroOrOne(), zeroOrOne()];
             };
             this.currentPlayer.currentRoll = rollDice();
         },
@@ -38,7 +38,7 @@ export function CreateGame() {
             console.log('attempting to move', piece);
             const index = board.getIndex({ piece });
             console.log('current index', index);
-            const aim = index + player.currentRoll;
+            const aim = index + player.currentRoll.reduce((acc, value) => acc + value, 0);
             
             const movePiece = ({ piece, start, aim }) => {
                 board.removePiece({ piece, index: start });

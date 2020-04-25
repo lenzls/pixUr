@@ -1,8 +1,9 @@
 import { createBackgroundSprite } from '../board-renderer.js';
-import { Container, Text } from '../engine.js';
+import { Container, Text, Sprite, loader } from '../engine.js';
 import { STATES } from '../state-machine.js';
 import { createButton } from './common.js';
 import { TYPE } from '../player.js';
+import { ASSETS } from '../sprites.js';
 
 export function createGameScene({ stateMachine, game }) {
     const container = new Container();
@@ -31,6 +32,18 @@ export function createGameScene({ stateMachine, game }) {
         transparency: 0.25,
     });
     container.addChild(diceButton);
+
+    const diceSprites = [
+        new Sprite(loader.resources[ASSETS.DICE_NULL].texture),
+        new Sprite(loader.resources[ASSETS.DICE_NULL].texture),
+        new Sprite(loader.resources[ASSETS.DICE_NULL].texture),
+        new Sprite(loader.resources[ASSETS.DICE_NULL].texture),
+    ];
+    diceSprites.forEach((sprite, index) => {
+        sprite.position.set(570, 115 + 50 * index);
+        container.addChild(sprite);
+    });
+
     container.addChild(createButton({
         text: '☰',
         color: 0x66CC66,
@@ -54,6 +67,19 @@ export function createGameScene({ stateMachine, game }) {
             }
             else {
                 diceButton.visible = true;
+            }
+
+            const dice = game.currentPlayer.currentRoll;
+            if (dice) {
+                diceSprites.forEach((sprite, index) => {
+                    sprite.visible = true;
+                    sprite.texture = dice[index] === 0 ? loader.resources[ASSETS.DICE_NULL].texture : loader.resources[ASSETS.DICE_ONE].texture;
+                });
+            }
+            else {
+                diceSprites.forEach((sprite) => {
+                    sprite.visible = false;
+                });
             }
         }
     };
