@@ -14,7 +14,7 @@ const DIMENSIONS = {
 const parentElement = document.querySelector('#canvas-parent');
 const app = new Application({ 
     ...DIMENSIONS,
-    backgroundColor: 0xEEEEEE,
+    backgroundColor: 0xffffff,
 });
 parentElement.appendChild(app.view);
 
@@ -29,9 +29,10 @@ addAssets({ loader })
     .load(() => {
         app.stage.addChild(createButton({
             text: '⛶',
-            color: 0xFF00FF,
+            color: 0xeec39a,
             position: { x: 585, y: 10 },
             onClick: () => toggleFullscreen({ element: parentElement }),
+            transparency: 0.25,
         }));
         CreateStateMachine({ app });
     });
