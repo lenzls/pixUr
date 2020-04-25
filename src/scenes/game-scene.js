@@ -20,10 +20,11 @@ export function createGameScene({ stateMachine, game }) {
         });
 
     container.addChild(createButton({
-        text: 'Main Menu',
+        text: '☰',
         color: 0x66CC66,
-        position: { x: 450, y: 405 },
+        position: { x: 535, y: 10 },
         onClick: () => stateMachine.switchToState({ state: STATES.MENU }),
+        transparency: 0.25,
     }));
 
     return container;
