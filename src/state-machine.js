@@ -5,9 +5,7 @@ import { createMenuScene } from './scenes/menu-scene.js';
 function CreateMenuState(config) {
     return {
         container: createMenuScene(config),
-        update() {
-            console.log('menu')
-        },
+        update() {},
     };
 }
 function CreateGameState() {
@@ -15,7 +13,6 @@ function CreateGameState() {
     return {
         container: createGameScene({ game }),
         update() {
-            console.log('game')
             game.update();
         },
     };
@@ -49,7 +46,6 @@ export function CreateStateMachine({ app }) {
             if (stateInstances[STATES.GAME]) {
                 stateInstances[STATES.GAME].container.visible = currentState === STATES.GAME;
             }
-            console.log(this.updateFunction)
         },
     };
     stateMachine.startNewState({ state: STATES.MENU });
