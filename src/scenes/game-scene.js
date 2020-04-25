@@ -1,7 +1,9 @@
 import { createBackgroundSprite } from '../board-renderer.js';
 import { Container } from '../engine.js';
+import { STATES } from '../state-machine.js';
+import { createButton } from './common.js';
 
-export function createGameScene({ game }) {
+export function createGameScene({ stateMachine, game }) {
     const container = new Container();
         
     container.addChild(createBackgroundSprite());
@@ -16,6 +18,13 @@ export function createGameScene({ game }) {
                 game.moveAttempt({ piece: event.target.piece });
             });
         });
+
+    container.addChild(createButton({
+        text: 'Main Menu',
+        color: 0x66CC66,
+        position: { x: 450, y: 405 },
+        onClick: () => stateMachine.switchToState({ state: STATES.MENU }),
+    }));
 
     return container;
 }

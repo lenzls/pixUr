@@ -1,5 +1,6 @@
-import { Container, Graphics, Text } from '../engine.js';
+import { Container } from '../engine.js';
 import { STATES } from '../state-machine.js';
+import { createButton } from './common.js';
 
 export function createMenuScene({ stateMachine }) {
     const container = new Container();
@@ -17,24 +18,4 @@ export function createMenuScene({ stateMachine }) {
         onClick: () => stateMachine.switchToState({ state: STATES.GAME }),
     }));
     return container;
-}
-
-function createButton({ text, color, position, onClick }) {
-    const background = new Graphics();
-    background.beginFill(color);
-    background.drawRect(0, 0, 165, 50);
-    background.endFill();
-    background.interactive = true;
-    background.buttonMode = true;
-    background.on('pointerdown', onClick);
-
-    const buttonText = new Text(text);
-    buttonText.position.set(
-        background.width / 2 - buttonText.width / 2, 
-        background.height / 2 - buttonText.height / 2, 
-    );
-    background.addChild(buttonText);
-    background.position.set(position.x, position.y);
-    
-    return background;
 }

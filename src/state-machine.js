@@ -8,10 +8,10 @@ function CreateMenuState(config) {
         update() {},
     };
 }
-function CreateGameState() {
+function CreateGameState(config) {
     const game = CreateGame();
     return {
-        container: createGameScene({ game }),
+        container: createGameScene({ game, ...config }),
         update() {
             game.update();
         },
@@ -32,7 +32,7 @@ export function CreateStateMachine({ app }) {
         startNewState({ state }) {
             if (stateInstances[state]) app.stage.removeChild(stateInstances[state].container);
             if (state === STATES.MENU) stateInstances[state] = CreateMenuState({ app, stateMachine: this});
-            if (state === STATES.GAME) stateInstances[state] = CreateGameState();
+            if (state === STATES.GAME) stateInstances[state] = CreateGameState({ stateMachine: this });
             app.stage.addChild(stateInstances[state].container);
             this.switchToState({ state: state });
         },
