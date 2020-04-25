@@ -31,11 +31,6 @@ export function CreateBoard() {
             }
         },
         updatePieceRenderingPositions() {
-            const calcYPos = ({ player, index }) => {
-                if (index > 4 && index < 13) return 120;
-                return player.type === TYPE.WHITE ? 50 : 340;
-            };
-
             const getPlayerBaselineYPos = ({ player }) => {
                 return player.type === TYPE.WHITE ? 10 : 420;
             };
@@ -51,11 +46,10 @@ export function CreateBoard() {
                     });
                 }
                 else if (index <= 4) {
-                    const piece = spaces[index][0];
-                    if (piece) { 
+                    space.forEach(piece => {
                         const x = 255 - (index - 1) * 65;
                         piece.sprite.position.set(x, getPlayerYPos({ ...piece })); 
-                    }
+                    });
                 }
                 else if (index <= 12) {
                     const piece = spaces[index][0];
@@ -65,16 +59,15 @@ export function CreateBoard() {
                     }
                 }
                 else if (index <= 14) {
-                    const piece = spaces[index][0];
-                    if (piece) { 
+                    space.forEach(piece => {
                         const x = 650 - (index - 11) * 65;
                         piece.sprite.position.set(x, getPlayerYPos({ ...piece })); 
-                    }
+                    });
                 }
                 else if (index === 15) {
                     space.forEach(piece => {
                         const localIndex = spaces[15].filter(p => p.player === piece.player).indexOf(piece);
-                        piece.sprite.position.set(600 + localIndex * 10, getPlayerBaselineYPos({ ...piece }));
+                        piece.sprite.position.set(500 + localIndex * 10, getPlayerBaselineYPos({ ...piece }));
                     });
                 }
 
