@@ -74,20 +74,38 @@ function createGameScene() {
 
 function createMenuScene() {
     const container = new Container();
-    const START_GAME_BUTTON_POS = { x: 230, y: 300 };
 
-    const startGameButton = new Graphics();
-    startGameButton.beginFill(0x66CCFF);
-    startGameButton.drawRect(0, 0, 165, 50);
-    startGameButton.endFill();
-    startGameButton.interactive = true;
-    startGameButton.buttonMode = true;
-    startGameButton.on('pointerdown', (e) => switchToGame());
-
-    const buttonText = new Text('Start Game');
-    buttonText.position.set(15, 12);
-    startGameButton.addChild(buttonText);
-    startGameButton.position.set(START_GAME_BUTTON_POS.x, START_GAME_BUTTON_POS.y);
-    container.addChild(startGameButton);
+    container.addChild(createButton({
+        text: 'New Game',
+        color: 0x66CCFF,
+        position: { x: 130, y: 300 },
+        onClick: () => switchToGame(),
+    }));
+    container.addChild(createButton({
+        text: 'Continue',
+        color: 0x66CCFF,
+        position: { x: 330, y: 300 },
+        onClick: () => switchToGame(),
+    }));
     return container;
+}
+
+function createButton({ text, color, position, onClick }) {
+    const background = new Graphics();
+    background.beginFill(color);
+    background.drawRect(0, 0, 165, 50);
+    background.endFill();
+    background.interactive = true;
+    background.buttonMode = true;
+    background.on('pointerdown', onClick);
+
+    const buttonText = new Text(text);
+    buttonText.position.set(
+        background.width / 2 - buttonText.width / 2, 
+        background.height / 2 - buttonText.height / 2, 
+    );
+    background.addChild(buttonText);
+    background.position.set(position.x, position.y);
+    
+    return background;
 }
