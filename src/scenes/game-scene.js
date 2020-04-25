@@ -23,13 +23,14 @@ export function createGameScene({ stateMachine, game }) {
     const currentPlayerIndicator = new Text('→');
     container.addChild(currentPlayerIndicator);
 
-    container.addChild(createButton({
+    const diceButton = createButton({
         text: '⚄',
         color: 0x66CC66,
         position: { x: 450, y: 25 },
         onClick: () => game.rollDice(),
         transparency: 0.25,
-    }));
+    });
+    container.addChild(diceButton);
     container.addChild(createButton({
         text: '☰',
         color: 0x66CC66,
@@ -46,6 +47,13 @@ export function createGameScene({ stateMachine, game }) {
             }
             else if (game.currentPlayer.type === TYPE.WHITE) {
                 currentPlayerIndicator.position.set(10, 100);
+            }
+
+            if (game.currentPlayer.currentRoll) {
+                diceButton.visible = false;
+            }
+            else {
+                diceButton.visible = true;
             }
         }
     };
