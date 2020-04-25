@@ -12,12 +12,19 @@ export function CreateGame() {
 
     const hasPlayerWon = (player) => player.pieces.every(piece => board.getIndex({ piece }) === 15);
 
+    let currentPlayer = white;
+
     return {
         board,
         white,
         black,
         moveAttempt({ piece, pips = 1 }) {
             const player = piece.player;
+            
+            if (player !== currentPlayer) {
+                alert("It's not your turn, pal");
+                return;
+            }
             // is it the player's turn?
             console.log('attempting to move', piece);
             const index = board.getIndex({ piece });
@@ -27,6 +34,7 @@ export function CreateGame() {
             const movePiece = ({ piece, start, aim }) => {
                 board.removePiece({ piece, index: start });
                 board.addPiece({ piece, index: aim });
+                currentPlayer = currentPlayer === white ? black : white;
             };
             if (aim <= 4 || (aim > 12 && aim <= 14)) {
                 if (board.getPieces({ index: aim }).filter(p => p.player === player).length === 0) {
@@ -42,7 +50,7 @@ export function CreateGame() {
                 movePiece({ piece, start: index, aim });
             }
             else {
-                console.log('reject move attempt');
+                console.log('Too far, pal.');
             }
         },
         update() {
