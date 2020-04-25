@@ -1,4 +1,5 @@
 import { ASSETS } from './sprites.js';
+import { Sprite, loader } from './engine.js';
 import { TYPE } from './player.js';
 
 const HOME_ROW_RECT = {
@@ -62,4 +63,8 @@ export function removePieceFromBoard({ piece }) {
 export function addPieceToBoard({ piece, index }) {    
     setSpriteToPositionWithinRect({ sprite: piece.sprite, ...getRect({ player: piece.player, index }) });
     piece.sprite.visible = true;
+}
+
+export function createBackgroundSprite() {
+    return new Sprite(loader.resources[ASSETS.BOARD].texture);
 }

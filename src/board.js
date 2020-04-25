@@ -1,5 +1,3 @@
-import { ASSETS } from './sprites.js';
-import { Sprite, loader } from './engine.js';
 import { addPieceToBoard, removePieceFromBoard } from './board-renderer.js';
 
 
@@ -9,7 +7,6 @@ export function CreateBoard() {
         spaces[i] = [];
     }
     return {
-        sprite: new Sprite(loader.resources[ASSETS.BOARD].texture),
         spaces,
         clear() {},
         addPiece({ piece, index }) {

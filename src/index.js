@@ -1,6 +1,7 @@
 import { CreateGame } from './game.js';
 import { addAssets } from './sprites.js';
-import { utils, Application, Container, loader, Sprite } from './engine.js';
+import { createBackgroundSprite } from './board-renderer.js';
+import { utils, Application, Container, loader } from './engine.js';
 
 
 console.log(`WebGL is supported by your browser: ${utils.isWebGLSupported()}`);
@@ -33,10 +34,9 @@ addAssets({ loader })
         menuScene.visible = false;
         gameScene.visible = true;
 
-        
         game = CreateGame();
         
-        gameScene.addChild(game.board.sprite);
+        gameScene.addChild(createBackgroundSprite());
         [
             ...game.white.pieces.map(p => p.sprite), 
             ...game.black.pieces.map(p => p.sprite)
