@@ -46,7 +46,6 @@ export function CreateGame() {
             }
         },
         update() { 
-            board.updatePieceRenderingPositions();
         },
     };
 }

@@ -2,24 +2,7 @@ import { TYPE } from './player.js';
 import { ASSETS } from './sprites.js';
 import { Sprite, loader } from './engine.js';
 
-const WHITE_ROW_Y = {
-    top: 112,
-    bottom: 176,
-};
-const COMBAT_ROW_Y = {
-    top: 176,
-    bottom: 240,
-};
-const BLACK_ROW_Y = {
-    top: 240,
-    bottom: 304,
-};
-
-const SAFE_ROW_POSITION = {
-    [TYPE.WHITE]: WHITE_ROW_Y,
-    [TYPE.BLACK]: BLACK_ROW_Y,
-};
-const HOME_ROW_POSITION = {
+const HOME_ROW_RECT = {
     [TYPE.WHITE]: {
         top: 14,
         bottom: 80,
@@ -58,8 +41,8 @@ function getGridPosition({ index, player }) {
 }
 
 function getRect({ index, player }) {
-    if (index === 0) return { ...HOME_ROW_POSITION[player.type], left: 36, right: 270 };
-    if (index === 15) return { ...HOME_ROW_POSITION[player.type], left: 430, right: 610 };
+    if (index === 0) return { ...HOME_ROW_RECT[player.type], left: 36, right: 270 };
+    if (index === 15) return { ...HOME_ROW_RECT[player.type], left: 430, right: 610 };
     return getRectInGrid(getGridPosition({ index, player }));
 }
 
@@ -84,6 +67,8 @@ export function CreateBoard() {
         clear() {},
         addPiece({ piece, index }) {
             spaces[index].push(piece);
+            piece.sprite.visible = true;
+            setSpriteToPositionWithinRect({ sprite: piece.sprite, ...getRect({ player: piece.player, index }) });
         },
         getPieces({ index }) {
             return spaces[index];
@@ -96,14 +81,8 @@ export function CreateBoard() {
             const indexWithinSpace = space.indexOf(piece);
             if (indexWithinSpace !== -1) {
                 space.splice(indexWithinSpace, 1);
+                piece.sprite.visible = false;
             }
-        },
-        updatePieceRenderingPositions() {
-            spaces.forEach((space, index) => {
-                space.forEach(piece => {
-                    setSpriteToPositionWithinRect({ sprite: piece.sprite, ...getRect({ player: piece.player, index }) });
-                });
-            });
         },
     };
 }
