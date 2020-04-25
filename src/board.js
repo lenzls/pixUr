@@ -1,17 +1,14 @@
 import { TYPE } from './player.js';
+import { ASSETS } from './sprites.js';
+import { Sprite, loader } from './engine.js';
 
 export function CreateBoard() {
-    const spaces = [
-        // supplyWhite
-        // goalWhite
-        // 
-        // supplyBlack
-        // goalBlack
-    ];
+    const spaces = [];
     for (let i = 0; i < 16; i++) {
         spaces[i] = [];
     }
     return {
+        sprite: new Sprite(loader.resources[ASSETS.BOARD].texture),
         spaces,
         clear() {},
         addPiece({ piece, index }) {

@@ -1,5 +1,5 @@
 import { CreateGame } from './game.js';
-import { addAssets, ASSETS } from './sprites.js';
+import { addAssets } from './sprites.js';
 import { utils, Application, Container, loader, Sprite } from './engine.js';
 
 
@@ -33,11 +33,10 @@ addAssets({ loader })
         menuScene.visible = false;
         gameScene.visible = true;
 
-        const boardSprite = new Sprite(loader.resources[ASSETS.BOARD].texture);
-        gameScene.addChild(boardSprite);
-
+        
         game = CreateGame();
-
+        
+        gameScene.addChild(game.board.sprite);
         [
             ...game.white.pieces.map(p => p.sprite), 
             ...game.black.pieces.map(p => p.sprite)
