@@ -1,7 +1,6 @@
-import { CreateGame } from './game.js';
 import { addAssets } from './sprites.js';
-import { createBackgroundSprite } from './board-renderer.js';
-import { utils, Application, Container, Graphics, Text, loader } from './engine.js';
+import { utils, Application, loader } from './engine.js';
+import { CreateStateMachine, STATES } from './state-machine.js';
 
 
 console.log(`WebGL is supported by your browser: ${utils.isWebGLSupported()}`);
@@ -14,13 +13,6 @@ const app = new Application({
 document.body.appendChild(app.view);
 
 
-let menuScene;
-let gameScene;
-
-const state = play;
-
-let game;
-
 function play(delta) {
     game.update();
 }
@@ -31,81 +23,9 @@ addAssets({ loader })
         console.log(`progress: ${loader.progress}%`);
     })
     .load(() => {
-        menuScene = createMenuScene();
-        gameScene = createGameScene();
+        const stateMachine = CreateStateMachine({ app });
         
-        app.stage.addChild(menuScene);
-        app.stage.addChild(gameScene);
+        stateMachine.startNewState({ state: STATES.MENU });
 
-        switchToMenu();
-
-        app.ticker.add(state);
+        app.ticker.add(stateMachine.updateFunction);
     });
-
-function switchToMenu() {
-    menuScene.visible = true;
-    gameScene.visible = false;
-}
-function switchToGame() {
-    menuScene.visible = false;
-    gameScene.visible = true;
-}
-
-function createGameScene() {
-    const container = new Container();
-
-    game = CreateGame();
-        
-    container.addChild(createBackgroundSprite());
-    [
-        ...game.white.pieces.map(p => p.sprite), 
-        ...game.black.pieces.map(p => p.sprite)
-    ]
-        .forEach(sprite => {
-            container.addChild(sprite);
-            sprite.interactive = true;
-            sprite.on('click', (event) => {
-                game.moveAttempt({ piece: event.target.piece });
-            });
-        });
-
-    return container;
-}
-
-function createMenuScene() {
-    const container = new Container();
-
-    container.addChild(createButton({
-        text: 'New Game',
-        color: 0x66CCFF,
-        position: { x: 130, y: 300 },
-        onClick: () => switchToGame(),
-    }));
-    container.addChild(createButton({
-        text: 'Continue',
-        color: 0x66CCFF,
-        position: { x: 330, y: 300 },
-        onClick: () => switchToGame(),
-    }));
-    return container;
-}
-
-function createButton({ text, color, position, onClick }) {
-    const background = new Graphics();
-    background.beginFill(color);
-    background.drawRect(0, 0, 165, 50);
-    background.endFill();
-    background.interactive = true;
-    background.buttonMode = true;
-    background.on('pointerdown', onClick);
-
-    const buttonText = new Text(text);
-    buttonText.position.set(
-        background.width / 2 - buttonText.width / 2, 
-        background.height / 2 - buttonText.height / 2, 
-    );
-    background.addChild(buttonText);
-    background.position.set(position.x, position.y);
-    
-    return background;
-}
