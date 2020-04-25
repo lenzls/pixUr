@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-
+const packagejson = require('../package.json');
 const targetFolder = path.resolve(__dirname, '..', 'dist');
 
 module.exports = {
@@ -12,6 +12,7 @@ module.exports = {
     mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
     plugins: [new HtmlWebpackPlugin({
         template: 'src/index.html',
+        title: `${packagejson.name} – ${packagejson.description} (${packagejson.version})`
     })],
     module: {
         rules: [
