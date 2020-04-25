@@ -24,10 +24,19 @@ addAssets({ loader })
     })
     .load(() => {
         app.stage.addChild(createButton({
-            text: 'Fullscreen',
+            text: '⛶',
             color: 0xFF00FF,
             position: { x: 450, y: 30 },
-            onClick: () => parentElement.requestFullscreen(),
+            onClick: () => toggleFullscreen({ element: parentElement }),
         }));
         CreateStateMachine({ app });
     });
+
+function toggleFullscreen({ element }) {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    }
+    else {
+        element.requestFullscreen();
+    }
+}
