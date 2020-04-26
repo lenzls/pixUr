@@ -43,6 +43,14 @@ function getGridPosition({ index, player }) {
 
 function getRect({ index, player }) {
     if (index === 0) return { ...HOME_ROW_RECT[player.type], left: 36, right: 350 };
+    if (index === 1 && player.type === TYPE.WHITE) return getCurrentSkin().spaces.w1;
+    if (index === 2 && player.type === TYPE.WHITE) return getCurrentSkin().spaces.w2;
+    if (index === 3 && player.type === TYPE.WHITE) return getCurrentSkin().spaces.w3;
+    if (index === 4 && player.type === TYPE.WHITE) return getCurrentSkin().spaces.w4;
+    if (index === 1 && player.type === TYPE.BLACK) return getCurrentSkin().spaces.b1;
+    if (index === 2 && player.type === TYPE.BLACK) return getCurrentSkin().spaces.b2;
+    if (index === 3 && player.type === TYPE.BLACK) return getCurrentSkin().spaces.b3;
+    if (index === 4 && player.type === TYPE.BLACK) return getCurrentSkin().spaces.b4;
     if (index === 15) return { ...HOME_ROW_RECT[player.type], left: 430, right: 610 };
     return getRectInGrid(getGridPosition({ index, player }));
 }

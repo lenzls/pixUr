@@ -13,5 +13,55 @@
             "top": 350,
             "bottom": 416
         }
+    },
+    "spaces": {
+        "w1": {
+            "top": 114,
+            "bottom": 173,
+            "left": 242,
+            "right": 303
+        },
+        "w2": {
+            "top": 114,
+            "bottom": 173,
+            "left": 178,
+            "right": 238
+        },
+        "w3": {
+            "top": 114,
+            "bottom": 173,
+            "left": 114,
+            "right": 172
+        },
+        "w4": {
+            "top": 114,
+            "bottom": 173,
+            "left": 50,
+            "right": 109
+        },
+        "b1": {
+            "top": 242,
+            "bottom": 300,
+            "left": 242,
+            "right": 303
+        },
+        "b2": {
+            "top": 242,
+            "bottom": 300,
+            "left": 178,
+            "right": 238
+        },
+        "b3": {
+            "top": 242,
+            "bottom": 300,
+            "left": 114,
+            "right": 172
+        },
+        "b4": {
+            "top": 242,
+            "bottom": 300,
+            "left": 50,
+            "right": 109
+        }
     }
 }
