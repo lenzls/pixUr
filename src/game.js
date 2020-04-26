@@ -72,7 +72,7 @@ export function CreateGame() {
                 alert('Too far.');
                 return;
             }
-            if (ownPiecesInAimSpace) {
+            if (ownPiecesInAimSpace && !aimInGoal) {
                 alert('Here is already one of yours…');
                 return;
             }
