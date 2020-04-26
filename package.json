@@ -1,6 +1,6 @@
 {
   "name": "pixur",
-  "version": "0.0.2",
+  "version": "1.0.0-SNAPSHOT",
   "private": true,
   "description": "Recreation of the Royal Game of Ur",
   "main": "index.js",
