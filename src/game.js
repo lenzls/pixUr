@@ -43,6 +43,13 @@ export function CreateGame() {
             }
             const index = board.getIndex({ piece });
             const aim = index + pips(this.lastRoll);
+
+            const aimIsBehindGoal = aim >= 16;
+
+            if (aimIsBehindGoal) {
+                alert('Too far.');
+                return;
+            }
             
             const onRosette = (index) => [4, 8, 14].includes(index);
             const conductValidMove = ({ piece, start, aim }) => {
@@ -65,13 +72,8 @@ export function CreateGame() {
             const aimInSafeZone = (0 <= aim && aim <= 4) || (13 <= aim && aim <= 14);
             const aimInCombatZone = (5 <= aim && aim <= 12);
             const aimInGoal = aim === 15;
-            const aimIsBehindGoal = aim >= 16;
             const aimIsSafeSpace = [8].includes(aim);
 
-            if (aimIsBehindGoal) {
-                alert('Too far.');
-                return;
-            }
             if (ownPiecesInAimSpace && !aimInGoal) {
                 alert('Here is already one of yours…');
                 return;
