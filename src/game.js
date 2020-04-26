@@ -1,6 +1,8 @@
 import { CreateBoard } from './board.js';
 import { CreateWhitePlayer, CreateBlackPlayer } from './player.js';
 
+const pips = roll => roll.reduce((acc, value) => acc + value, 0);
+
 export function CreateGame() {
     const board = CreateBoard();
     const white = CreateWhitePlayer();
@@ -22,6 +24,9 @@ export function CreateGame() {
                 return [zeroOrOne(), zeroOrOne(), zeroOrOne(), zeroOrOne()];
             };
             this.currentPlayer.currentRoll = rollDice();
+            if (pips(this.currentPlayer.currentRoll) === 0) {
+                this.switchPlayer();
+            }
         },
         moveAttempt({ piece }) {
             const player = piece.player;
@@ -38,7 +43,7 @@ export function CreateGame() {
             console.log('attempting to move', piece);
             const index = board.getIndex({ piece });
             console.log('current index', index);
-            const aim = index + player.currentRoll.reduce((acc, value) => acc + value, 0);
+            const aim = index + pips(player.currentRoll);
             
             const movePiece = ({ piece, start, aim }) => {
                 board.removePiece({ piece, index: start });
