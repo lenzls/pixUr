@@ -19,7 +19,7 @@ const app = new Application({
 parentElement.appendChild(app.view);
 
 resize(app)();
-window.addEventListener("resize", resize(app));
+window.addEventListener('resize', resize(app));
 
 addAssets({ loader })
     .on('progress', (loader, resource) => {
