@@ -1,9 +1,9 @@
 import { createBackgroundSprite } from '../board-renderer.js';
-import { Container, Text, loader } from '../engine.js';
+import { Container, Text } from '../engine.js';
 import { STATES } from '../state-machine.js';
 import { createButton } from './common.js';
 import { TYPE } from '../player.js';
-import { ASSETS, CreateSprite } from '../sprites.js';
+import { ASSETS, CreateSprite, changeSpriteTexture } from '../sprites.js';
 
 export function createGameScene({ stateMachine, game }) {
     const container = new Container();
@@ -73,7 +73,7 @@ export function createGameScene({ stateMachine, game }) {
             if (dice) {
                 diceSprites.forEach((sprite, index) => {
                     sprite.visible = true;
-                    sprite.texture = dice[index] === 0 ? loader.resources[ASSETS.DICE_NULL].texture : loader.resources[ASSETS.DICE_ONE].texture;
+                    changeSpriteTexture({ sprite, asset: dice[index] === 0 ? ASSETS.DICE_NULL : ASSETS.DICE_ONE });
                 });
             }
             else {
