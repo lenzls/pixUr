@@ -3,5 +3,15 @@
     "currentPlayerIndicator": {
         "whiteY": 100,
         "blackY": 300
+    },
+    "homeRowRect": {
+        "white": {
+            "top": 14,
+            "bottom": 80
+        },
+        "black": {
+            "top": 350,
+            "bottom": 416
+        }
     }
 }

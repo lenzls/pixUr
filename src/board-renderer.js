@@ -1,15 +1,15 @@
 import { ASSETS, CreateSprite } from './sprites.js';
-import { loader } from './engine.js';
+import { getCurrentSkin } from './layout.js';
 import { TYPE } from './player.js';
 
 const HOME_ROW_RECT = {
     [TYPE.WHITE]: {
-        top: 14,
-        bottom: 80,
+        top: getCurrentSkin().homeRowRect.white.top,
+        bottom: getCurrentSkin().homeRowRect.white.bottom,
     },
     [TYPE.BLACK]: {
-        top: 350,
-        bottom: 416,
+        top: getCurrentSkin().homeRowRect.black.top,
+        bottom: getCurrentSkin().homeRowRect.black.bottom,
     },
 };
 
