@@ -2,8 +2,6 @@ import { ASSETS, CreateSprite } from './sprites.js';
 import { getCurrentSkin } from './layout.js';
 import { TYPE } from './player.js';
 
-const PIECE_SIZE = 32;
-
 function getRect({ index, player }) {
     if (index === 0 && player.type === TYPE.WHITE) return getCurrentSkin().spaces.wstart;
     if (index === 0 && player.type === TYPE.BLACK) return getCurrentSkin().spaces.bstart;
@@ -27,7 +25,7 @@ function setSpriteToPositionWithinRect({ otherPiecesInSpace, sprite, top, bottom
         generator: generatePositionCandidate,
         condition: (candidate) => 
             playersOtherPiecesInSpace
-                .every(piece => !overlap(piece.sprite, { ...candidate, width: PIECE_SIZE, height: PIECE_SIZE })),
+                .every(piece => !overlap(piece.sprite, { ...candidate, width: sprite.width, height: sprite.height })),
         maxTries: 200,
     });
     sprite.position.set(position.x, position.y);
