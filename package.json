@@ -9,7 +9,8 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.js",
     "deploy": "npm run build && sh build/deploy-github-pages.sh",
     "lint": "eslint src/*.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bump-version": "npm --no-git-tag-version version "
   },
   "repository": {
     "type": "git",
