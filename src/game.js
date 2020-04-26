@@ -32,9 +32,7 @@ export function CreateGame() {
             }
         },
         moveAttempt({ piece }) {
-            const player = piece.player;
-            
-            if (player !== this.currentPlayer) {
+            if (piece.player !== this.currentPlayer) {
                 alert("It's not your turn, pal");
                 return;
             }
@@ -42,7 +40,6 @@ export function CreateGame() {
                 alert('Roll the dice first, pal');
                 return;
             }
-            // is it the player's turn?
             console.log('attempting to move', piece);
             const index = board.getIndex({ piece });
             console.log('current index', index);
@@ -59,7 +56,7 @@ export function CreateGame() {
                 board.addPiece({ piece: opponentPiece, index: 0 });
             };
             if (aim <= 4 || (aim > 12 && aim <= 14)) {
-                if (board.getPieces({ index: aim }).filter(p => p.player === player).length === 0) {
+                if (board.getPieces({ index: aim }).filter(p => p.player === this.currentPlayer).length === 0) {
                     movePiece({ piece, start: index, aim });
                 }
             }
