@@ -63,53 +63,77 @@
             "left": 50,
             "right": 109
         },
-        "mid1": {
+        "mid5": {
             "top": 178,
             "bottom": 236,
             "left": 50,
             "right": 109
         },
-        "mid2": {
+        "mid6": {
             "top": 178,
             "bottom": 236,
             "left": 114,
             "right": 172
         },
-        "mid3": {
+        "mid7": {
             "top": 178,
             "bottom": 236,
             "left": 177,
             "right": 238
         },
-        "mid4": {
+        "mid8": {
             "top": 178,
             "bottom": 236,
             "left": 242,
             "right": 302
         },
-        "mid5": {
+        "mid9": {
             "top": 178,
             "bottom": 236,
             "left": 307,
             "right": 366
         },
-        "mid6": {
+        "mid10": {
             "top": 178,
             "bottom": 236,
             "left": 372,
             "right": 430
         },
-        "mid7": {
+        "mid11": {
             "top": 178,
             "bottom": 236,
             "left": 435,
             "right": 494
         },
-        "mid8": {
+        "mid12": {
             "top": 178,
             "bottom": 236,
             "left": 498,
             "right": 559
+        },
+        "w13": {
+            "top": 114,
+            "bottom": 173,
+            "left": 498,
+            "right": 559
+        },
+        "w14": {
+            "top": 114,
+            "bottom": 173,
+            "left": 435,
+            "right": 494
+        },
+        "b13": {
+            "top": 242,
+            "bottom": 300,
+            "left": 498,
+            "right": 559
+        },
+        "b14": {
+            "top": 242,
+            "bottom": 300,
+            "left": 435,
+            "right": 494
         }
     }
 }
