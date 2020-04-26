@@ -44,9 +44,15 @@ export function CreateGame() {
             const index = board.getIndex({ piece });
             const aim = index + pips(this.lastRoll);
             
-            const movePiece = ({ piece, start, aim }) => {
+            const conductValidMove = ({ piece, start, aim }) => {
                 board.removePiece({ piece, index: start });
                 board.addPiece({ piece, index: aim });
+                if (onRosette(aim)) {
+                    this.anotherTurn();
+                }
+                else {
+                    this.switchPlayer();
+                }
             };
             const combat = ({ piece, index }) => {
                 const opponentPiece = board.getPieces({ index }).find(pieceInSpace => pieceInSpace.player !== piece.player);
@@ -63,29 +69,17 @@ export function CreateGame() {
 
             if (inSafeZone(aim)) {
                 if (noOwnPiecesInSpace({ player: this.currentPlayer, index: aim })) {
-                    movePiece({ piece, start: index, aim });
-                    if (onRosette(aim)) {
-                        this.anotherTurn();
-                    }
-                    else {
-                        this.switchPlayer();
-                    }
+                    conductValidMove({ piece, start: index, aim });
                 }
             }
             else if (inCombatZone(aim)) {
                 if (noPiecesInSpace({ index: aim })) {
                     combat({ piece, index: aim });
                 }
-                movePiece({ piece, start: index, aim });
-                if (onRosette(aim)) {
-                    this.anotherTurn();
-                }
-                else {
-                    this.switchPlayer();
-                }
+                conductValidMove({ piece, start: index, aim });
             }
             else if (inGoal(aim)) {
-                movePiece({ piece, start: index, aim });
+                conductValidMove({ piece, start: index, aim });
             }
             else if (behindGoal(aim)) {
                 console.log('Too far, pal.');
