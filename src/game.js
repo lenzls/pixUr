@@ -14,6 +14,8 @@ export function CreateGame() {
     const hasPlayerWon = (player) => player.pieces.every(piece => board.getIndex({ piece }) === 15);
 
     return {
+        lastRoll: null,
+        currentPlayerRolled: false,
         currentPlayer: white,
         board,
         white,
@@ -23,8 +25,9 @@ export function CreateGame() {
                 const zeroOrOne = () => Math.floor(Math.random() * 2);
                 return [zeroOrOne(), zeroOrOne(), zeroOrOne(), zeroOrOne()];
             };
-            this.currentPlayer.currentRoll = rollDice();
-            if (pips(this.currentPlayer.currentRoll) === 0) {
+            this.lastRoll = rollDice();
+            this.currentPlayerRolled = true;
+            if (pips(this.lastRoll) === 0) {
                 this.switchPlayer();
             }
         },
@@ -35,7 +38,7 @@ export function CreateGame() {
                 alert("It's not your turn, pal");
                 return;
             }
-            if (!player.currentRoll) {
+            if (!this.currentPlayerRolled) {
                 alert('Roll the dice first, pal');
                 return;
             }
@@ -43,7 +46,7 @@ export function CreateGame() {
             console.log('attempting to move', piece);
             const index = board.getIndex({ piece });
             console.log('current index', index);
-            const aim = index + pips(player.currentRoll);
+            const aim = index + pips(this.lastRoll);
             
             const movePiece = ({ piece, start, aim }) => {
                 board.removePiece({ piece, index: start });
@@ -74,7 +77,7 @@ export function CreateGame() {
             }
         },
         switchPlayer() {
-            this.currentPlayer.currentRoll = null;
+            this.currentPlayerRolled = false;
             this.currentPlayer = this.currentPlayer === white ? black : white;
         },
         update() {

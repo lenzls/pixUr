@@ -62,14 +62,14 @@ export function createGameScene({ stateMachine, game }) {
                 currentPlayerIndicator.position.set(10, 100);
             }
 
-            if (game.currentPlayer.currentRoll) {
+            if (game.currentPlayerRolled) {
                 diceButton.visible = false;
             }
             else {
                 diceButton.visible = true;
             }
 
-            const dice = game.currentPlayer.currentRoll;
+            const dice = game.lastRoll;
             if (dice) {
                 diceSprites.forEach((sprite, index) => {
                     sprite.visible = true;
