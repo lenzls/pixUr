@@ -62,6 +62,54 @@
             "bottom": 300,
             "left": 50,
             "right": 109
+        },
+        "mid1": {
+            "top": 178,
+            "bottom": 236,
+            "left": 50,
+            "right": 109
+        },
+        "mid2": {
+            "top": 178,
+            "bottom": 236,
+            "left": 114,
+            "right": 172
+        },
+        "mid3": {
+            "top": 178,
+            "bottom": 236,
+            "left": 177,
+            "right": 238
+        },
+        "mid4": {
+            "top": 178,
+            "bottom": 236,
+            "left": 242,
+            "right": 302
+        },
+        "mid5": {
+            "top": 178,
+            "bottom": 236,
+            "left": 307,
+            "right": 366
+        },
+        "mid6": {
+            "top": 178,
+            "bottom": 236,
+            "left": 372,
+            "right": 430
+        },
+        "mid7": {
+            "top": 178,
+            "bottom": 236,
+            "left": 435,
+            "right": 494
+        },
+        "mid8": {
+            "top": 178,
+            "bottom": 236,
+            "left": 498,
+            "right": 559
         }
     }
 }
