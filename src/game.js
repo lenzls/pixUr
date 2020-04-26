@@ -47,7 +47,6 @@ export function CreateGame() {
             const movePiece = ({ piece, start, aim }) => {
                 board.removePiece({ piece, index: start });
                 board.addPiece({ piece, index: aim });
-                this.switchPlayer();
             };
             const combat = ({ piece, index }) => {
                 const opponentPiece = board.getPieces({ index }).find(pieceInSpace => pieceInSpace.player !== piece.player);
@@ -60,10 +59,17 @@ export function CreateGame() {
             const inCombatZone = (index) => (5 <= index && index <= 12);
             const inGoal = (index) => index === 15;
             const behindGoal = (index) => index >= 16;
+            const onRosette = (index) => [4, 8, 14].includes(index);
 
             if (inSafeZone(aim)) {
                 if (noOwnPiecesInSpace({ player: this.currentPlayer, index: aim })) {
                     movePiece({ piece, start: index, aim });
+                    if (onRosette(aim)) {
+                        this.anotherTurn();
+                    }
+                    else {
+                        this.switchPlayer();
+                    }
                 }
             }
             else if (inCombatZone(aim)) {
@@ -71,6 +77,12 @@ export function CreateGame() {
                     combat({ piece, index: aim });
                 }
                 movePiece({ piece, start: index, aim });
+                if (onRosette(aim)) {
+                    this.anotherTurn();
+                }
+                else {
+                    this.switchPlayer();
+                }
             }
             else if (inGoal(aim)) {
                 movePiece({ piece, start: index, aim });
@@ -78,6 +90,9 @@ export function CreateGame() {
             else if (behindGoal(aim)) {
                 console.log('Too far, pal.');
             }
+        },
+        anotherTurn() {
+            this.currentPlayerRolled = false;
         },
         switchPlayer() {
             this.currentPlayerRolled = false;
