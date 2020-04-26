@@ -1,9 +1,9 @@
 import { createBackgroundSprite } from '../board-renderer.js';
-import { Container, Text, Sprite, loader } from '../engine.js';
+import { Container, Text, loader } from '../engine.js';
 import { STATES } from '../state-machine.js';
 import { createButton } from './common.js';
 import { TYPE } from '../player.js';
-import { ASSETS } from '../sprites.js';
+import { ASSETS, CreateSprite } from '../sprites.js';
 
 export function createGameScene({ stateMachine, game }) {
     const container = new Container();
@@ -34,10 +34,10 @@ export function createGameScene({ stateMachine, game }) {
     container.addChild(diceButton);
 
     const diceSprites = [
-        new Sprite(loader.resources[ASSETS.DICE_NULL].texture),
-        new Sprite(loader.resources[ASSETS.DICE_NULL].texture),
-        new Sprite(loader.resources[ASSETS.DICE_NULL].texture),
-        new Sprite(loader.resources[ASSETS.DICE_NULL].texture),
+        CreateSprite({ asset: ASSETS.DICE_NULL }),
+        CreateSprite({ asset: ASSETS.DICE_NULL }),
+        CreateSprite({ asset: ASSETS.DICE_NULL }),
+        CreateSprite({ asset: ASSETS.DICE_NULL }),
     ];
     diceSprites.forEach((sprite, index) => {
         sprite.position.set(570, 115 + 50 * index);

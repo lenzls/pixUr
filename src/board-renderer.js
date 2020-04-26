@@ -1,5 +1,4 @@
-import { ASSETS } from './sprites.js';
-import { Sprite, loader } from './engine.js';
+import { ASSETS, CreateSprite } from './sprites.js';
 import { TYPE } from './player.js';
 
 const HOME_ROW_RECT = {
@@ -101,5 +100,5 @@ export function addPieceToBoard({ otherPiecesInSpace, piece, index }) {
 }
 
 export function createBackgroundSprite() {
-    return new Sprite(loader.resources[ASSETS.BOARD].texture);
+    return CreateSprite({ asset: ASSETS.BOARD });
 }
