@@ -45,15 +45,21 @@ export function CreateGame() {
                 board.addPiece({ piece, index: aim });
                 this.switchPlayer();
             };
+            const combat = ({ piece, index }) => {
+                const opponentPiece = board.getPieces({ index }).find(pieceInSpace => pieceInSpace.player !== piece.player);
+                board.removePiece({ piece: opponentPiece, index });
+                board.addPiece({ piece: opponentPiece, index: 0 });
+            };
             if (aim <= 4 || (aim > 12 && aim <= 14)) {
                 if (board.getPieces({ index: aim }).filter(p => p.player === player).length === 0) {
                     movePiece({ piece, start: index, aim });
                 }
             }
             else if (aim >= 4 && aim <= 12) {
-                if (board.getPieces({ index: aim }).length === 0) {
-                    movePiece({ piece, start: index, aim });
+                if (board.getPieces({ index: aim }).length > 0) {
+                    combat({ piece, index: aim });
                 }
+                movePiece({ piece, start: index, aim });
             }
             else if (aim === 15) {
                 movePiece({ piece, start: index, aim });
