@@ -1,4 +1,5 @@
 import { ASSETS, CreateSprite } from './sprites.js';
+import { loader } from './engine.js';
 import { TYPE } from './player.js';
 
 const HOME_ROW_RECT = {

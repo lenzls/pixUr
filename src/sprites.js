@@ -2,6 +2,7 @@ import { loader, Sprite } from './engine.js';
 
 import bmWhiteSprite from './assets/graphics/british-museum/white.png';
 import bmBlackSprite from './assets/graphics/british-museum/black.png';
+import bmBoardSprite from './assets/graphics/british-museum/background.png';
 import simpleBlackSprite from './assets/graphics/simple/black.png';
 import simpleWhiteSprite from './assets/graphics/simple/white.png';
 import simpleBoardSprite from './assets/graphics/simple/board.png';
@@ -46,5 +47,6 @@ export function addAssets({ loader }) {
         .add(SKINS[0] + '/' + ASSETS.BOARD, simpleBoardSprite)
 
         .add(SKINS[1] + '/' + ASSETS.BLACK_PIECE, bmBlackSprite)
-        .add(SKINS[1] + '/' + ASSETS.WHITE_PIECE, bmWhiteSprite);
+        .add(SKINS[1] + '/' + ASSETS.WHITE_PIECE, bmWhiteSprite)
+        .add(SKINS[1] + '/' + ASSETS.BOARD, bmBoardSprite);
 }
