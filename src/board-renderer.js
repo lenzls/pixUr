@@ -13,33 +13,7 @@ const HOME_ROW_RECT = {
     },
 };
 
-const SPACE_SIZE = 64;
 const PIECE_SIZE = 32;
-
-function getRectInGrid({ column, row }) {
-    // topleft square (index 4) is col:1 row:1
-    return {
-        left: 48 + (column -1 ) * SPACE_SIZE,
-        right: 48 + column * SPACE_SIZE,
-        top: 112 + (row - 1) * SPACE_SIZE,
-        bottom: 112 + row * SPACE_SIZE,
-    };
-}
-
-function getGridPosition({ index, player }) {
-    if (index <= 0 | index >= 15 ) {
-        throw new Error('hmm');
-    }
-    if (index <= 4 || index >= 13) {
-        const row = player.type === TYPE.WHITE ? 1 : 3;
-        if (index <= 4) return { column: 4 - index + 1, row, };
-        if (index >= 13) return { column: 20 - index + 1, row, };
-    }
-    return {
-        row: 2,
-        column: index - 4,
-    };
-}
 
 function getRect({ index, player }) {
     if (index === 0) return { ...HOME_ROW_RECT[player.type], left: 36, right: 350 };
@@ -64,7 +38,7 @@ function getRect({ index, player }) {
     if (index === 13 && player.type === TYPE.BLACK) return getCurrentSkin().spaces.b13;
     if (index === 14 && player.type === TYPE.BLACK) return getCurrentSkin().spaces.b14;
     if (index === 15) return { ...HOME_ROW_RECT[player.type], left: 430, right: 610 };
-    return getRectInGrid(getGridPosition({ index, player }));
+    throw new Error('Hmm');
 }
 
 function randomInt(minInclusive, maxExclusive) {
