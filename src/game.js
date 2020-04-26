@@ -76,13 +76,11 @@ export function CreateGame() {
                 alert('Here is already one of yours…');
                 return;
             }
-            if (aimInGoal) {
-                return conductValidMove({ piece, start: index, aim });
-            }
-            if (!piecesInAimSpace) {
-                return conductValidMove({ piece, start: index, aim });
-            }
-            if (aimInSafeZone && !ownPiecesInAimSpace) {
+            if (
+                aimInGoal ||
+                !piecesInAimSpace ||
+                (aimInSafeZone && !ownPiecesInAimSpace)
+            ) {
                 return conductValidMove({ piece, start: index, aim });
             }
             if (aimInCombatZone && piecesInAimSpace && !aimIsSafeSpace) {
