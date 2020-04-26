@@ -1,4 +1,5 @@
 import { loader, Sprite } from './engine.js';
+import { getCurrentSkin, SKINS } from './layout.js';
 
 import bmWhiteSprite from './skins/british-museum/white.png';
 import bmBlackSprite from './skins/british-museum/black.png';
@@ -9,13 +10,6 @@ import simpleBoardSprite from './skins/simple/board.png';
 import simpleDiceNull from './skins/simple/dice-0.png';
 import simpleDiceOne from './skins/simple/dice-1.png';
 
-// TODO: initialize from filesystem
-const SKINS = [
-    'simple',
-    'british-museum',
-];
-
-const currentSkin = 0;
 
 export const ASSETS = {
     WHITE_PIECE: 'whitePiece',
@@ -26,8 +20,8 @@ export const ASSETS = {
 };
 
 function getResource(asset) {
-    const assetInSkin = loader.resources[`${SKINS[currentSkin]}/${asset}`];
-    return assetInSkin ? assetInSkin : loader.resources[`${SKINS[0]}/${asset}`];
+    const assetInSkin = loader.resources[`${getCurrentSkin().resourceKeyPrefix}/${asset}`];
+    return assetInSkin ? assetInSkin : loader.resources[`${SKINS[0].resourceKeyPrefix}/${asset}`];
 }
 
 export function changeSpriteTexture({ sprite, asset }) {
@@ -40,13 +34,13 @@ export function CreateSprite({ asset }) {
 
 export function addAssets({ loader }) {
     return loader
-        .add(SKINS[0] + '/' + ASSETS.WHITE_PIECE, simpleWhiteSprite)
-        .add(SKINS[0] + '/' + ASSETS.BLACK_PIECE, simpleBlackSprite)
-        .add(SKINS[0] + '/' + ASSETS.DICE_NULL, simpleDiceNull)
-        .add(SKINS[0] + '/' + ASSETS.DICE_ONE, simpleDiceOne)
-        .add(SKINS[0] + '/' + ASSETS.BOARD, simpleBoardSprite)
+        .add(SKINS[0].resourceKeyPrefix + '/' + ASSETS.WHITE_PIECE, simpleWhiteSprite)
+        .add(SKINS[0].resourceKeyPrefix + '/' + ASSETS.BLACK_PIECE, simpleBlackSprite)
+        .add(SKINS[0].resourceKeyPrefix + '/' + ASSETS.DICE_NULL, simpleDiceNull)
+        .add(SKINS[0].resourceKeyPrefix + '/' + ASSETS.DICE_ONE, simpleDiceOne)
+        .add(SKINS[0].resourceKeyPrefix + '/' + ASSETS.BOARD, simpleBoardSprite)
 
-        .add(SKINS[1] + '/' + ASSETS.BLACK_PIECE, bmBlackSprite)
-        .add(SKINS[1] + '/' + ASSETS.WHITE_PIECE, bmWhiteSprite)
-        .add(SKINS[1] + '/' + ASSETS.BOARD, bmBoardSprite);
+        .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.BLACK_PIECE, bmBlackSprite)
+        .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.WHITE_PIECE, bmWhiteSprite)
+        .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.BOARD, bmBoardSprite);
 }

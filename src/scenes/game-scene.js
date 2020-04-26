@@ -4,7 +4,7 @@ import { STATES } from '../state-machine.js';
 import { createButton } from './common.js';
 import { TYPE } from '../player.js';
 import { ASSETS, CreateSprite, changeSpriteTexture } from '../sprites.js';
-import { layout } from '../layout.js';
+import { getCurrentSkin } from '../layout.js';
 
 export function createGameScene({ stateMachine, game }) {
     const container = new Container();
@@ -57,10 +57,10 @@ export function createGameScene({ stateMachine, game }) {
         container,
         update() {
             if (game.currentPlayer.type === TYPE.BLACK) {
-                currentPlayerIndicator.position.set(10, layout.currentPlayerIndicator.blackY);
+                currentPlayerIndicator.position.set(10, getCurrentSkin().currentPlayerIndicator.blackY);
             }
             else if (game.currentPlayer.type === TYPE.WHITE) {
-                currentPlayerIndicator.position.set(10, layout.currentPlayerIndicator.whiteY);
+                currentPlayerIndicator.position.set(10, getCurrentSkin().currentPlayerIndicator.whiteY);
             }
 
             if (game.currentPlayerRolled) {

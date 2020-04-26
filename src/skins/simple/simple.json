@@ -1,4 +1,5 @@
 {
+    "resourceKeyPrefix": "simple",
     "currentPlayerIndicator": {
         "whiteY": 100,
         "blackY": 300

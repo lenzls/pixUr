@@ -1,4 +1,5 @@
 {
+    "resourceKeyPrefix": "british-museum",
     "currentPlayerIndicator": {
         "whiteY": 10,
         "blackY": 400
