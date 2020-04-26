@@ -27,7 +27,7 @@ export function createGameScene({ stateMachine, game }) {
     const diceButton = createButton({
         text: '⚄',
         color: 0x66CC66,
-        position: { x: 450, y: 25 },
+        position: { x: 580, y: 190 },
         onClick: () => game.rollDice(),
         transparency: 0.25,
     });
