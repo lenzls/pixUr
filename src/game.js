@@ -44,6 +44,7 @@ export function CreateGame() {
             const index = board.getIndex({ piece });
             const aim = index + pips(this.lastRoll);
             
+            const onRosette = (index) => [4, 8, 14].includes(index);
             const conductValidMove = ({ piece, start, aim }) => {
                 board.removePiece({ piece, index: start });
                 board.addPiece({ piece, index: aim });
@@ -59,30 +60,34 @@ export function CreateGame() {
                 board.removePiece({ piece: opponentPiece, index });
                 board.addPiece({ piece: opponentPiece, index: 0 });
             };
-            const noOwnPiecesInSpace = ({ player, index }) => board.getPieces({ index }).every(p => p.player !== player);
-            const noPiecesInSpace = ({ index }) => board.getPieces({ index }).length > 0;
-            const inSafeZone = (index) => (0 <= index && index <= 4) || (13 <= index && index <= 14);
-            const inCombatZone = (index) => (5 <= index && index <= 12);
-            const inGoal = (index) => index === 15;
-            const behindGoal = (index) => index >= 16;
-            const onRosette = (index) => [4, 8, 14].includes(index);
+            const ownPiecesInAimSpace = board.getPieces({ index: aim }).some(p => p.player === this.currentPlayer);
+            const piecesInAimSpace = board.getPieces({ index: aim }).length > 0;
+            const aimInSafeZone = (0 <= aim && aim <= 4) || (13 <= aim && aim <= 14);
+            const aimInCombatZone = (5 <= aim && aim <= 12);
+            const aimInGoal = aim === 15;
+            const aimIsBehindGoal = aim >= 16;
+            const aimIsSafeSpace = [8].includes(aim);
 
-            if (inSafeZone(aim)) {
-                if (noOwnPiecesInSpace({ player: this.currentPlayer, index: aim })) {
-                    conductValidMove({ piece, start: index, aim });
-                }
+            if (aimIsBehindGoal) {
+                alert('Too far.');
+                return;
             }
-            else if (inCombatZone(aim)) {
-                if (noPiecesInSpace({ index: aim })) {
-                    combat({ piece, index: aim });
-                }
+            if (ownPiecesInAimSpace) {
+                alert('Here is already one of yours…');
+                return;
+            }
+            if (aimInGoal) {
+                return conductValidMove({ piece, start: index, aim });
+            }
+            if (!piecesInAimSpace) {
+                return conductValidMove({ piece, start: index, aim });
+            }
+            if (aimInSafeZone && !ownPiecesInAimSpace) {
+                return conductValidMove({ piece, start: index, aim });
+            }
+            if (aimInCombatZone && piecesInAimSpace && !aimIsSafeSpace) {
+                combat({ piece, index: aim });
                 conductValidMove({ piece, start: index, aim });
-            }
-            else if (inGoal(aim)) {
-                conductValidMove({ piece, start: index, aim });
-            }
-            else if (behindGoal(aim)) {
-                console.log('Too far, pal.');
             }
         },
         anotherTurn() {
