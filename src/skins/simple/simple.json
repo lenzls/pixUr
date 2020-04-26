@@ -4,17 +4,31 @@
         "whiteY": 100,
         "blackY": 300
     },
-    "homeRowRect": {
-        "white": {
-            "top": 14,
-            "bottom": 80
-        },
-        "black": {
-            "top": 350,
-            "bottom": 416
-        }
-    },
     "spaces": {
+        "wstart": {
+            "top": 14,
+            "bottom": 80,
+            "left": 36, 
+            "right": 350
+        },
+        "bstart": {
+            "top": 350,
+            "bottom": 416,
+            "left": 36, 
+            "right": 350
+        },
+        "wend": {
+            "top": 14,
+            "bottom": 80,
+            "left": 430, 
+            "right": 610
+        },
+        "bend": {
+            "top": 350,
+            "bottom": 416,
+            "left": 430, 
+            "right": 610
+        },
         "w1": {
             "top": 114,
             "bottom": 173,

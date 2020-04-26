@@ -2,21 +2,11 @@ import { ASSETS, CreateSprite } from './sprites.js';
 import { getCurrentSkin } from './layout.js';
 import { TYPE } from './player.js';
 
-const HOME_ROW_RECT = {
-    [TYPE.WHITE]: {
-        top: getCurrentSkin().homeRowRect.white.top,
-        bottom: getCurrentSkin().homeRowRect.white.bottom,
-    },
-    [TYPE.BLACK]: {
-        top: getCurrentSkin().homeRowRect.black.top,
-        bottom: getCurrentSkin().homeRowRect.black.bottom,
-    },
-};
-
 const PIECE_SIZE = 32;
 
 function getRect({ index, player }) {
-    if (index === 0) return { ...HOME_ROW_RECT[player.type], left: 36, right: 350 };
+    if (index === 0 && player.type === TYPE.WHITE) return getCurrentSkin().spaces.wstart;
+    if (index === 0 && player.type === TYPE.BLACK) return getCurrentSkin().spaces.bstart;
     if (index === 1 && player.type === TYPE.WHITE) return getCurrentSkin().spaces.w1;
     if (index === 2 && player.type === TYPE.WHITE) return getCurrentSkin().spaces.w2;
     if (index === 3 && player.type === TYPE.WHITE) return getCurrentSkin().spaces.w3;
@@ -37,7 +27,8 @@ function getRect({ index, player }) {
     if (index === 14 && player.type === TYPE.WHITE) return getCurrentSkin().spaces.w14;
     if (index === 13 && player.type === TYPE.BLACK) return getCurrentSkin().spaces.b13;
     if (index === 14 && player.type === TYPE.BLACK) return getCurrentSkin().spaces.b14;
-    if (index === 15) return { ...HOME_ROW_RECT[player.type], left: 430, right: 610 };
+    if (index === 15 && player.type === TYPE.WHITE) return getCurrentSkin().spaces.wend;
+    if (index === 15 && player.type === TYPE.BLACK) return getCurrentSkin().spaces.bend;
     throw new Error('Hmm');
 }
 
