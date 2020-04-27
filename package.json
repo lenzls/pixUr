@@ -1,6 +1,6 @@
 {
   "name": "enedi",
-  "version": "0.1.0",
+  "version": "1.0.0-SNAPSHOT",
   "private": true,
   "description": "Recreation of the Royal Game of Ur",
   "main": "index.js",
