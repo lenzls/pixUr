@@ -1,7 +1,6 @@
 import { CreateBoard } from './board.js';
 import { CreateWhitePlayer, CreateBlackPlayer } from './player.js';
-
-const pips = roll => roll.reduce((acc, value) => acc + value, 0);
+import { CreateDie, totalPips } from './die.js';
 
 export function CreateGame() {
     const board = CreateBoard();
@@ -14,20 +13,16 @@ export function CreateGame() {
     const hasPlayerWon = (player) => player.pieces.every(piece => board.getIndex({ piece }) === 15);
 
     return {
-        lastRoll: null,
+        dice: [CreateDie(), CreateDie(), CreateDie(), CreateDie()],
         currentPlayerRolled: false,
         currentPlayer: white,
         board,
         white,
         black,
         rollDice() {
-            const rollDice = () => {
-                const zeroOrOne = () => Math.floor(Math.random() * 2);
-                return [zeroOrOne(), zeroOrOne(), zeroOrOne(), zeroOrOne()];
-            };
-            this.lastRoll = rollDice();
+            this.dice.forEach(die => die.roll());
             this.currentPlayerRolled = true;
-            if (pips(this.lastRoll) === 0) {
+            if (totalPips(this.dice) === 0) {
                 this.switchPlayer();
             }
         },
@@ -42,7 +37,7 @@ export function CreateGame() {
                 return;
             }
             const index = board.getIndex({ piece });
-            const aim = index + pips(this.lastRoll);
+            const aim = index + totalPips(this.dice);
 
             const aimIsBehindGoal = aim >= 16;
 

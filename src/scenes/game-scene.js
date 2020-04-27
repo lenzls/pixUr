@@ -3,7 +3,6 @@ import { Container, Text } from '../engine.js';
 import { STATES } from '../state-machine.js';
 import { createButton } from './common.js';
 import { TYPE } from '../player.js';
-import { ASSETS, CreateSprite, changeSpriteTexture } from '../sprites.js';
 import { getCurrentSkin } from '../layout.js';
 
 export function createGameScene({ stateMachine, game }) {
@@ -34,13 +33,7 @@ export function createGameScene({ stateMachine, game }) {
     });
     container.addChild(diceButton);
 
-    const diceSprites = [
-        CreateSprite({ asset: ASSETS.DICE_NULL }),
-        CreateSprite({ asset: ASSETS.DICE_NULL }),
-        CreateSprite({ asset: ASSETS.DICE_NULL }),
-        CreateSprite({ asset: ASSETS.DICE_NULL }),
-    ];
-    diceSprites.forEach((sprite, index) => {
+    game.dice.map(die => die.sprite).forEach((sprite, index) => {
         sprite.position.set(570, 115 + 50 * index);
         container.addChild(sprite);
     });
@@ -68,19 +61,6 @@ export function createGameScene({ stateMachine, game }) {
             }
             else {
                 diceButton.visible = true;
-            }
-
-            const dice = game.lastRoll;
-            if (dice) {
-                diceSprites.forEach((sprite, index) => {
-                    sprite.visible = true;
-                    changeSpriteTexture({ sprite, asset: dice[index] === 0 ? ASSETS.DICE_NULL : ASSETS.DICE_ONE });
-                });
-            }
-            else {
-                diceSprites.forEach((sprite) => {
-                    sprite.visible = false;
-                });
             }
         }
     };
