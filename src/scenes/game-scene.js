@@ -1,4 +1,3 @@
-import { createBackgroundSprite } from '../board-renderer.js';
 import { Container, Text } from '../engine.js';
 import { STATES } from '../state-machine.js';
 import { createButton } from './common.js';
@@ -8,7 +7,7 @@ import { getCurrentSkin } from '../layout.js';
 export function createGameScene({ stateMachine, game }) {
     const container = new Container();
         
-    container.addChild(createBackgroundSprite());
+    container.addChild(game.board.sprite);
     [
         ...game.white.pieces.map(p => p.sprite), 
         ...game.black.pieces.map(p => p.sprite)

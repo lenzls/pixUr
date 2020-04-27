@@ -1,5 +1,5 @@
 import { ASSETS, CreateSprite, changeSpriteTexture } from './sprites.js';
-import { setSpriteToPositionWithinRect } from './board-renderer.js';
+import { setSpriteToPositionWithinRect } from './sprite-helper.js';
 import { getCurrentSkin } from './layout.js';
 
 export function totalPips(dice) { 
