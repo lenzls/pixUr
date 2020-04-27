@@ -15,16 +15,15 @@ function randomInt(minInclusive, maxExclusive) {
     return Math.floor(minInclusive + Math.random() * (maxExclusive - minInclusive));
 }
 
-function setSpriteToPositionWithinRect({ otherPiecesInSpace, sprite, top, bottom, left, right }) {
+function setSpriteToPositionWithinRect({ pieceInSpaceNotToOverlapWith, sprite, top, bottom, left, right }) {
     const generatePositionCandidate = () => ({
         x: randomInt(left, right - sprite.width),
         y: randomInt(top, bottom - sprite.height),
     });
-    const playersOtherPiecesInSpace = otherPiecesInSpace.filter(piece => piece.player === sprite.piece.player);
     const position = tryUntil({
         generator: generatePositionCandidate,
         condition: (candidate) => 
-            playersOtherPiecesInSpace
+            pieceInSpaceNotToOverlapWith
                 .every(piece => !overlap(piece.sprite, { ...candidate, width: sprite.width, height: sprite.height })),
         maxTries: 200,
     });
@@ -60,7 +59,10 @@ export function removePieceFromBoard({ piece }) {
 }
 
 export function addPieceToBoard({ otherPiecesInSpace, piece, index }) {
-    setSpriteToPositionWithinRect({ otherPiecesInSpace, sprite: piece.sprite, ...getRect({ player: piece.player, index }) });
+    setSpriteToPositionWithinRect({ 
+        pieceInSpaceNotToOverlapWith: otherPiecesInSpace.filter(piece => piece.player === piece.player), 
+        sprite: piece.sprite, ...getRect({ player: piece.player, index }) 
+    });
     piece.sprite.visible = true;
 }
 
