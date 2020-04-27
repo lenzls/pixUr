@@ -9,4 +9,4 @@ git commit --message "Rebuild GitHub pages"
 git filter-branch --force --prune-empty --subdirectory-filter dist
 git push --force origin gh-pages
 git co master
-echo "Deploy finished. Please visit https://lenzls.github.io/pixUr/"
+echo "Deploy finished. Please visit https://lenzls.github.io/enedi/"

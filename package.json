@@ -1,5 +1,5 @@
 {
-  "name": "pixur",
+  "name": "enedi",
   "version": "0.0.3",
   "private": true,
   "description": "Recreation of the Royal Game of Ur",
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lenzls/pixUr.git"
+    "url": "git+https://github.com/lenzls/enedi.git"
   },
   "author": "Simon Lenz",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lenzls/pixUr/issues"
+    "url": "https://github.com/lenzls/enedi/issues"
   },
-  "homepage": "https://github.com/lenzls/pixUr#readme",
+  "homepage": "https://github.com/lenzls/enedi#readme",
   "dependencies": {
     "pixi.js": "^5.2.3"
   },
