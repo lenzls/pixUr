@@ -15,7 +15,7 @@ function randomInt(minInclusive, maxExclusive) {
     return Math.floor(minInclusive + Math.random() * (maxExclusive - minInclusive));
 }
 
-function setSpriteToPositionWithinRect({ spritesInSpaceNotToOverlapWith, sprite, top, bottom, left, right }) {
+export function setSpriteToPositionWithinRect({ spritesInSpaceNotToOverlapWith, sprite, top, bottom, left, right, maxTries = 200 }) {
     const generatePositionCandidate = () => ({
         x: randomInt(left, right - sprite.width),
         y: randomInt(top, bottom - sprite.height),
@@ -25,7 +25,7 @@ function setSpriteToPositionWithinRect({ spritesInSpaceNotToOverlapWith, sprite,
         condition: (candidate) => 
             spritesInSpaceNotToOverlapWith
                 .every(other => !overlap(other, { ...candidate, width: sprite.width, height: sprite.height })),
-        maxTries: 200,
+        maxTries,
     });
     sprite.position.set(position.x, position.y);
 }

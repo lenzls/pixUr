@@ -1,6 +1,6 @@
 import { CreateBoard } from './board.js';
 import { CreateWhitePlayer, CreateBlackPlayer } from './player.js';
-import { CreateDie, totalPips } from './die.js';
+import { CreateDie, totalPips, calcNewDiceSpritePositions } from './die.js';
 
 export function CreateGame() {
     const board = CreateBoard();
@@ -21,6 +21,7 @@ export function CreateGame() {
         black,
         rollDice() {
             this.dice.forEach(die => die.roll());
+            calcNewDiceSpritePositions({ dice: this.dice });
             this.currentPlayerRolled = true;
             if (totalPips(this.dice) === 0) {
                 this.switchPlayer();

@@ -4,6 +4,12 @@
         "whiteY": 60,
         "blackY": 400
     },
+    "diceArea": {
+        "top": 60,
+        "bottom": 370,
+        "left": 565, 
+        "right": 630
+    },
     "spaces": {
         "wstart": {
             "top": 34,
