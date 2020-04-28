@@ -4,6 +4,9 @@ import { getCurrentSkin, SKINS } from './layout.js';
 import bmWhiteSprite from './skins/british-museum/white.png';
 import bmBlackSprite from './skins/british-museum/black.png';
 import bmBoardSprite from './skins/british-museum/background.png';
+import bmPlateSprite from './skins/british-museum/plate.png';
+import bmNewGameButtonSprite from './skins/british-museum/new-game-button.png';
+import bmContinueButtonSprite from './skins/british-museum/continue-button.png';
 import simpleBlackSprite from './skins/simple/black.png';
 import simpleWhiteSprite from './skins/simple/white.png';
 import simpleBoardSprite from './skins/simple/board.png';
@@ -17,11 +20,23 @@ export const ASSETS = {
     BOARD: 'board',
     DICE_NULL: 'diceNull',
     DICE_ONE: 'diceOne',
+    PLATE: 'plate',
+    NEW_GAME_BUTTON: 'newGameButton',
+    CONTINUE_BUTTON: 'continueButton',
 };
 
 function getResource(asset) {
     const assetInSkin = loader.resources[`${getCurrentSkin().resourceKeyPrefix}/${asset}`];
-    return assetInSkin ? assetInSkin : loader.resources[`${SKINS[0].resourceKeyPrefix}/${asset}`];
+    if (assetInSkin) {
+        return assetInSkin;
+    }
+    const firstHitInOtherSkins = SKINS
+        .map(skin => loader.resources[`${skin.resourceKeyPrefix}/${asset}`])
+        .find(resource => !!resource);
+    if (firstHitInOtherSkins) {
+        return firstHitInOtherSkins;
+    }
+    throw new Error(`No skin contains asset ${asset}`);
 }
 
 export function changeSpriteTexture({ sprite, asset }) {
@@ -42,5 +57,8 @@ export function addAssets({ loader }) {
 
         .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.BLACK_PIECE, bmBlackSprite)
         .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.WHITE_PIECE, bmWhiteSprite)
-        .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.BOARD, bmBoardSprite);
+        .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.BOARD, bmBoardSprite)
+        .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.NEW_GAME_BUTTON, bmNewGameButtonSprite)
+        .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.CONTINUE_BUTTON, bmContinueButtonSprite)
+        .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.PLATE, bmPlateSprite);
 }
