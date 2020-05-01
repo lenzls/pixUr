@@ -2,7 +2,7 @@ import { ASSETS, CreateSprite } from './sprites.js';
 import { setSpriteToPositionWithinRect } from './sprite-helper.js';
 import { getCurrentSkin } from './layout.js';
 import { TYPE } from './player.js';
-
+import { inCombatZone } from './game-rules.js';
 
 export function CreateBoard() {
     const spaces = [];
@@ -17,8 +17,11 @@ export function CreateBoard() {
             spaces[index].push(piece);
             addSpriteToSpace({ otherPiecesInSpace: spaces[index], piece, index });
         },
-        getPieces({ index }) {
-            return spaces[index];
+        getPieces({ index, player }) {
+            if (inCombatZone(index)) {
+                return spaces[index];
+            }
+            return spaces[index].filter(piece => piece.player === player);
         },
         getIndex({ piece }) {
             return spaces.findIndex(space => space.includes(piece));

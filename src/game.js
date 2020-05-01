@@ -1,6 +1,7 @@
 import { CreateBoard } from './board.js';
 import { CreateWhitePlayer, CreateBlackPlayer } from './player.js';
 import { CreateDie, totalPips, calcNewDiceSpritePositions } from './die.js';
+import { isMoveValid, moveResultsInCombat } from './game-rules.js';
 
 export function CreateGame() {
     const board = CreateBoard();
@@ -39,13 +40,6 @@ export function CreateGame() {
             }
             const index = board.getIndex({ piece });
             const aim = index + totalPips(this.dice);
-
-            const aimIsBehindGoal = aim >= 16;
-
-            if (aimIsBehindGoal) {
-                alert('Too far.');
-                return;
-            }
             
             const onRosette = (index) => [4, 8, 14].includes(index);
             const conductValidMove = ({ piece, start, aim }) => {
@@ -63,27 +57,16 @@ export function CreateGame() {
                 board.removePiece({ piece: opponentPiece, index });
                 board.addPiece({ piece: opponentPiece, index: 0 });
             };
-            const ownPiecesInAimSpace = board.getPieces({ index: aim }).some(p => p.player === this.currentPlayer);
-            const piecesInAimSpace = board.getPieces({ index: aim }).length > 0;
-            const aimInSafeZone = (0 <= aim && aim <= 4) || (13 <= aim && aim <= 14);
-            const aimInCombatZone = (5 <= aim && aim <= 12);
-            const aimInGoal = aim === 15;
-            const aimIsSafeSpace = [8].includes(aim);
 
-            if (ownPiecesInAimSpace && !aimInGoal) {
-                alert('Here is already one of yours…');
-                return;
-            }
-            if (
-                aimInGoal ||
-                !piecesInAimSpace ||
-                (aimInSafeZone && !ownPiecesInAimSpace)
-            ) {
-                return conductValidMove({ piece, start: index, aim });
-            }
-            if (aimInCombatZone && piecesInAimSpace && !aimIsSafeSpace) {
-                combat({ piece, index: aim });
+            const moveEvaluation = isMoveValid({ index: aim, board, player: this.currentPlayer });
+            if (moveEvaluation.valid) {
+                if (moveResultsInCombat({ board, play: this.currentPlayer, index: aim })) {
+                    combat({ piece, index: aim });
+                }
                 conductValidMove({ piece, start: index, aim });
+            }
+            else {
+                alert(moveEvaluation.reason);
             }
         },
         anotherTurn() {
