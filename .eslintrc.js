@@ -29,6 +29,13 @@ module.exports = {
         'semi': [
             'error',
             'always'
-        ]
+        ],
+        "comma-dangle": [
+            'error',
+            'always-multiline'
+        ],
+        "no-trailing-spaces": [
+            'error'
+        ],
     }
 };

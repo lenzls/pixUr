@@ -5,13 +5,13 @@ import { ASSETS, CreateSprite } from './sprites.js';
 
 
 export function addSpriteToSpace({ otherPiecesInSpace, piece, index }) {
-    setSpriteToPositionWithinRect({ 
-        spritesInSpaceNotToOverlapWith: 
+    setSpriteToPositionWithinRect({
+        spritesInSpaceNotToOverlapWith:
             otherPiecesInSpace
                 .filter(piece => piece.player === piece.player)
-                .map(piece => piece.sprite), 
-        sprite: piece.sprite, 
-        ...getRectOfSpace({ player: piece.player, index }) 
+                .map(piece => piece.sprite),
+        sprite: piece.sprite,
+        ...getRectOfSpace({ player: piece.player, index }),
     });
     piece.sprite.visible = true;
 }

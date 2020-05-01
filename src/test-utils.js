@@ -1,8 +1,8 @@
 export const CreatePiece = (player) => ({
-    player
+    player,
 });
 const CreatePlayer = (name) => ({
-    name
+    name,
 });
 export const black = CreatePlayer('black');
 export const white = CreatePlayer('white');

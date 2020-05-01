@@ -24,16 +24,16 @@ function CreatePlayer({ name, asset, type }) {
 }
 
 export function CreateBlackPlayer() {
-    return CreatePlayer({ 
-        name: 'black', 
+    return CreatePlayer({
+        name: 'black',
         asset: ASSETS.BLACK_PIECE,
         type: TYPE.BLACK,
     });
 }
 
 export function CreateWhitePlayer() {
-    return CreatePlayer({ 
-        name: 'white', 
+    return CreatePlayer({
+        name: 'white',
         asset: ASSETS.WHITE_PIECE,
         type: TYPE.WHITE,
     });

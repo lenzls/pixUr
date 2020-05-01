@@ -41,7 +41,7 @@ export function CreateGame() {
             }
             const index = board.getIndex({ piece });
             const aim = index + totalPips(this.dice);
-            
+
             const onRosette = (index) => [4, 8, 14].includes(index);
             const conductValidMove = ({ piece, start, aim }) => {
                 board.removePiece({ piece, index: start });

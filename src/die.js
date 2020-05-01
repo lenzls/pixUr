@@ -2,7 +2,7 @@ import { ASSETS, CreateSprite, changeSpriteTexture } from './sprites.js';
 import { setSpriteToPositionWithinRect } from './sprite-helper.js';
 import { getCurrentSkin } from './layout.js';
 
-export function totalPips(dice) { 
+export function totalPips(dice) {
     return dice.reduce((acc, die) => acc + die.currentPips, 0);
 }
 
@@ -17,7 +17,7 @@ export function CreateDie() {
         },
         updateSprite() {
             changeSpriteTexture({ sprite: this.sprite, asset: this.currentPips === 0 ? ASSETS.DICE_NULL : ASSETS.DICE_ONE });
-        }
+        },
     };
 }
 
@@ -30,7 +30,7 @@ export function calcNewDiceSpritePositions({ dice }) {
             spritesInSpaceNotToOverlapWith: dice.map(die => die.sprite),
             sprite: die.sprite,
             ...getCurrentSkin().diceArea,
-            maxTries: 1000
+            maxTries: 1000,
         });
     });
 }

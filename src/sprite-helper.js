@@ -34,7 +34,7 @@ export function setSpriteToPositionWithinRect({ spritesInSpaceNotToOverlapWith, 
     });
     const position = tryUntil({
         generator: generatePositionCandidate,
-        condition: (candidate) => 
+        condition: (candidate) =>
             spritesInSpaceNotToOverlapWith
                 .every(other => !overlap(other, { ...candidate, width: sprite.width, height: sprite.height })),
         maxTries,

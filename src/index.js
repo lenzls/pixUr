@@ -12,7 +12,7 @@ const DIMENSIONS = {
 };
 
 const parentElement = document.querySelector('#canvas-parent');
-const app = new Application({ 
+const app = new Application({
     ...DIMENSIONS,
     backgroundColor: 0xffffff,
 });
