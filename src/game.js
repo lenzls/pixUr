@@ -2,9 +2,10 @@ import { CreateBoard } from './board.js';
 import { CreateWhitePlayer, CreateBlackPlayer } from './player.js';
 import { CreateDie, totalPips, calcNewDiceSpritePositions } from './die.js';
 import { isMoveValid, moveResultsInCombat } from './game-rules.js';
+import { getBoardSprite, addSpriteToSpace, removeSpriteFromSpace } from './board-display.js';
 
 export function CreateGame() {
-    const board = CreateBoard();
+    const board = CreateBoard({ sprite: getBoardSprite(), addSpriteToSpace, removeSpriteFromSpace });
     const white = CreateWhitePlayer();
     const black = CreateBlackPlayer();
     board.clear();

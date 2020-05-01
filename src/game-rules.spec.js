@@ -1,17 +1,9 @@
 import { describe, it, expect } from '@jest/globals';
+import { black, white, CreatePiece } from './test-utils.js';
 
 import { isMoveValid, moveResultsInCombat } from './game-rules.js';
 
 describe('game-rules', () => {
-    const CreatePiece = (player) => ({
-        player
-    });
-    const CreatePlayer = (name) => ({
-        name
-    });
-    const black = CreatePlayer('black');
-    const white = CreatePlayer('white');
-
     describe('isMoveValid', () => {
         describe('invalid', () => {
             it('if move behind goal', () => {
