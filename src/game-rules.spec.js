@@ -80,5 +80,10 @@ describe('game-rules', () => {
             const board = { getPieces: () => [white] };
             expect(moveResultsInCombat({ index: 6, board, player: black })).toBe(true);
         });
+
+        it('occupied by own piece in goal', () => {
+            const board = { getPieces: () => [black, black] };
+            expect(moveResultsInCombat({ index: 15, board, player: black })).toBe(false);
+        });
     });
 });
