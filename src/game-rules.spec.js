@@ -55,6 +55,12 @@ describe('game-rules', () => {
                 expect(isMoveValid({ index: 15, board, player: black }))
                     .toEqual(expect.objectContaining({ valid: true }));
             });
+
+            it('land in combat space', () => {
+                const board = { getPieces: () => [white] };
+                expect(isMoveValid({ index: 6, board, player: black }))
+                    .toEqual(expect.objectContaining({ valid: true }));
+            });
         });
     });
 });
