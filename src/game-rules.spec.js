@@ -46,7 +46,11 @@ describe('game-rules', () => {
         describe('valid', () => {
             it('land on empty space', () => {
                 const board = { getPieces: () => [] };
+                expect(isMoveValid({ index: 3, board, player: black }))
+                    .toEqual(expect.objectContaining({ valid: true }));
                 expect(isMoveValid({ index: 8, board, player: black }))
+                    .toEqual(expect.objectContaining({ valid: true }));
+                expect(isMoveValid({ index: 13, board, player: black }))
                     .toEqual(expect.objectContaining({ valid: true }));
             });
 
