@@ -35,6 +35,12 @@ describe('game-rules', () => {
                 expect(isMoveValid({ index: 13, board, player: black }))
                     .toEqual(expect.objectContaining({ valid: false }));
             });
+
+            it('if occupied by opponent piece but is a safe spot', () => {
+                const board = { getPieces: () => [CreatePiece(white)] };
+                expect(isMoveValid({ index: 8, board, player: black }))
+                    .toEqual(expect.objectContaining({ valid: false }));
+            });
         });
     });
 });
