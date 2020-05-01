@@ -9,6 +9,13 @@ describe('game-rules', () => {
                 expect(isMoveValid({ index: 16 }))
                     .toEqual(expect.objectContaining({ valid: false }));
             });
+
+            it('if out of playfield', () => {
+                expect(isMoveValid({ index: 100 }))
+                    .toEqual(expect.objectContaining({ valid: false }));
+                expect(isMoveValid({ index: -100 }))
+                    .toEqual(expect.objectContaining({ valid: false }));
+            });
         });
     });
 });
