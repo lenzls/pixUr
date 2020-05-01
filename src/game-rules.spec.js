@@ -3,17 +3,17 @@ import { describe, it, expect } from '@jest/globals';
 import { isMoveValid } from './game-rules.js';
 
 describe('game-rules', () => {
+    const CreatePiece = (player) => ({
+        player
+    });
+    const CreatePlayer = (name) => ({
+        name
+    });
+    const black = CreatePlayer('black');
+    const white = CreatePlayer('white');
+
     describe('isMoveValid', () => {
         describe('invalid', () => {
-            const CreatePiece = (player) => ({
-                player
-            });
-            const CreatePlayer = (name) => ({
-                name
-            });
-            const black = CreatePlayer('black');
-            const white = CreatePlayer('white');
-
             it('if move behind goal', () => {
                 expect(isMoveValid({ index: 16 }))
                     .toEqual(expect.objectContaining({ valid: false }));
@@ -40,6 +40,20 @@ describe('game-rules', () => {
                 const board = { getPieces: () => [CreatePiece(white)] };
                 expect(isMoveValid({ index: 8, board, player: black }))
                     .toEqual(expect.objectContaining({ valid: false }));
+            });
+        });
+
+        describe('valid', () => {
+            it('land on empty space', () => {
+                const board = { getPieces: () => [] };
+                expect(isMoveValid({ index: 8, board, player: black }))
+                    .toEqual(expect.objectContaining({ valid: true }));
+            });
+
+            it('land in already occupied goal', () => {
+                const board = { getPieces: () => [black, black] };
+                expect(isMoveValid({ index: 15, board, player: black }))
+                    .toEqual(expect.objectContaining({ valid: true }));
             });
         });
     });
