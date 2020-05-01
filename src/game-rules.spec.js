@@ -1,3 +1,5 @@
+import { describe, it, expect } from '@jest/globals';
+
 describe('game-rules', () => {
     describe('isMoveValid', () => {
         it('test', () => {
