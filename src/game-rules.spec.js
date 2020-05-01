@@ -1,6 +1,6 @@
 import { describe, it, expect } from '@jest/globals';
 
-import { isMoveValid } from './game-rules.js';
+import { isMoveValid, moveResultsInCombat } from './game-rules.js';
 
 describe('game-rules', () => {
     const CreatePiece = (player) => ({
@@ -65,6 +65,20 @@ describe('game-rules', () => {
                 expect(isMoveValid({ index: 6, board, player: black }))
                     .toEqual(expect.objectContaining({ valid: true }));
             });
+        });
+    });
+
+    describe('moveResultsInCombat', () => {
+        it('unoccupied hex', () => {
+            const board = { getPieces: () => [] };
+            expect(moveResultsInCombat({ index: 2, board, player: black })).toBe(false);
+            expect(moveResultsInCombat({ index: 6, board, player: black })).toBe(false);
+            expect(moveResultsInCombat({ index: 13, board, player: black })).toBe(false);
+        });
+
+        it('occupied by opponent in combat zone', () => {
+            const board = { getPieces: () => [white] };
+            expect(moveResultsInCombat({ index: 6, board, player: black })).toBe(true);
         });
     });
 });
