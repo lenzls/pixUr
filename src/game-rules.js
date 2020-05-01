@@ -1,3 +1,12 @@
+export function validMoveExists({ board, player, pips }) {
+    return player.pieces
+        .some(piece => isMoveValid({
+            index: board.getIndex({ piece }) + pips,
+            player,
+            board,
+        }).valid);
+}
+
 export function isMoveValid({ index, board, player }) {
     if (index < 0) {
         return { valid: false, reason: 'Invalid position. Please file a bug report how you managed to do that :)' };
