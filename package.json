@@ -9,7 +9,7 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.js",
     "deploy": "npm run build && sh build/deploy-github-pages.sh",
     "lint": "eslint src/*.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "bump-version": "npm --no-git-tag-version version "
   },
   "repository": {
@@ -30,6 +30,7 @@
     "eslint": "^6.8.0",
     "file-loader": "^6.0.0",
     "html-webpack-plugin": "^4.2.0",
+    "jest": "^25.5.3",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
