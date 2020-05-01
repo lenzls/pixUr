@@ -5,7 +5,7 @@ export function isMoveValid({ index, board, player }) {
     if (index > 15) {
         return { valid: false, reason: 'too far' };
     }
-    if (hasOwnPieces(board, player, index)) {
+    if (hasOwnPieces(board, player, index) && !inGoal(index)) {
         return { valid: false, reason: "You can't take your own pieces" };
     }
     if (inCombatZone(index) && hasOpponentPieces(board, player, index) && inSafeZone(index)) {
@@ -28,6 +28,10 @@ function hasOwnPieces(board, player, index) {
 
 function inSafeZone(index) {
     return index === 8;
+}
+
+function inGoal(index) {
+    return index === 15;
 }
 
 export function inCombatZone(index) {

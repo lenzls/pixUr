@@ -47,13 +47,13 @@ describe('game-rules', () => {
             });
 
             it('land in already occupied goal', () => {
-                const board = { getPieces: () => [black, black] };
+                const board = { getPieces: () => [CreatePiece(black), CreatePiece(black)] };
                 expect(isMoveValid({ index: 15, board, player: black }))
                     .toEqual(expect.objectContaining({ valid: true }));
             });
 
             it('land in combat space', () => {
-                const board = { getPieces: () => [white] };
+                const board = { getPieces: () => [CreatePiece(white)] };
                 expect(isMoveValid({ index: 6, board, player: black }))
                     .toEqual(expect.objectContaining({ valid: true }));
             });
@@ -69,12 +69,12 @@ describe('game-rules', () => {
         });
 
         it('occupied by opponent in combat zone', () => {
-            const board = { getPieces: () => [white] };
+            const board = { getPieces: () => [CreatePiece(white)] };
             expect(moveResultsInCombat({ index: 6, board, player: black })).toBe(true);
         });
 
         it('occupied by own piece in goal', () => {
-            const board = { getPieces: () => [black, black] };
+            const board = { getPieces: () => [CreatePiece(black), CreatePiece(black)] };
             expect(moveResultsInCombat({ index: 15, board, player: black })).toBe(false);
         });
     });
