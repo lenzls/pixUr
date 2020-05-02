@@ -70,7 +70,9 @@ export function addAssets({ loader }) {
         .add(SKINS[0].resourceKeyPrefix + '/' + ASSETS.WHITE_PIECE, simpleWhiteSprite)
         .add(SKINS[0].resourceKeyPrefix + '/' + ASSETS.BLACK_PIECE, simpleBlackSprite)
         .add(SKINS[0].resourceKeyPrefix + '/' + ASSETS.DICE_NULL_A, simpleDiceNull)
+        .add(SKINS[0].resourceKeyPrefix + '/' + ASSETS.DICE_NULL_B, simpleDiceNull)
         .add(SKINS[0].resourceKeyPrefix + '/' + ASSETS.DICE_ONE_A, simpleDiceOne)
+        .add(SKINS[0].resourceKeyPrefix + '/' + ASSETS.DICE_ONE_B, simpleDiceOne)
         .add(SKINS[0].resourceKeyPrefix + '/' + ASSETS.BOARD, simpleBoardSprite)
 
         .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.DICE_NULL_A, bmDice0aSprite)
