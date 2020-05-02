@@ -1,7 +1,7 @@
 import { CreateBoard } from './board.js';
 import { CreateWhitePlayer, CreateBlackPlayer } from './player.js';
 import { CreateDie, totalPips, calcNewDiceSpritePositions } from './die.js';
-import { isMoveValid, moveResultsInCombat } from './game-rules.js';
+import { isMoveValid, moveResultsInCombat, validMoveExists } from './game-rules.js';
 import { getBoardSprite, addSpriteToSpace, removeSpriteFromSpace } from './board-display.js';
 
 export function CreateGame() {
@@ -25,7 +25,10 @@ export function CreateGame() {
             this.dice.forEach(die => die.roll());
             calcNewDiceSpritePositions({ dice: this.dice });
             this.currentPlayerRolled = true;
-            if (totalPips(this.dice) === 0) {
+            if (
+                totalPips(this.dice) === 0 ||
+                !validMoveExists({ board: this.board, player: this.currentPlayer, pips: totalPips(this.dice) })
+            ) {
                 this.switchPlayer();
             }
         },
