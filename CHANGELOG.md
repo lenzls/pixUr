@@ -1,8 +1,13 @@
 # Changelog
 
 ## [Unreleased]
+
+
+## [0.2.0] – 2020-05-02
     - new style menu screen
     - refactor rules
+    - better die sprites in british museum skin
+    - dice scale a little according to y position
 
 ## [0.1.0] – 2020-04-27
     - introduce skins (simple and british-museum for now)
