@@ -61,6 +61,6 @@ export function createGameScene({ stateMachine, game }) {
             else {
                 diceButton.visible = true;
             }
-        }
+        },
     };
 }

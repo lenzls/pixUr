@@ -1,4 +1,4 @@
-import { ASSETS, CreateSprite, changeSpriteTexture } from './sprites.js';
+import { ASSETS, CreateSprite, changeSpriteTexture, getRandomSpriteTexture } from './sprites.js';
 import { setSpriteToPositionWithinRect } from './sprite-helper.js';
 import { getCurrentSkin } from './layout.js';
 
@@ -8,7 +8,7 @@ export function totalPips(dice) {
 
 export function CreateDie() {
     return {
-        sprite: CreateSprite({ asset: ASSETS.DICE_NULL }),
+        sprite: CreateSprite({ asset: ASSETS.DICE_NULL_A }),
         currentPips: -1,
         roll() {
             const zeroOrOne = () => Math.floor(Math.random() * 2);
@@ -16,7 +16,7 @@ export function CreateDie() {
             this.updateSprite();
         },
         updateSprite() {
-            changeSpriteTexture({ sprite: this.sprite, asset: this.currentPips === 0 ? ASSETS.DICE_NULL : ASSETS.DICE_ONE });
+            changeSpriteTexture({ sprite: this.sprite, asset: getRandomSpriteTexture(this.currentPips) });
         },
     };
 }
