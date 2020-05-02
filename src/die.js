@@ -1,6 +1,7 @@
 import { ASSETS, CreateSprite, changeSpriteTexture, getRandomSpriteTexture } from './sprites.js';
 import { setSpriteToPositionWithinRect } from './sprite-helper.js';
 import { getCurrentSkin } from './layout.js';
+import { correctScaleForY } from './die-display.js';
 
 export function totalPips(dice) {
     return dice.reduce((acc, die) => acc + die.currentPips, 0);
@@ -17,6 +18,8 @@ export function CreateDie() {
         },
         updateSprite() {
             changeSpriteTexture({ sprite: this.sprite, asset: getRandomSpriteTexture(this.currentPips) });
+            const factor = correctScaleForY({ yPos: this.sprite.position.y, skin: getCurrentSkin() });
+            this.sprite.scale.set(factor, factor);
         },
     };
 }
@@ -33,4 +36,5 @@ export function calcNewDiceSpritePositions({ dice }) {
             maxTries: 1000,
         });
     });
+    dice.forEach(die => die.updateSprite());
 }
