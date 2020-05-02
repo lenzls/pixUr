@@ -4,5 +4,5 @@ export const CreatePiece = (player) => ({
 const CreatePlayer = (name) => ({
     name,
 });
-export const black = CreatePlayer('black');
-export const white = CreatePlayer('white');
+export const createBlack = () => CreatePlayer('black');
+export const createWhite = () => CreatePlayer('white');

@@ -1,9 +1,15 @@
-import { describe, it, expect } from '@jest/globals';
-import { black, white, CreatePiece } from './test-utils.js';
+import { describe, it, expect, beforeEach } from '@jest/globals';
+import { createBlack, createWhite, CreatePiece } from './test-utils.js';
 
 import { isMoveValid, moveResultsInCombat, validMoveExists } from './game-rules.js';
 
 describe('game-rules', () => {
+    let white, black;
+    beforeEach(() => {
+        white = createWhite();
+        black = createBlack();
+    });
+
     describe('isMoveValid', () => {
         describe('invalid', () => {
             it('if move behind goal', () => {
@@ -92,12 +98,12 @@ describe('game-rules', () => {
 
         it('no valid moves', () => {
             const ownPiece = CreatePiece(white);
-            const white = { ...white, pieces: [ownPiece] };
+            white.pieces = [ownPiece];
             const board = {
                 getPieces: () =>[ownPiece],
                 getIndex: () => 0,
             };
-            expect(validMoveExists({ board, player: white, pips: 2 })).toBe(true);
+            expect(validMoveExists({ board, player: white, pips: 2 })).toBe(false);
         });
     });
 });

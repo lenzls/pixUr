@@ -1,9 +1,15 @@
-import { describe, it, expect } from '@jest/globals';
-import { black, white, CreatePiece } from './test-utils.js';
+import { describe, it, expect, beforeEach } from '@jest/globals';
+import { createBlack, createWhite, CreatePiece } from './test-utils.js';
 
 import { CreateBoard } from './board.js';
 
 describe('board', () => {
+    let white, black;
+    beforeEach(() => {
+        white = createWhite();
+        black = createBlack();
+    });
+
     describe('getPieces', () => {
         const mockBoardSpriteBindings = { sprite: null, addSpriteToSpace: () => {}, removeSpriteFromSpace: () => {} };
 
