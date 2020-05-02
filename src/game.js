@@ -3,8 +3,9 @@ import { CreateWhitePlayer, CreateBlackPlayer } from './player.js';
 import { CreateDie, totalPips, calcNewDiceSpritePositions } from './die.js';
 import { isMoveValid, moveResultsInCombat, validMoveExists } from './game-rules.js';
 import { getBoardSprite, addSpriteToSpace, removeSpriteFromSpace } from './board-display.js';
+import { STATES } from './state-machine.js';
 
-export function CreateGame() {
+export function CreateGame({ stateMachine }) {
     const board = CreateBoard({ sprite: getBoardSprite(), addSpriteToSpace, removeSpriteFromSpace });
     const white = CreateWhitePlayer();
     const black = CreateBlackPlayer();
@@ -81,10 +82,12 @@ export function CreateGame() {
         },
         update() {
             if (hasPlayerWon(black)) {
-                console.log('black has won!');
+                alert('black has won!');
+                stateMachine.switchToState({ state: STATES.MENU });
             }
             if (hasPlayerWon(white)) {
-                console.log('white has won!');
+                alert('white has won!');
+                stateMachine.switchToState({ state: STATES.MENU });
             }
         },
     };

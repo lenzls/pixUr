@@ -6,11 +6,11 @@ import { getCurrentSkin } from '../layout.js';
 
 export function createGameScene({ stateMachine, game }) {
     const container = new Container();
-        
+
     container.addChild(game.board.sprite);
     [
-        ...game.white.pieces.map(p => p.sprite), 
-        ...game.black.pieces.map(p => p.sprite)
+        ...game.white.pieces.map(p => p.sprite),
+        ...game.black.pieces.map(p => p.sprite),
     ]
         .forEach(sprite => {
             container.addChild(sprite);

@@ -9,7 +9,7 @@ function CreateMenuState(config) {
     };
 }
 function CreateGameState(config) {
-    const game = CreateGame();
+    const game = CreateGame({ stateMachine: config.stateMachine });
     const scene = createGameScene({ game, ...config });
     return {
         container: scene.container,
