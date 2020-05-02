@@ -1,5 +1,5 @@
 import { CreatePiece } from './piece.js';
-import { ASSETS, CreateSprite } from './sprites.js';
+import { ASSETS } from './sprites.js';
 
 export const TYPE = {
     BLACK: 'black',
@@ -13,13 +13,13 @@ function CreatePlayer({ name, asset, type }) {
         pieces,
         type,
     };
-    pieces.push(CreatePiece({ player, sprite: CreateSprite({ asset }) }));
-    pieces.push(CreatePiece({ player, sprite: CreateSprite({ asset }) }));
-    pieces.push(CreatePiece({ player, sprite: CreateSprite({ asset }) }));
-    pieces.push(CreatePiece({ player, sprite: CreateSprite({ asset }) }));
-    pieces.push(CreatePiece({ player, sprite: CreateSprite({ asset }) }));
-    pieces.push(CreatePiece({ player, sprite: CreateSprite({ asset }) }));
-    pieces.push(CreatePiece({ player, sprite: CreateSprite({ asset }) }));
+    pieces.push(CreatePiece({ player, asset }));
+    pieces.push(CreatePiece({ player, asset }));
+    pieces.push(CreatePiece({ player, asset }));
+    pieces.push(CreatePiece({ player, asset }));
+    pieces.push(CreatePiece({ player, asset }));
+    pieces.push(CreatePiece({ player, asset }));
+    pieces.push(CreatePiece({ player, asset }));
     return player;
 }
 
