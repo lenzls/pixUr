@@ -42,36 +42,35 @@ export function CreateGame() {
                 alert('Roll the dice first, pal');
                 return;
             }
-            const index = board.getIndex({ piece });
-            const aim = index + totalPips(this.dice);
-
-            const onRosette = (index) => [4, 8, 14].includes(index);
-            const conductValidMove = ({ piece, start, aim }) => {
-                board.removePiece({ piece, index: start });
-                board.addPiece({ piece, index: aim });
-                if (onRosette(aim)) {
-                    this.anotherTurn();
-                }
-                else {
-                    this.switchPlayer();
-                }
-            };
-            const combat = ({ piece, index }) => {
-                const opponentPiece = board.getPieces({ index }).find(pieceInSpace => pieceInSpace.player !== piece.player);
-                board.removePiece({ piece: opponentPiece, index });
-                board.addPiece({ piece: opponentPiece, index: 0 });
-            };
+            const startPosition = board.getIndex({ piece });
+            const aim = startPosition + totalPips(this.dice);
 
             const moveEvaluation = isMoveValid({ index: aim, board, player: this.currentPlayer });
             if (moveEvaluation.valid) {
                 if (moveResultsInCombat({ board, play: this.currentPlayer, index: aim })) {
-                    combat({ piece, index: aim });
+                    this.combat({ piece, index: aim });
                 }
-                conductValidMove({ piece, start: index, aim });
+                this.conductValidMove({ piece, start: startPosition, aim });
             }
             else {
                 alert(moveEvaluation.reason);
             }
+        },
+        conductValidMove({ piece, start, aim }) {
+            const onRosette = (index) => [4, 8, 14].includes(index);
+            this.board.removePiece({ piece, index: start });
+            this.board.addPiece({ piece, index: aim });
+            if (onRosette(aim)) {
+                this.anotherTurn();
+            }
+            else {
+                this.switchPlayer();
+            }
+        },
+        combat({ piece, index }) {
+            const opponentPiece = board.getPieces({ index }).find(pieceInSpace => pieceInSpace.player !== piece.player);
+            this.board.removePiece({ piece: opponentPiece, index });
+            this.board.addPiece({ piece: opponentPiece, index: 0 });
         },
         anotherTurn() {
             this.currentPlayerRolled = false;
