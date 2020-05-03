@@ -1,26 +1,34 @@
-import { Graphics, Text } from './engine.js';
+import { Container, Graphics, Text, TextStyle } from './engine.js';
+import { DIMENSIONS } from './index.js';
 
+export function showNotification({ title, parent }) {
+    const container = new Container();
 
-export function showNotification({ title, container }) {
     const background = new Graphics();
-    background.beginFill(0xff00ff, 0.1);
-    background.drawRect(0, 0, container.width, container.height);
+    background.beginFill(0xc5a573, 0.3);
+    background.drawRect(0, 0, DIMENSIONS.width, DIMENSIONS.height);
     background.endFill();
     background.interactive = true;
 
-    const buttonText = new Text(title);
+    const style = new TextStyle({
+        fill: '#f6eacd',
+        fontFamily: 'Georgia',
+        fontSize: 38,
+    });
+    const buttonText = new Text(title, style);
 
     const box = new Graphics();
-    box.beginFill(0xff00ff, 0.7);
+    box.beginFill(0x738db4, 0.9);
     box.drawRect(0, 0, buttonText.width + 20, buttonText.height + 10);
     box.endFill();
     box.interactive = true;
     box.buttonMode = true;
-    box.on('pointerdown', () => container.removeChild(background));
+    box.on('pointerdown', () => parent.removeChild(container));
 
     box.addChild(buttonText);
     background.addChild(box);
     container.addChild(background);
+    parent.addChild(container);
 
     centerElement({ element: buttonText, container: box });
     centerElement({ element: box, container });
