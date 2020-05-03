@@ -19,7 +19,7 @@ export function showNotification({ title, parent }) {
 
     const box = new Graphics();
     box.beginFill(0x738db4, 0.9);
-    box.drawRect(0, 0, buttonText.width + 20, buttonText.height + 10);
+    box.drawRect(0, 0, buttonText.width + 160, buttonText.height + 80);
     box.endFill();
     box.interactive = true;
     box.buttonMode = true;
