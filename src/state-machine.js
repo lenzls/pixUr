@@ -9,7 +9,7 @@ function CreateMenuState(config) {
     };
 }
 function CreateGameState(config) {
-    const game = CreateGame({ stateMachine: config.stateMachine });
+    const game = CreateGame(config);
     const scene = createGameScene({ game, ...config });
     return {
         container: scene.container,
@@ -33,8 +33,8 @@ export function CreateStateMachine({ app }) {
         createScenes() {},
         startNewState({ state }) {
             if (stateInstances[state]) app.stage.removeChild(stateInstances[state].container);
-            if (state === STATES.MENU) stateInstances[state] = CreateMenuState({ app, stateMachine: this});
-            if (state === STATES.GAME) stateInstances[state] = CreateGameState({ stateMachine: this });
+            if (state === STATES.MENU) stateInstances[state] = CreateMenuState({ stateMachine: this });
+            if (state === STATES.GAME) stateInstances[state] = CreateGameState({ stateMachine: this, container: app.stage });
             app.stage.addChild(stateInstances[state].container);
             this.switchToState({ state: state });
         },

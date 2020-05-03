@@ -4,8 +4,9 @@ import { CreateDie, totalPips, calcNewDiceSpritePositions } from './die.js';
 import { isMoveValid, moveResultsInCombat, validMoveExists } from './game-rules.js';
 import { getBoardSprite, addSpriteToSpace, removeSpriteFromSpace } from './board-display.js';
 import { STATES } from './state-machine.js';
+import { showNotification } from './overlay.js';
 
-export function CreateGame({ stateMachine }) {
+export function CreateGame({ stateMachine, container }) {
     const board = CreateBoard({ sprite: getBoardSprite(), addSpriteToSpace, removeSpriteFromSpace });
     const white = CreateWhitePlayer();
     const black = CreateBlackPlayer();
@@ -54,7 +55,7 @@ export function CreateGame({ stateMachine }) {
                 this.conductValidMove({ piece, start: startPosition, aim });
             }
             else {
-                alert(moveEvaluation.reason);
+                showNotification({ title: moveEvaluation.reason, parent: container });
             }
         },
         conductValidMove({ piece, start, aim }) {

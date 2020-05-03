@@ -6,7 +6,7 @@ import { resize } from './resizer.js';
 
 console.log(`WebGL is supported by your browser: ${utils.isWebGLSupported()}`);
 
-const DIMENSIONS = {
+export const DIMENSIONS = {
     width: 640,
     height: 480,
 };
