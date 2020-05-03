@@ -1,7 +1,8 @@
 # Changelog
 
 ## [Unreleased]
-
+    - introduced notification system
+    - replace all alerts with notifications
 
 ## [0.2.0] – 2020-05-02
     - new style menu screen

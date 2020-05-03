@@ -37,11 +37,11 @@ export function CreateGame({ stateMachine, container }) {
         moveAttempt({ piece }) {
             console.log('attempting to move', piece);
             if (piece.player !== this.currentPlayer) {
-                alert("It's not your turn, pal");
+                showNotification({ title: "It's not your turn, pal", parent: container });
                 return;
             }
             if (!this.currentPlayerRolled) {
-                alert('Roll the dice first, pal');
+                showNotification({ title: 'Roll the dice first, pal', parent: container });
                 return;
             }
             const startPosition = board.getIndex({ piece });
@@ -83,11 +83,11 @@ export function CreateGame({ stateMachine, container }) {
         },
         update() {
             if (hasPlayerWon(black)) {
-                alert('black has won!');
+                showNotification({ title: 'Black has won!', parent: container });
                 stateMachine.switchToState({ state: STATES.MENU });
             }
             if (hasPlayerWon(white)) {
-                alert('white has won!');
+                showNotification({ title: 'White has won!', parent: container });
                 stateMachine.switchToState({ state: STATES.MENU });
             }
         },
