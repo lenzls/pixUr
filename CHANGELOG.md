@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [0.3.0] – 2020-05-03
     - introduced notification system
     - replace all alerts with notifications
 
