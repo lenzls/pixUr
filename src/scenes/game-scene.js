@@ -1,7 +1,7 @@
 import { Container, Text } from '../engine.js';
 import { STATES } from '../state-machine.js';
 import { createButton } from './common.js';
-import { TYPE } from '../player.js';
+import { TYPE } from '../player/player.js';
 import { getCurrentSkin } from '../layout.js';
 
 export function createGameScene({ stateMachine, game }) {

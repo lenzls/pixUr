@@ -1,5 +1,5 @@
 import { CreateBoard } from './board.js';
-import { CreateWhitePlayer, CreateBlackPlayer } from './player.js';
+import { CreateWhitePlayer, CreateBlackPlayer } from './player/player.js';
 import { CreateDie, totalPips, calcNewDiceSpritePositions } from './die.js';
 import { isMoveValid, moveResultsInCombat, validMoveExists } from './game-rules.js';
 import { getBoardSprite, addSpriteToSpace, removeSpriteFromSpace } from './board-display.js';

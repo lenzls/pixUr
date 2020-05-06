@@ -1,6 +1,6 @@
 import { setSpriteToPositionWithinRect } from './sprite-helper.js';
 import { getCurrentSkin } from './layout.js';
-import { TYPE } from './player.js';
+import { TYPE } from './player/player.js';
 import { ASSETS, CreateSprite } from './sprites.js';
 
 

@@ -1,5 +1,5 @@
-import { CreatePiece } from './piece.js';
-import { ASSETS } from './sprites.js';
+import { CreatePiece } from '../piece.js';
+import { ASSETS } from '../sprites.js';
 
 export const TYPE = {
     BLACK: 'black',
