@@ -15,7 +15,6 @@ function CreateGameState(config) {
     return {
         container: scene.container,
         update() {
-            game.update();
             scene.update();
         },
     };

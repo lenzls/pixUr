@@ -28,7 +28,7 @@ export function CreateGame({ stateMachine, container }) {
             this.board.removePiece({ piece, index: start });
             this.board.addPiece({ piece, index: aim });
             if (onRosette(aim)) {
-                this.anotherTurn();
+                this.rollAgain();
             }
             else {
                 this.endTurn();
@@ -39,26 +39,27 @@ export function CreateGame({ stateMachine, container }) {
             this.board.removePiece({ piece: opponentPiece, index });
             this.board.addPiece({ piece: opponentPiece, index: 0 });
         },
-        update() {
-            if (hasPlayerWon(black)) {
-                showNotification({ title: 'Black has won!', parent: container });
-                stateMachine.switchToState({ state: STATES.MENU });
-            }
-            if (hasPlayerWon(white)) {
-                showNotification({ title: 'White has won!', parent: container });
-                stateMachine.switchToState({ state: STATES.MENU });
-            }
-        },
         startGame() {
             this.startTurn();
         },
         endTurn() {
+            if (hasPlayerWon(black)) {
+                showNotification({ title: 'Black has won!', parent: container });
+                stateMachine.switchToState({ state: STATES.MENU });
+                return;
+            }
+            else if (hasPlayerWon(white)) {
+                showNotification({ title: 'White has won!', parent: container });
+                stateMachine.switchToState({ state: STATES.MENU });
+                return;
+            }
+
             this.currentPlayerRolled = false;
             this.currentPlayer = this.currentPlayer === white ? black : white;
 
             this.startTurn();
         },
-        anotherTurn() {
+        rollAgain() {
             this.currentPlayerRolled = false;
             this.startTurn();
         },
@@ -83,7 +84,7 @@ export function CreateGame({ stateMachine, container }) {
                         doneCallback: moveAttempt,
                     });
                 }
-            };
+            }
 
             function moveAttempt({ piece }) {
                 console.log('attempting to move', piece);
@@ -115,7 +116,7 @@ export function CreateGame({ stateMachine, container }) {
                         doneCallback: moveAttempt,
                     });
                 }
-            };
+            }
         },
     };
 }
