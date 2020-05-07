@@ -2,21 +2,33 @@ import { CreatePiece } from '../piece.js';
 import { ASSETS } from '../sprites.js';
 
 import { CreateAiActor } from './ai-actor.js';
+import { CreateHumanActor } from './human-actor.js';
 
-export const TYPE = {
+export const COLOUR = {
     BLACK: 'black',
     WHITE: 'white',
 };
 
-function CreatePlayer({ name, asset, type }) {
+export const TYPE = {
+    AI: 'ai',
+    HUMAN: 'human',
+};
+
+function CreatePlayer({ name, asset, type, colour }) {
     const pieces = [];
     const player = {
         name,
         pieces,
         type,
+        colour,
         actor: null,
     };
-    player.actor = CreateAiActor({ me: player });
+    if (type === TYPE.AI) {
+        player.actor = CreateAiActor({ me: player });
+    }
+    if (type === TYPE.HUMAN) {
+        player.actor = CreateHumanActor();
+    }
     pieces.push(CreatePiece({ player, asset }));
     pieces.push(CreatePiece({ player, asset }));
     pieces.push(CreatePiece({ player, asset }));
@@ -31,7 +43,8 @@ export function CreateBlackPlayer() {
     return CreatePlayer({
         name: 'black',
         asset: ASSETS.BLACK_PIECE,
-        type: TYPE.BLACK,
+        colour: COLOUR.BLACK,
+        type: TYPE.HUMAN,
     });
 }
 
@@ -39,6 +52,7 @@ export function CreateWhitePlayer() {
     return CreatePlayer({
         name: 'white',
         asset: ASSETS.WHITE_PIECE,
-        type: TYPE.WHITE,
+        colour: COLOUR.WHITE,
+        type: TYPE.AI,
     });
 }
