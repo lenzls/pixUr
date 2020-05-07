@@ -1,10 +1,13 @@
 import { isMoveValid } from '../game-rules.js';
 
+const ROLL_HESITATION_IN_MS = 1000;
+const MOVE_HESITATION_IN_MS = 2000;
+
 export function CreateAiActor({ me }) {
     return {
         askWhenToRollDice({ nowCallback }) {
             console.log('AI was asked to roll the dice');
-            setTimeout(() => nowCallback(), 2000);
+            setTimeout(() => nowCallback(), ROLL_HESITATION_IN_MS);
         },
         askToThinkOfMove({ board, pips, doneCallback }) {
             const think = () => {
@@ -12,8 +15,8 @@ export function CreateAiActor({ me }) {
                 const start = board.getIndex({ piece: pieceToMove });
                 console.log(`AI wants to move from ${start} to ${start + pips}`);
                 doneCallback({ piece: pieceToMove });
-            }
-            setTimeout(() => think(), 2000);
+            };
+            setTimeout(() => think(), MOVE_HESITATION_IN_MS);
         },
     };
 }
