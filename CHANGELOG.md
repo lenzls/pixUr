@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+## [0.4.0] – 2020-05-07
+    - add AI player (white ai, black human)
+
 ## [0.3.0] – 2020-05-03
     - introduced notification system
     - replace all alerts with notifications
