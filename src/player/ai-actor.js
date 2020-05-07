@@ -12,8 +12,6 @@ export function CreateAiActor({ me }) {
         askToThinkOfMove({ board, pips, doneCallback }) {
             const think = () => {
                 const pieceToMove = determinePieceToMove({ board, me, pips });
-                const start = board.getIndex({ piece: pieceToMove });
-                console.log(`AI wants to move from ${start} to ${start + pips}`);
                 doneCallback({ piece: pieceToMove });
             };
             setTimeout(() => think(), MOVE_HESITATION_IN_MS);
