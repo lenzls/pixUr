@@ -1,6 +1,7 @@
 import { Container } from '../engine.js';
 import { STATES } from '../state-machine.js';
 import { ASSETS, CreateSprite } from '../sprites.js';
+import { showNotification } from '../overlay.js'
 
 export function createMenuScene({ stateMachine }) {
     const container = new Container();
@@ -37,6 +38,12 @@ export function createMenuScene({ stateMachine }) {
                 position: { x: 74, y: 355 },
             });
         }
+
+        createButton({
+            asset: ASSETS.SETTINGS_BUTTON,
+            action: () => showNotification({ title: 'Here will be settings.', parent: container }),
+            position: { x: 420, y: 355 },
+        });
     }
 
     return {
