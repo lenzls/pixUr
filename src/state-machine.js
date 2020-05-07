@@ -11,10 +11,10 @@ function CreateMenuState(config) {
 function CreateGameState(config) {
     const game = CreateGame(config);
     const scene = createGameScene({ game, ...config });
+    game.startGame();
     return {
         container: scene.container,
         update() {
-            game.update();
             scene.update();
         },
     };

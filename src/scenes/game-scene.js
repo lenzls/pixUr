@@ -1,7 +1,7 @@
 import { Container, Text } from '../engine.js';
 import { STATES } from '../state-machine.js';
 import { createButton } from './common.js';
-import { TYPE } from '../player.js';
+import { COLOUR } from '../player/player.js';
 import { getCurrentSkin } from '../layout.js';
 
 export function createGameScene({ stateMachine, game }) {
@@ -12,13 +12,7 @@ export function createGameScene({ stateMachine, game }) {
         ...game.white.pieces.map(p => p.sprite),
         ...game.black.pieces.map(p => p.sprite),
     ]
-        .forEach(sprite => {
-            container.addChild(sprite);
-            sprite.interactive = true;
-            sprite.on('pointerdown', (event) => {
-                game.moveAttempt({ piece: event.target.piece });
-            });
-        });
+        .forEach(sprite => container.addChild(sprite));
 
     const currentPlayerIndicator = new Text('→');
     container.addChild(currentPlayerIndicator);
@@ -27,7 +21,7 @@ export function createGameScene({ stateMachine, game }) {
         text: '⚄',
         color: 0x66CC66,
         position: { x: 580, y: 190 },
-        onClick: () => game.rollDice(),
+        onClick: () => game.currentPlayer.actor.touchDice(),
         transparency: 0.25,
     });
     container.addChild(diceButton);
@@ -48,10 +42,10 @@ export function createGameScene({ stateMachine, game }) {
     return {
         container,
         update() {
-            if (game.currentPlayer.type === TYPE.BLACK) {
+            if (game.currentPlayer.colour === COLOUR.BLACK) {
                 currentPlayerIndicator.position.set(10, getCurrentSkin().currentPlayerIndicator.blackY);
             }
-            else if (game.currentPlayer.type === TYPE.WHITE) {
+            else if (game.currentPlayer.colour === COLOUR.WHITE) {
                 currentPlayerIndicator.position.set(10, getCurrentSkin().currentPlayerIndicator.whiteY);
             }
 
