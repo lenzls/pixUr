@@ -12,13 +12,7 @@ export function createGameScene({ stateMachine, game }) {
         ...game.white.pieces.map(p => p.sprite),
         ...game.black.pieces.map(p => p.sprite),
     ]
-        .forEach(sprite => {
-            container.addChild(sprite);
-            sprite.interactive = true;
-            sprite.on('pointerdown', (event) => {
-                game.currentPlayer.actor.touchPiece({ piece: event.target.piece });
-            });
-        });
+        .forEach(sprite => container.addChild(sprite));
 
     const currentPlayerIndicator = new Text('→');
     container.addChild(currentPlayerIndicator);

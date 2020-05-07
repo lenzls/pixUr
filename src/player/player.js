@@ -27,7 +27,7 @@ function CreatePlayer({ name, asset, type, colour }) {
         player.actor = CreateAiActor({ me: player });
     }
     if (type === TYPE.HUMAN) {
-        player.actor = CreateHumanActor();
+        player.actor = CreateHumanActor({ me: player });
     }
     pieces.push(CreatePiece({ player, asset }));
     pieces.push(CreatePiece({ player, asset }));
