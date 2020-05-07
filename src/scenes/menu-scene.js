@@ -9,33 +9,41 @@ export function createMenuScene({ stateMachine }) {
         container.remove
         container.addChild(CreateSprite({ asset: ASSETS.PLATE }));
 
-        const continueButtonSprite = CreateSprite({ asset: ASSETS.CONTINUE_BUTTON });
-        continueButtonSprite.interactive = true;
-        continueButtonSprite.buttonMode = true;
-        continueButtonSprite.on('pointerdown', () => stateMachine.switchToState({ state: STATES.GAME }));
-        continueButtonSprite.position.set(420, 355);
-        container.addChild(continueButtonSprite);
+        function createButton({ asset, action, position }) {
+            const buttonSprite = CreateSprite({ asset });
+            buttonSprite.interactive = true;
+            buttonSprite.buttonMode = true;
+            buttonSprite.on('pointerdown', action);
+            buttonSprite.position.set(position.x, position.y);
+            container.addChild(buttonSprite);
+        }
 
-        let newGameButtonSprite = null;
         if (gameRunning) {
-            newGameButtonSprite = CreateSprite({ asset: ASSETS.NEW_GAME_BUTTON_SMALL });
+            createButton({
+                asset: ASSETS.NEW_GAME_BUTTON_SMALL,
+                action: () => stateMachine.startNewState({ state: STATES.GAME }),
+                position: { x: 74, y: 355 },
+            });
+            createButton({
+                asset: ASSETS.CONTINUE_BUTTON_SMALL,
+                action: () => stateMachine.switchToState({ state: STATES.GAME }),
+                position: { x: 104, y: 409 },
+            });
         }
         else {
-            newGameButtonSprite = CreateSprite({ asset: ASSETS.NEW_GAME_BUTTON });
+            createButton({
+                asset: ASSETS.NEW_GAME_BUTTON,
+                action: () => stateMachine.startNewState({ state: STATES.GAME }),
+                position: { x: 74, y: 355 },
+            });
         }
-        newGameButtonSprite.interactive = true;
-        newGameButtonSprite.buttonMode = true;
-        newGameButtonSprite.on('pointerdown', () => stateMachine.startNewState({ state: STATES.GAME }));
-        newGameButtonSprite.position.set(74, 355);
-        container.addChild(newGameButtonSprite);
-
     }
 
     return {
         container,
         switchTo() {
-            const game = stateMachine.getState({ state: STATES.GAME });
-            createMenu({ gameRunning: !!game?.game?.gameRunning });
+            const gameState = stateMachine.getState({ state: STATES.GAME });
+            createMenu({ gameRunning: !!gameState?.game?.gameRunning });
         },
     };
 }
