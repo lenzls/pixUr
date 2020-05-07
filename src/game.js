@@ -54,8 +54,8 @@ export function CreateGame({ stateMachine, container }) {
                 return;
             }
 
-            this.currentPlayerRolled = false;
             this.currentPlayer = this.currentPlayer === white ? black : white;
+            this.currentPlayerRolled = false;
 
             this.startTurn();
         },

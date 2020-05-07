@@ -16,6 +16,9 @@ export function CreateAiActor({ me }) {
             };
             setTimeout(() => think(), MOVE_HESITATION_IN_MS);
         },
+        touchDice() {
+            console.log('I can decide for myself when to roll the dice. beep bob. This should not happen :/')
+        },
     };
 }
 
