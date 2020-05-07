@@ -4,12 +4,16 @@ export function CreateAiActor({ me }) {
     return {
         askWhenToRollDice({ nowCallback }) {
             console.log('AI was asked to roll the dice');
-            setTimeout(() => nowCallback(), 1000);
+            setTimeout(() => nowCallback(), 2000);
         },
         askToThinkOfMove({ board, pips, doneCallback }) {
-            const pieceToMove = determinePieceToMove({ board, me, pips });
-            console.log(`AI wants to move ${pieceToMove}`);
-            doneCallback({ pieceToMove });
+            const think = () => {
+                const pieceToMove = determinePieceToMove({ board, me, pips });
+                const start = board.getIndex({ piece: pieceToMove });
+                console.log(`AI wants to move from ${start} to ${start + pips}`);
+                doneCallback({ piece: pieceToMove });
+            }
+            setTimeout(() => think(), 2000);
         },
     };
 }

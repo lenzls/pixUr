@@ -1,6 +1,8 @@
 import { CreatePiece } from '../piece.js';
 import { ASSETS } from '../sprites.js';
 
+import { CreateAiActor } from './ai-actor.js';
+
 export const TYPE = {
     BLACK: 'black',
     WHITE: 'white',
@@ -12,7 +14,9 @@ function CreatePlayer({ name, asset, type }) {
         name,
         pieces,
         type,
+        actor: null,
     };
+    player.actor = CreateAiActor({ me: player });
     pieces.push(CreatePiece({ player, asset }));
     pieces.push(CreatePiece({ player, asset }));
     pieces.push(CreatePiece({ player, asset }));
