@@ -110,7 +110,7 @@ export function CreateGame({ stateMachine, container }) {
                 else {
                     showNotification({ title: moveEvaluation.reason, parent: container });
 
-                    that.currentPlayer.askToThinkOfMove({
+                    that.currentPlayer.actor.askToThinkOfMove({
                         board: that.board,
                         pips,
                         doneCallback: moveAttempt,
