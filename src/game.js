@@ -17,6 +17,7 @@ export function CreateGame({ stateMachine, container }) {
     const hasPlayerWon = (player) => player.pieces.every(piece => board.getIndex({ piece }) === 15);
 
     return {
+        gameRunning: false,
         dice: [CreateDie(), CreateDie(), CreateDie(), CreateDie()],
         currentPlayerRolled: false,
         currentPlayer: white,
@@ -40,16 +41,19 @@ export function CreateGame({ stateMachine, container }) {
             this.board.addPiece({ piece: opponentPiece, index: 0 });
         },
         startGame() {
+            this.gameRunning = true;
             this.startTurn();
         },
         endTurn() {
             if (hasPlayerWon(black)) {
                 showNotification({ title: 'Black has won!', parent: container });
+                this.gameRunning = false;
                 stateMachine.switchToState({ state: STATES.MENU });
                 return;
             }
             else if (hasPlayerWon(white)) {
                 showNotification({ title: 'White has won!', parent: container });
+                this.gameRunning = false;
                 stateMachine.switchToState({ state: STATES.MENU });
                 return;
             }

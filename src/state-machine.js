@@ -3,8 +3,10 @@ import { createGameScene } from './scenes/game-scene.js';
 import { createMenuScene } from './scenes/menu-scene.js';
 
 function CreateMenuState(config) {
+    const scene = createMenuScene(config);
     return {
-        container: createMenuScene(config),
+        container: scene.container,
+        switchTo: scene.switchTo,
         update() {},
     };
 }
@@ -13,7 +15,9 @@ function CreateGameState(config) {
     const scene = createGameScene({ game, ...config });
     game.startGame();
     return {
+        game,
         container: scene.container,
+        switchTo() {},
         update() {
             scene.update();
         },
@@ -48,6 +52,10 @@ export function CreateStateMachine({ app }) {
             if (stateInstances[STATES.GAME]) {
                 stateInstances[STATES.GAME].container.visible = currentState === STATES.GAME;
             }
+            stateInstances[currentState].switchTo();
+        },
+        getState({ state }) {
+            return stateInstances[state];
         },
     };
     stateMachine.startNewState({ state: STATES.MENU });

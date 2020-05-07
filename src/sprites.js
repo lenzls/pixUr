@@ -10,7 +10,9 @@ import bmBlackSprite from './skins/british-museum/black.png';
 import bmBoardSprite from './skins/british-museum/background.png';
 import bmPlateSprite from './skins/british-museum/plate.png';
 import bmNewGameButtonSprite from './skins/british-museum/new-game-button.png';
+import bmNewGameButtonSmallSprite from './skins/british-museum/new-game-button-small.png';
 import bmContinueButtonSprite from './skins/british-museum/continue-button.png';
+import bmContinueButtonSmallSprite from './skins/british-museum/continue-button-small.png';
 
 import simpleBlackSprite from './skins/simple/black.png';
 import simpleWhiteSprite from './skins/simple/white.png';
@@ -29,7 +31,9 @@ export const ASSETS = {
     DICE_ONE_B: 'diceOneb',
     PLATE: 'plate',
     NEW_GAME_BUTTON: 'newGameButton',
+    NEW_GAME_BUTTON_SMALL: 'newGameButtonSmall',
     CONTINUE_BUTTON: 'continueButton',
+    CONTINUE_BUTTON_SMALL: 'continueButtonSmall',
 };
 
 function getResource(asset) {
@@ -82,7 +86,10 @@ export function addAssets({ loader }) {
         .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.BLACK_PIECE, bmBlackSprite)
         .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.WHITE_PIECE, bmWhiteSprite)
         .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.BOARD, bmBoardSprite)
+
         .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.NEW_GAME_BUTTON, bmNewGameButtonSprite)
+        .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.NEW_GAME_BUTTON_SMALL, bmNewGameButtonSmallSprite)
         .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.CONTINUE_BUTTON, bmContinueButtonSprite)
+        .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.CONTINUE_BUTTON_SMALL, bmContinueButtonSmallSprite)
         .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.PLATE, bmPlateSprite);
 }
