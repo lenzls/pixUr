@@ -1,7 +1,7 @@
 import { isMoveValid } from '../game-rules.js';
 
-const ROLL_HESITATION_IN_MS = 100;
-const MOVE_HESITATION_IN_MS = 200;
+const ROLL_HESITATION_IN_MS = 500;
+const MOVE_HESITATION_IN_MS = 700;
 
 export function CreateAiActor({ me }) {
     return {
