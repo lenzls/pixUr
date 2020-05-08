@@ -1,6 +1,6 @@
 import { Container, Text } from '../engine.js';
 import { STATES } from '../state-machine.js';
-import { createButton } from './common.js';
+import { createButton, toggleFullScreenButton } from './common.js';
 import { COLOUR } from '../player/player.js';
 import { getCurrentSkin } from '../layout.js';
 
@@ -38,6 +38,8 @@ export function createGameScene({ stateMachine, game }) {
         onClick: () => stateMachine.switchToState({ state: STATES.MENU }),
         transparency: 0.25,
     }));
+
+    container.addChild(toggleFullScreenButton);
 
     return {
         container,

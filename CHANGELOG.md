@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+    - add settings menu entry
+    - fullscreen button visible in game and menu
 
 ## [0.4.0] – 2020-05-07
     - add AI player (white ai, black human)

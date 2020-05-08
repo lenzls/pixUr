@@ -1,7 +1,6 @@
 import { addAssets } from './sprites.js';
 import { utils, Application, loader } from './engine.js';
 import { CreateStateMachine } from './state-machine.js';
-import { createButton } from './scenes/common.js';
 import { resize } from './resizer.js';
 
 console.log(`WebGL is supported by your browser: ${utils.isWebGLSupported()}`);
@@ -11,7 +10,7 @@ export const DIMENSIONS = {
     height: 480,
 };
 
-const parentElement = document.querySelector('#canvas-parent');
+export const parentElement = document.querySelector('#canvas-parent');
 const app = new Application({
     ...DIMENSIONS,
     backgroundColor: 0xffffff,
@@ -27,21 +26,5 @@ addAssets({ loader })
         console.log(`progress: ${loader.progress}%`);
     })
     .load(() => {
-        app.stage.addChild(createButton({
-            text: '⛶',
-            color: 0xeec39a,
-            position: { x: 585, y: 10 },
-            onClick: () => toggleFullscreen({ element: parentElement }),
-            transparency: 0.25,
-        }));
         CreateStateMachine({ app });
     });
-
-function toggleFullscreen({ element }) {
-    if (document.fullscreenElement) {
-        document.exitFullscreen();
-    }
-    else {
-        element.requestFullscreen();
-    }
-}

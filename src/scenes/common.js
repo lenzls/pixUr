@@ -1,4 +1,5 @@
 import { Graphics, Text } from '../engine.js';
+import { parentElement } from '../index.js';
 
 export function createButton({ text, color, position, onClick, transparency = 0.8 }) {
     const buttonText = new Text(text);
@@ -20,4 +21,21 @@ export function createButton({ text, color, position, onClick, transparency = 0.
     background.position.set(position.x, position.y);
 
     return background;
+}
+
+export const toggleFullScreenButton = createButton({
+    text: '⛶',
+    color: 0xeec39a,
+    position: { x: 585, y: 10 },
+    onClick: () => toggleFullscreen({ element: parentElement }),
+    transparency: 0.25,
+});
+
+function toggleFullscreen({ element }) {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    }
+    else {
+        element.requestFullscreen();
+    }
 }
