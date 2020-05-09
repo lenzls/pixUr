@@ -19,7 +19,8 @@ export function createGameConfigScene({ stateMachine }) {
     createButton({
         asset: ASSETS.NEW_GAME_BUTTON,
         action: () => {
-            console.log(select.selectedIndex);
+            console.log(white.selectedIndex);
+            console.log(black.selectedIndex);
             stateMachine.startNewGame();
         },
         position: { x: 74, y: 355 },
@@ -30,15 +31,24 @@ export function createGameConfigScene({ stateMachine }) {
         position: { x: 420, y: 355 },
     });
 
-    const select = createSelect({
+    const white = createSelect({
         options: [
             { text: 'White: AI' },
             { text: 'White: Human' },
         ],
-        color: 0xff00ff,
-        position: { x: 330, y: 200 },
+        color: 0xded6d5,
+        position: { x: 400, y: 150 },
     });
-    container.addChild(select.container);
+    const black = createSelect({
+        options: [
+            { text: 'Black: AI' },
+            { text: 'Black: Human' },
+        ],
+        color: 0x7b8d9c,
+        position: { x: 400, y: 220 },
+    });
+    container.addChild(white.container);
+    container.addChild(black.container);
 
     container.addChild(createToggleFullScreenButton());
 
