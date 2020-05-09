@@ -41,7 +41,7 @@ export function createMenuScene({ stateMachine }) {
 
         createButton({
             asset: ASSETS.SETTINGS_BUTTON,
-            action: () => showNotification({ title: 'Here will be settings.', parent: container }),
+            action: () => stateMachine.gotoState({ state: STATES.SETTINGS }),
             position: { x: 420, y: 355 },
         });
 
