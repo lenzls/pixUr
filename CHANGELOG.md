@@ -1,7 +1,7 @@
 # Changelog
 
 ## [Unreleased]
-
+    - add skin changer
 
 ## [0.5.0] – 2020-05-09
     - add game config menu

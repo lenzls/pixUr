@@ -14,6 +14,8 @@ import bmNewGameButtonSmallSprite from './skins/british-museum/new-game-button-s
 import bmSettingsButtonSprite from './skins/british-museum/settings-button.png';
 import bmContinueButtonSmallSprite from './skins/british-museum/continue-button-small.png';
 import bmBackButtonSmallSprite from './skins/british-museum/back-button.png';
+import bmSkinBmButtonSprite from './skins/british-museum/skin-bm-button.png';
+import bmSkinSimpleButtonSprite from './skins/british-museum/skin-simple-button.png';
 
 import simpleBlackSprite from './skins/simple/black.png';
 import simpleWhiteSprite from './skins/simple/white.png';
@@ -36,6 +38,8 @@ export const ASSETS = {
     SETTINGS_BUTTON: 'settingsButton',
     CONTINUE_BUTTON_SMALL: 'continueButtonSmall',
     BACK_BUTTON: 'backButton',
+    SKIN_BM_BUTTON: 'skinBmButton',
+    SKIN_SIMPLE_BUTTON: 'skinSimpleButton',
 };
 
 function getResource(asset) {
@@ -106,5 +110,7 @@ export function addAssets({ loader }) {
         .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.CONTINUE_BUTTON_SMALL, bmContinueButtonSmallSprite)
         .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.PLATE, bmPlateSprite)
 
-        .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.BACK_BUTTON, bmBackButtonSmallSprite);
+        .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.BACK_BUTTON, bmBackButtonSmallSprite)
+        .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.SKIN_BM_BUTTON, bmSkinBmButtonSprite)
+        .add(SKINS[1].resourceKeyPrefix + '/' + ASSETS.SKIN_SIMPLE_BUTTON, bmSkinSimpleButtonSprite);
 }

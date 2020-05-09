@@ -1,5 +1,6 @@
 import { Container, Graphics, Text } from '../engine.js';
 import { parentElement } from '../index.js';
+import { CreateSprite } from '../sprites.js';
 
 export function createBoxButton({ text, color, position, onClick, transparency = 0.8 }) {
     const buttonText = new Text(text);
@@ -37,13 +38,23 @@ export function createSelect({ options, color, position, onSelect = () => {}, in
             const selected = options[this.selectedIndex];
 
             this.container.removeChildren();
-            this.container.addChild(createBoxButton({
-                text: selected.text,
-                color,
-                position,
-                onClick: () => this.next(),
-                transparency: 0.9,
-            }));
+            if (!selected.asset) {
+                this.container.addChild(createBoxButton({
+                    text: selected.text,
+                    color,
+                    position,
+                    onClick: () => this.next(),
+                    transparency: 0.9,
+                }));
+            }
+            else {
+                const buttonSprite = CreateSprite({ asset: selected.asset });
+                buttonSprite.interactive = true;
+                buttonSprite.buttonMode = true;
+                buttonSprite.on('pointerdown', () => this.next());
+                buttonSprite.position.set(position.x, position.y);
+                this.container.addChild(buttonSprite);
+            }
         },
     };
     select.render();

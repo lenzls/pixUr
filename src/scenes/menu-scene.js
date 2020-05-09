@@ -48,8 +48,8 @@ export function createMenuScene({ stateMachine }) {
 
         const skin = createSelect({
             options: [
-                { text: 'Skin: Simple', value: 0 },
-                { text: 'Skin: British Museum', value: 1 },
+                { value: 0, asset: ASSETS.SKIN_SIMPLE_BUTTON },
+                { value: 1, asset: ASSETS.SKIN_BM_BUTTON },
             ],
             color: 0x7b8d9c,
             position: { x: 400, y: 220 },
