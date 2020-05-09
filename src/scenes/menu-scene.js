@@ -31,19 +31,13 @@ export function createMenuScene({ stateMachine }) {
             }));
         }
 
-        container.addChild(createSpriteButton({
-            asset: ASSETS.SETTINGS_BUTTON,
-            action: () => showNotification({ title: 'Here will be soon a skin switcher', parent: container }),
-            position: { x: 420, y: 355 },
-        }));
-
         const skin = createSelect({
             options: [
                 { value: 0, asset: ASSETS.SKIN_SIMPLE_BUTTON },
                 { value: 1, asset: ASSETS.SKIN_BM_BUTTON },
             ],
             color: 0x7b8d9c,
-            position: { x: 400, y: 220 },
+            position: { x: 420, y: 355 },
             onSelect: () => setCurrentSkin(skin.value),
             initialSelection: currentSkinIndex,
         });
