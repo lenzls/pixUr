@@ -2,6 +2,7 @@ import { Container } from '../engine.js';
 import { STATES } from '../state-machine.js';
 import { ASSETS, CreateSprite } from '../sprites.js';
 import { createToggleFullScreenButton, createSelect } from './common.js';
+import { ACTOR_TYPE } from '../player/player.js';
 
 export function createGameConfigScene({ stateMachine }) {
     const container = new Container();
@@ -19,9 +20,10 @@ export function createGameConfigScene({ stateMachine }) {
     createButton({
         asset: ASSETS.NEW_GAME_BUTTON,
         action: () => {
-            console.log(white.selectedIndex);
-            console.log(black.selectedIndex);
-            stateMachine.startNewGame();
+            stateMachine.startNewGame({
+                whiteActorType: white.value,
+                blackActorType: black.value,
+            });
         },
         position: { x: 74, y: 355 },
     });
@@ -33,16 +35,16 @@ export function createGameConfigScene({ stateMachine }) {
 
     const white = createSelect({
         options: [
-            { text: 'White: AI' },
-            { text: 'White: Human' },
+            { text: 'White: AI', value: ACTOR_TYPE.AI },
+            { text: 'White: Human', value: ACTOR_TYPE.HUMAN },
         ],
         color: 0xded6d5,
         position: { x: 400, y: 150 },
     });
     const black = createSelect({
         options: [
-            { text: 'Black: AI' },
-            { text: 'Black: Human' },
+            { text: 'Black: AI', value: ACTOR_TYPE.AI },
+            { text: 'Black: Human', value: ACTOR_TYPE.HUMAN },
         ],
         color: 0x7b8d9c,
         position: { x: 400, y: 220 },

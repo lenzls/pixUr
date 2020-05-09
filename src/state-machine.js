@@ -45,15 +45,15 @@ export function CreateStateMachine({ app }) {
     let currentState = null;
     const stateMachine = {
         createScenes() {},
-        startNewGame() {
+        startNewGame(config) {
             if (stateInstances[STATES.GAME]) stateInstances[STATES.GAME].game.abortRunningGame();
-            this.startNewState({ state: STATES.GAME });
+            this.startNewState({ state: STATES.GAME, config });
         },
-        startNewState({ state }) {
+        startNewState({ state, config }) {
             if (stateInstances[state]) app.stage.removeChild(stateInstances[state].container);
-            if (state === STATES.MENU) stateInstances[state] = CreateMenuState({ stateMachine: this });
-            if (state === STATES.GAME_CONFIG) stateInstances[state] = CreateGameConfigState({ stateMachine: this });
-            if (state === STATES.GAME) stateInstances[state] = CreateGameState({ stateMachine: this, container: app.stage });
+            if (state === STATES.MENU) stateInstances[state] = CreateMenuState({ stateMachine: this, config });
+            if (state === STATES.GAME_CONFIG) stateInstances[state] = CreateGameConfigState({ stateMachine: this, config });
+            if (state === STATES.GAME) stateInstances[state] = CreateGameState({ stateMachine: this, container: app.stage, config });
             app.stage.addChild(stateInstances[state].container);
             this.switchToState({ state: state });
         },

@@ -39,20 +39,20 @@ function CreatePlayer({ name, asset, actorType, colour }) {
     return player;
 }
 
-export function CreateBlackPlayer() {
+export function CreateBlackPlayer({ actorType }) {
     return CreatePlayer({
         name: 'black',
         asset: ASSETS.BLACK_PIECE,
         colour: COLOUR.BLACK,
-        actorType: ACTOR_TYPE.HUMAN,
+        actorType,
     });
 }
 
-export function CreateWhitePlayer() {
+export function CreateWhitePlayer({ actorType }) {
     return CreatePlayer({
         name: 'white',
         asset: ASSETS.WHITE_PIECE,
         colour: COLOUR.WHITE,
-        actorType: ACTOR_TYPE.AI,
+        actorType,
     });
 }

@@ -5,10 +5,10 @@ import { isMoveValid, moveResultsInCombat, validMoveExists } from './game-rules.
 import { getBoardSprite, addSpriteToSpace, removeSpriteFromSpace } from './board-display.js';
 import { showNotification } from './overlay.js';
 
-export function CreateGame({ container }) {
+export function CreateGame({ container, config: { whiteActorType, blackActorType } = {} }) {
     const board = CreateBoard({ sprite: getBoardSprite(), addSpriteToSpace, removeSpriteFromSpace });
-    const white = CreateWhitePlayer();
-    const black = CreateBlackPlayer();
+    const white = CreateWhitePlayer({ actorType: whiteActorType });
+    const black = CreateBlackPlayer({ actorType: blackActorType });
     board.clear();
     [...white.pieces, ...black.pieces]
         .forEach(piece => board.addPiece({ piece, index: 0 }));
