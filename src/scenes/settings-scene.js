@@ -1,7 +1,6 @@
 import { Container } from '../engine.js';
 import { STATES } from '../state-machine.js';
 import { ASSETS, CreateSprite } from '../sprites.js';
-import { showNotification } from '../overlay.js'
 import { toggleFullScreenButton } from './common.js';
 
 export function createSettingsScene({ stateMachine }) {
@@ -27,6 +26,5 @@ export function createSettingsScene({ stateMachine }) {
 
     return {
         container,
-        switchTo() {/* NoOP */},
     };
 }
