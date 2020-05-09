@@ -3,7 +3,7 @@ import { STATES } from '../state-machine.js';
 import { ASSETS, CreateSprite } from '../sprites.js';
 import { showNotification } from '../overlay.js'
 import { currentSkinIndex, setCurrentSkin } from '../layout.js';
-import { createSelect, createToggleFullScreenButton } from './common.js';
+import { createSelect, createSpriteButton, createToggleFullScreenButton } from './common.js';
 
 export function createMenuScene({ stateMachine }) {
     const container = new Container();
@@ -11,40 +11,31 @@ export function createMenuScene({ stateMachine }) {
         container.removeChildren();
         container.addChild(CreateSprite({ asset: ASSETS.PLATE }));
 
-        function createButton({ asset, action, position }) {
-            const buttonSprite = CreateSprite({ asset });
-            buttonSprite.interactive = true;
-            buttonSprite.buttonMode = true;
-            buttonSprite.on('pointerdown', action);
-            buttonSprite.position.set(position.x, position.y);
-            container.addChild(buttonSprite);
-        }
-
         if (gameRunning) {
-            createButton({
+            container.addChild(createSpriteButton({
                 asset: ASSETS.NEW_GAME_BUTTON_SMALL,
                 action: () => stateMachine.gotoState({ state: STATES.GAME_CONFIG }),
                 position: { x: 74, y: 355 },
-            });
-            createButton({
+            }));
+            container.addChild(createSpriteButton({
                 asset: ASSETS.CONTINUE_BUTTON_SMALL,
                 action: () => stateMachine.switchToState({ state: STATES.GAME }),
                 position: { x: 104, y: 409 },
-            });
+            }));
         }
         else {
-            createButton({
+            container.addChild(createSpriteButton({
                 asset: ASSETS.NEW_GAME_BUTTON,
                 action: () => stateMachine.gotoState({ state: STATES.GAME_CONFIG }),
                 position: { x: 74, y: 355 },
-            });
+            }));
         }
 
-        createButton({
+        container.addChild(createSpriteButton({
             asset: ASSETS.SETTINGS_BUTTON,
             action: () => showNotification({ title: 'Here will be soon a skin switcher', parent: container }),
             position: { x: 420, y: 355 },
-        });
+        }));
 
         const skin = createSelect({
             options: [

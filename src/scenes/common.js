@@ -23,6 +23,15 @@ export function createBoxButton({ text, color, position, onClick, transparency =
     return background;
 }
 
+export function createSpriteButton({ asset, action, position }) {
+    const buttonSprite = CreateSprite({ asset });
+    buttonSprite.interactive = true;
+    buttonSprite.buttonMode = true;
+    buttonSprite.on('pointerdown', action);
+    buttonSprite.position.set(position.x, position.y);
+    return buttonSprite;
+}
+
 export function createSelect({ options, color, position, onSelect = () => {}, initialSelection = 0 }) {
     const select = {
         selectedIndex: initialSelection,
@@ -48,12 +57,11 @@ export function createSelect({ options, color, position, onSelect = () => {}, in
                 }));
             }
             else {
-                const buttonSprite = CreateSprite({ asset: selected.asset });
-                buttonSprite.interactive = true;
-                buttonSprite.buttonMode = true;
-                buttonSprite.on('pointerdown', () => this.next());
-                buttonSprite.position.set(position.x, position.y);
-                this.container.addChild(buttonSprite);
+                this.container.addChild(createSpriteButton({
+                    asset: selected.asset,
+                    action: () => this.next(),
+                    position,
+                }));
             }
         },
     };
