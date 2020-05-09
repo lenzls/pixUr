@@ -1,7 +1,11 @@
 # Changelog
 
 ## [Unreleased]
-    - add settings menu entry
+
+
+## [0.5.0] – 2020-05-09
+    - add game config menu
+       allows switching between ai and human actors
     - fullscreen button visible in game and menu
     - fix still running games when a new was created
 
