@@ -22,7 +22,7 @@ export function createMenuScene({ stateMachine }) {
         if (gameRunning) {
             createButton({
                 asset: ASSETS.NEW_GAME_BUTTON_SMALL,
-                action: () => stateMachine.startNewGame(),
+                action: () => stateMachine.gotoState({ state: STATES.SETTINGS }),
                 position: { x: 74, y: 355 },
             });
             createButton({
@@ -34,14 +34,14 @@ export function createMenuScene({ stateMachine }) {
         else {
             createButton({
                 asset: ASSETS.NEW_GAME_BUTTON,
-                action: () => stateMachine.startNewGame(),
+                action: () => stateMachine.gotoState({ state: STATES.SETTINGS }),
                 position: { x: 74, y: 355 },
             });
         }
 
         createButton({
             asset: ASSETS.SETTINGS_BUTTON,
-            action: () => stateMachine.gotoState({ state: STATES.SETTINGS }),
+            action: () => showNotification({ title: 'Here will be soon a skin switcher', parent: container }),
             position: { x: 420, y: 355 },
         });
 
