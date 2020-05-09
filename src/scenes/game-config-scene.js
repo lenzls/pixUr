@@ -41,6 +41,7 @@ export function createGameConfigScene({ stateMachine }) {
         color: 0xded6d5,
         position: { x: 400, y: 150 },
     });
+    container.addChild(white.container);
     const black = createSelect({
         options: [
             { text: 'Black: AI', value: ACTOR_TYPE.AI },
@@ -49,7 +50,6 @@ export function createGameConfigScene({ stateMachine }) {
         color: 0x7b8d9c,
         position: { x: 400, y: 220 },
     });
-    container.addChild(white.container);
     container.addChild(black.container);
 
     container.addChild(createToggleFullScreenButton());
