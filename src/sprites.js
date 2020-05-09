@@ -67,8 +67,19 @@ export function changeSpriteTexture({ sprite, asset }) {
     sprite.texture = getResource(asset).texture;
 }
 
+export function updateAllSprites() {
+    createdSprites.forEach(created => changeSpriteTexture(created));
+}
+
+const createdSprites = [];
+
 export function CreateSprite({ asset }) {
-    return new Sprite(getResource(asset).texture);
+    const sprite = new Sprite(getResource(asset).texture);
+    createdSprites.push({
+        sprite,
+        asset,
+    });
+    return sprite;
 }
 
 export function addAssets({ loader }) {
