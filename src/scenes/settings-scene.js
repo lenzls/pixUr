@@ -1,7 +1,7 @@
 import { Container } from '../engine.js';
 import { STATES } from '../state-machine.js';
 import { ASSETS, CreateSprite } from '../sprites.js';
-import { createBoxButton, createToggleFullScreenButton, createSelect } from './common.js';
+import { createToggleFullScreenButton, createSelect } from './common.js';
 
 export function createSettingsScene({ stateMachine }) {
     const container = new Container();
@@ -18,7 +18,10 @@ export function createSettingsScene({ stateMachine }) {
 
     createButton({
         asset: ASSETS.NEW_GAME_BUTTON,
-        action: () => stateMachine.startNewGame(),
+        action: () => {
+            console.log(select.selectedIndex);
+            stateMachine.startNewGame();
+        },
         position: { x: 74, y: 355 },
     });
     createButton({
@@ -27,12 +30,15 @@ export function createSettingsScene({ stateMachine }) {
         position: { x: 420, y: 355 },
     });
 
-    // createSelect({
-    //     options: [
-    //         { text: 'White: AI', action: () => console.log('White is ai') },
-    //         { text: 'White: Human', action: () => console.log('White is human') },
-    //     ],
-    // });
+    const select = createSelect({
+        options: [
+            { text: 'White: AI' },
+            { text: 'White: Human' },
+        ],
+        color: 0xff00ff,
+        position: { x: 330, y: 200 },
+    });
+    container.addChild(select.container);
 
     container.addChild(createToggleFullScreenButton());
 

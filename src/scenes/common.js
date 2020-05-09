@@ -1,4 +1,4 @@
-import { Graphics, Text } from '../engine.js';
+import { Container, Graphics, Text } from '../engine.js';
 import { parentElement } from '../index.js';
 
 export function createBoxButton({ text, color, position, onClick, transparency = 0.8 }) {
@@ -20,6 +20,30 @@ export function createBoxButton({ text, color, position, onClick, transparency =
     background.position.set(position.x, position.y);
 
     return background;
+}
+
+export function createSelect({ options, color, position }) {
+    const select = {
+        selectedIndex: 0,
+        container: new Container(),
+        next() {
+            this.selectedIndex = (this.selectedIndex + 1) % options.length;
+            this.render();
+        },
+        render() {
+            const selected = options[this.selectedIndex];
+
+            this.container.removeChildren();
+            this.container.addChild(createBoxButton({
+                text: selected.text,
+                color,
+                position,
+                onClick: () => this.next(),
+            }));
+        },
+    };
+    select.render();
+    return select;
 }
 
 export const createToggleFullScreenButton = () => createBoxButton({
