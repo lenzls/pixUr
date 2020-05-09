@@ -1,7 +1,7 @@
 import { Graphics, Text } from '../engine.js';
 import { parentElement } from '../index.js';
 
-export function createButton({ text, color, position, onClick, transparency = 0.8 }) {
+export function createBoxButton({ text, color, position, onClick, transparency = 0.8 }) {
     const buttonText = new Text(text);
 
     const background = new Graphics();
@@ -11,7 +11,6 @@ export function createButton({ text, color, position, onClick, transparency = 0.
     background.interactive = true;
     background.buttonMode = true;
     background.on('pointerdown', onClick);
-
 
     buttonText.position.set(
         background.width / 2 - buttonText.width / 2,
@@ -23,7 +22,7 @@ export function createButton({ text, color, position, onClick, transparency = 0.
     return background;
 }
 
-export const toggleFullScreenButton = createButton({
+export const createToggleFullScreenButton = () => createBoxButton({
     text: '⛶',
     color: 0xeec39a,
     position: { x: 585, y: 10 },

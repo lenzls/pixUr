@@ -1,7 +1,7 @@
 import { Container } from '../engine.js';
 import { STATES } from '../state-machine.js';
 import { ASSETS, CreateSprite } from '../sprites.js';
-import { toggleFullScreenButton } from './common.js';
+import { createToggleFullScreenButton } from './common.js';
 
 export function createSettingsScene({ stateMachine }) {
     const container = new Container();
@@ -18,11 +18,11 @@ export function createSettingsScene({ stateMachine }) {
 
     createButton({
         asset: ASSETS.BACK_BUTTON,
-        action: () => stateMachine.switchToState({ state: STATES.MENU }),
+        action: () => stateMachine.gotoState({ state: STATES.MENU }),
         position: { x: 74, y: 355 },
     });
 
-    container.addChild(toggleFullScreenButton);
+    container.addChild(createToggleFullScreenButton());
 
     return {
         container,

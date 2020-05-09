@@ -1,6 +1,6 @@
 import { Container, Text } from '../engine.js';
 import { STATES } from '../state-machine.js';
-import { createButton, toggleFullScreenButton } from './common.js';
+import { createBoxButton, createToggleFullScreenButton } from './common.js';
 import { COLOUR } from '../player/player.js';
 import { getCurrentSkin } from '../layout.js';
 
@@ -17,7 +17,7 @@ export function createGameScene({ stateMachine, game }) {
     const currentPlayerIndicator = new Text('→');
     container.addChild(currentPlayerIndicator);
 
-    const diceButton = createButton({
+    const diceButton = createBoxButton({
         text: '⚄',
         color: 0x66CC66,
         position: { x: 580, y: 190 },
@@ -31,7 +31,7 @@ export function createGameScene({ stateMachine, game }) {
         container.addChild(sprite);
     });
 
-    container.addChild(createButton({
+    container.addChild(createBoxButton({
         text: '☰',
         color: 0x66CC66,
         position: { x: 535, y: 10 },
@@ -39,7 +39,7 @@ export function createGameScene({ stateMachine, game }) {
         transparency: 0.25,
     }));
 
-    container.addChild(toggleFullScreenButton);
+    container.addChild(createToggleFullScreenButton());
 
     return {
         container,
