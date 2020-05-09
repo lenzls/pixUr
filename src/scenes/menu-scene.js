@@ -8,7 +8,6 @@ export function createMenuScene({ stateMachine }) {
     const container = new Container();
     function createMenu({ gameRunning }) {
         container.removeChildren();
-        container.remove
         container.addChild(CreateSprite({ asset: ASSETS.PLATE }));
 
         function createButton({ asset, action, position }) {
