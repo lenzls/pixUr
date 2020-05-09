@@ -3,6 +3,7 @@
 ## [Unreleased]
     - add settings menu entry
     - fullscreen button visible in game and menu
+    - fix still running games when a new was created
 
 ## [0.4.0] – 2020-05-07
     - add AI player (white ai, black human)

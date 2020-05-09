@@ -35,6 +35,10 @@ export function CreateStateMachine({ app }) {
     let currentState = null;
     const stateMachine = {
         createScenes() {},
+        startNewGame() {
+            if (stateInstances[STATES.GAME]) stateInstances[STATES.GAME].game.abortRunningGame();
+            this.startNewState({ state: STATES.GAME });
+        },
         startNewState({ state }) {
             if (stateInstances[state]) app.stage.removeChild(stateInstances[state].container);
             if (state === STATES.MENU) stateInstances[state] = CreateMenuState({ stateMachine: this });

@@ -3,10 +3,9 @@ import { CreateWhitePlayer, CreateBlackPlayer } from './player/player.js';
 import { CreateDie, totalPips, calcNewDiceSpritePositions } from './die.js';
 import { isMoveValid, moveResultsInCombat, validMoveExists } from './game-rules.js';
 import { getBoardSprite, addSpriteToSpace, removeSpriteFromSpace } from './board-display.js';
-import { STATES } from './state-machine.js';
 import { showNotification } from './overlay.js';
 
-export function CreateGame({ stateMachine, container }) {
+export function CreateGame({ container }) {
     const board = CreateBoard({ sprite: getBoardSprite(), addSpriteToSpace, removeSpriteFromSpace });
     const white = CreateWhitePlayer();
     const black = CreateBlackPlayer();
@@ -16,6 +15,7 @@ export function CreateGame({ stateMachine, container }) {
 
     const hasPlayerWon = (player) => player.pieces.every(piece => board.getIndex({ piece }) === 15);
 
+    let gameAborted = false;
     return {
         gameRunning: false,
         dice: [CreateDie(), CreateDie(), CreateDie(), CreateDie()],
@@ -44,17 +44,22 @@ export function CreateGame({ stateMachine, container }) {
             this.gameRunning = true;
             this.startTurn();
         },
+        endGame() {
+            this.gameRunning = false;
+        },
+        abortRunningGame() {
+            gameAborted = true;
+        },
         endTurn() {
+            if (gameAborted) { this.endGame(); return; }
             if (hasPlayerWon(black)) {
                 showNotification({ title: 'Black has won!', parent: container });
-                this.gameRunning = false;
-                stateMachine.switchToState({ state: STATES.MENU });
+                this.endGame();
                 return;
             }
             else if (hasPlayerWon(white)) {
                 showNotification({ title: 'White has won!', parent: container });
-                this.gameRunning = false;
-                stateMachine.switchToState({ state: STATES.MENU });
+                this.endGame();
                 return;
             }
 
@@ -68,9 +73,11 @@ export function CreateGame({ stateMachine, container }) {
             this.startTurn();
         },
         startTurn() {
+            if (gameAborted) { this.endGame(); return; }
             this.currentPlayer.actor.askWhenToRollDice({ nowCallback: rollDiceAndAskForNextMove });
             const that = this;
             function rollDiceAndAskForNextMove() {
+                if (gameAborted) { that.endGame(); return; }
                 that.dice.forEach(die => die.roll());
                 calcNewDiceSpritePositions({ dice: that.dice });
                 that.currentPlayerRolled = true;
@@ -91,7 +98,7 @@ export function CreateGame({ stateMachine, container }) {
             }
 
             function moveAttempt({ piece }) {
-                console.log('attempting to move', piece);
+                if (gameAborted) { that.endGame(); return; }
                 if (piece.player !== that.currentPlayer) {
                     showNotification({ title: "It's not your turn, pal", parent: container });
                     return;
