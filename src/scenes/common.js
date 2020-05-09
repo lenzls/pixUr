@@ -41,6 +41,7 @@ export function createSelect({ options, color, position }) {
                 color,
                 position,
                 onClick: () => this.next(),
+                transparency: 0.9,
             }));
         },
     };

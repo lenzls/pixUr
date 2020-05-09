@@ -35,8 +35,8 @@ export function createGameConfigScene({ stateMachine }) {
 
     const white = createSelect({
         options: [
-            { text: 'White: AI', value: ACTOR_TYPE.AI },
             { text: 'White: Human', value: ACTOR_TYPE.HUMAN },
+            { text: 'White: AI', value: ACTOR_TYPE.AI },
         ],
         color: 0xded6d5,
         position: { x: 400, y: 150 },
