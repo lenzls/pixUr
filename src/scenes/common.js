@@ -47,20 +47,20 @@ export function createSelect({ options, color, position, onSelect = () => {}, in
             const selected = options[this.selectedIndex];
 
             this.container.removeChildren();
-            if (!selected.asset) {
+            if (selected.asset) {
+                this.container.addChild(createSpriteButton({
+                    asset: selected.asset,
+                    action: () => this.next(),
+                    position,
+                }));
+            }
+            else if (selected.text) {
                 this.container.addChild(createBoxButton({
                     text: selected.text,
                     color,
                     position,
                     onClick: () => this.next(),
                     transparency: 0.9,
-                }));
-            }
-            else {
-                this.container.addChild(createSpriteButton({
-                    asset: selected.asset,
-                    action: () => this.next(),
-                    position,
                 }));
             }
         },
