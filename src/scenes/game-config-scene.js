@@ -30,7 +30,7 @@ export function createGameConfigScene({ stateMachine }) {
             { text: 'White: AI', value: ACTOR_TYPE.AI },
         ],
         color: 0xded6d5,
-        position: { x: 400, y: 150 },
+        position: { x: 250, y: 150 },
     });
     container.addChild(white.container);
     const black = createSelect({
@@ -39,7 +39,7 @@ export function createGameConfigScene({ stateMachine }) {
             { text: 'Black: Human', value: ACTOR_TYPE.HUMAN },
         ],
         color: 0x7b8d9c,
-        position: { x: 400, y: 220 },
+        position: { x: 250, y: 220 },
     });
     container.addChild(black.container);
 
