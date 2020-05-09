@@ -2,7 +2,8 @@ import { Container } from '../engine.js';
 import { STATES } from '../state-machine.js';
 import { ASSETS, CreateSprite } from '../sprites.js';
 import { showNotification } from '../overlay.js'
-import { createToggleFullScreenButton } from './common.js';
+import { currentSkinIndex, setCurrentSkin } from '../layout.js';
+import { createSelect, createToggleFullScreenButton } from './common.js';
 
 export function createMenuScene({ stateMachine }) {
     const container = new Container();
@@ -44,6 +45,18 @@ export function createMenuScene({ stateMachine }) {
             action: () => showNotification({ title: 'Here will be soon a skin switcher', parent: container }),
             position: { x: 420, y: 355 },
         });
+
+        const skin = createSelect({
+            options: [
+                { text: 'Skin: Simple', value: 0 },
+                { text: 'Skin: British Museum', value: 1 },
+            ],
+            color: 0x7b8d9c,
+            position: { x: 400, y: 220 },
+            onSelect: () => setCurrentSkin(skin.value),
+            initialSelection: currentSkinIndex,
+        });
+        container.addChild(skin.container);
 
         container.addChild(createToggleFullScreenButton());
     }

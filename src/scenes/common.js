@@ -22,15 +22,16 @@ export function createBoxButton({ text, color, position, onClick, transparency =
     return background;
 }
 
-export function createSelect({ options, color, position }) {
+export function createSelect({ options, color, position, onSelect = () => {}, initialSelection = 0 }) {
     const select = {
-        selectedIndex: 0,
-        value: options[0].value,
+        selectedIndex: initialSelection,
+        value: options[initialSelection].value,
         container: new Container(),
         next() {
             this.selectedIndex = (this.selectedIndex + 1) % options.length;
             this.render();
             this.value = options[this.selectedIndex].value;
+            onSelect();
         },
         render() {
             const selected = options[this.selectedIndex];
