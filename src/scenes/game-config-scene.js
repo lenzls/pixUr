@@ -3,7 +3,7 @@ import { STATES } from '../state-machine.js';
 import { ASSETS, CreateSprite } from '../sprites.js';
 import { createToggleFullScreenButton, createSelect } from './common.js';
 
-export function createSettingsScene({ stateMachine }) {
+export function createGameConfigScene({ stateMachine }) {
     const container = new Container();
     container.addChild(CreateSprite({ asset: ASSETS.PLATE }));
 

@@ -1,7 +1,7 @@
 import { CreateGame } from './game.js';
 import { createGameScene } from './scenes/game-scene.js';
 import { createMenuScene } from './scenes/menu-scene.js';
-import { createSettingsScene } from './scenes/settings-scene.js';
+import { createGameConfigScene } from './scenes/game-config-scene.js';
 
 function CreateMenuState(config) {
     const scene = createMenuScene(config);
@@ -11,8 +11,8 @@ function CreateMenuState(config) {
         update() {},
     };
 }
-function CreateSettingsState(config) {
-    const scene = createSettingsScene(config);
+function CreateGameConfigState(config) {
+    const scene = createGameConfigScene(config);
     return {
         container: scene.container,
         switchTo() {},
@@ -35,7 +35,7 @@ function CreateGameState(config) {
 
 export const STATES = {
     MENU: 'menu',
-    SETTINGS: 'settings',
+    GAME_CONFIG: 'gameConfig',
     GAME: 'game',
 };
 
@@ -52,7 +52,7 @@ export function CreateStateMachine({ app }) {
         startNewState({ state }) {
             if (stateInstances[state]) app.stage.removeChild(stateInstances[state].container);
             if (state === STATES.MENU) stateInstances[state] = CreateMenuState({ stateMachine: this });
-            if (state === STATES.SETTINGS) stateInstances[state] = CreateSettingsState({ stateMachine: this });
+            if (state === STATES.GAME_CONFIG) stateInstances[state] = CreateGameConfigState({ stateMachine: this });
             if (state === STATES.GAME) stateInstances[state] = CreateGameState({ stateMachine: this, container: app.stage });
             app.stage.addChild(stateInstances[state].container);
             this.switchToState({ state: state });
@@ -75,7 +75,7 @@ export function CreateStateMachine({ app }) {
                 }
             };
             calculateVisibilityOfStateContainer(STATES.MENU);
-            calculateVisibilityOfStateContainer(STATES.SETTINGS);
+            calculateVisibilityOfStateContainer(STATES.GAME_CONFIG);
             calculateVisibilityOfStateContainer(STATES.GAME);
             stateInstances[currentState].switchTo();
         },

@@ -22,7 +22,7 @@ export function createMenuScene({ stateMachine }) {
         if (gameRunning) {
             createButton({
                 asset: ASSETS.NEW_GAME_BUTTON_SMALL,
-                action: () => stateMachine.gotoState({ state: STATES.SETTINGS }),
+                action: () => stateMachine.gotoState({ state: STATES.GAME_CONFIG }),
                 position: { x: 74, y: 355 },
             });
             createButton({
@@ -34,7 +34,7 @@ export function createMenuScene({ stateMachine }) {
         else {
             createButton({
                 asset: ASSETS.NEW_GAME_BUTTON,
-                action: () => stateMachine.gotoState({ state: STATES.SETTINGS }),
+                action: () => stateMachine.gotoState({ state: STATES.GAME_CONFIG }),
                 position: { x: 74, y: 355 },
             });
         }
