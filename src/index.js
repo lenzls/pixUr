@@ -29,5 +29,6 @@ loader
         console.log(`progress: ${loader.progress}%`);
     })
     .load(() => {
+        app.stage.sortableChildren = true;
         CreateStateMachine({ app });
     });

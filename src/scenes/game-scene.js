@@ -1,6 +1,6 @@
 import { Container, Text } from '../engine.js';
 import { STATES } from '../state-machine.js';
-import { createBoxButton, createToggleFullScreenButton, createVolumeSwitcher } from './common.js';
+import { createBoxButton } from './common.js';
 import { COLOUR } from '../player/player.js';
 import { getCurrentSkin } from '../layout.js';
 import { changeBackgroundMusic } from '../sounds.js';
@@ -39,9 +39,6 @@ export function createGameScene({ stateMachine, game }) {
         onClick: () => stateMachine.gotoState({ state: STATES.MENU }),
         transparency: 0.25,
     }));
-
-    container.addChild(createToggleFullScreenButton());
-    container.addChild(createVolumeSwitcher());
 
     return {
         container,

@@ -1,7 +1,7 @@
 import { Container } from '../engine.js';
 import { STATES } from '../state-machine.js';
 import { ASSETS, CreateSprite } from '../sprites.js';
-import { createToggleFullScreenButton, createVolumeSwitcher, createSelect, createSpriteButton } from './common.js';
+import { createSelect, createSpriteButton } from './common.js';
 import { ACTOR_TYPE } from '../player/player.js';
 
 export function createGameConfigScene({ stateMachine }) {
@@ -42,9 +42,6 @@ export function createGameConfigScene({ stateMachine }) {
         position: { x: 250, y: 220 },
     });
     container.addChild(black.container);
-
-    container.addChild(createToggleFullScreenButton());
-    container.addChild(createVolumeSwitcher());
 
     return {
         container,

@@ -2,6 +2,7 @@ import { CreateGame } from './game.js';
 import { createGameScene } from './scenes/game-scene.js';
 import { createMenuScene } from './scenes/menu-scene.js';
 import { createGameConfigScene } from './scenes/game-config-scene.js';
+import { createHud } from './scenes/hud.js';
 
 function CreateMenuState(config) {
     const scene = createMenuScene(config);
@@ -84,5 +85,6 @@ export function CreateStateMachine({ app }) {
         },
     };
     stateMachine.startNewState({ state: STATES.MENU });
+    app.stage.addChild(createHud().container);
     return stateMachine;
 }
