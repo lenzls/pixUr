@@ -26,7 +26,7 @@ function CreateGameState(config) {
     return {
         game,
         container: scene.container,
-        switchTo() {},
+        switchTo: scene.switchTo,
         update() {
             scene.update();
         },

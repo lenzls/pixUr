@@ -46,7 +46,6 @@ export function createMenuScene({ stateMachine }) {
         container.addChild(skin.container);
 
         container.addChild(createToggleFullScreenButton());
-        changeBackgroundMusic('menu-music');
     }
 
     return {
@@ -54,6 +53,7 @@ export function createMenuScene({ stateMachine }) {
         switchTo() {
             const gameState = stateMachine.getState({ state: STATES.GAME });
             createMenu({ gameRunning: !!gameState?.game?.gameRunning });
+            changeBackgroundMusic('menu-music');
         },
     };
 }

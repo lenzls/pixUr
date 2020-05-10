@@ -41,7 +41,6 @@ export function createGameScene({ stateMachine, game }) {
     }));
 
     container.addChild(createToggleFullScreenButton());
-    changeBackgroundMusic('fiest-music');
 
     return {
         container,
@@ -59,6 +58,9 @@ export function createGameScene({ stateMachine, game }) {
             else {
                 diceButton.visible = true;
             }
+        },
+        switchTo() {
+            changeBackgroundMusic('fiest-music');
         },
     };
 }
