@@ -1,4 +1,5 @@
-import { addAssets } from './sprites.js';
+import { addAssets as addSprites } from './sprites.js';
+import { addAssets as addSounds } from './sounds.js';
 import { utils, Application, loader } from './engine.js';
 import { CreateStateMachine } from './state-machine.js';
 import { resize } from './resizer.js';
@@ -20,7 +21,9 @@ parentElement.appendChild(app.view);
 resize(app)();
 window.addEventListener('resize', resize(app));
 
-addAssets({ loader })
+addSounds({ loader });
+addSprites({ loader });
+loader
     .on('progress', (loader, resource) => {
         console.log(`loading ${resource.url}`);
         console.log(`progress: ${loader.progress}%`);

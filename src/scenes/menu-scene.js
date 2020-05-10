@@ -2,6 +2,7 @@ import { Container } from '../engine.js';
 import { STATES } from '../state-machine.js';
 import { ASSETS, CreateSprite } from '../sprites.js';
 import { showNotification } from '../overlay.js'
+import { play } from '../sounds.js';
 import { currentSkinIndex, setCurrentSkin } from '../layout.js';
 import { createSelect, createSpriteButton, createToggleFullScreenButton } from './common.js';
 
@@ -44,6 +45,7 @@ export function createMenuScene({ stateMachine }) {
         container.addChild(skin.container);
 
         container.addChild(createToggleFullScreenButton());
+        play('menu-music');
     }
 
     return {

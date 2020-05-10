@@ -12,7 +12,7 @@ module.exports = {
     mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
     plugins: [new HtmlWebpackPlugin({
         template: 'src/index.html',
-        title: `${packagejson.name} – ${packagejson.description} (${packagejson.version})`
+        title: `${packagejson.name} – ${packagejson.description} (${packagejson.version})`,
     })],
     module: {
         rules: [
@@ -22,18 +22,18 @@ module.exports = {
                 use: [
                     {
                         loader: 'babel-loader',
-                    }
-                ]
+                    },
+                ],
             },
             {
-                test: /\.png$/,
+                test: /(\.png|\.ogg)$/,
                 use: [
-                    { 
+                    {
                         loader: 'file-loader' ,
                     },
-                ]
-            }
-        ]
+                ],
+            },
+        ],
     },
     devServer: {
         port: 9001,
