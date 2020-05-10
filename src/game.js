@@ -2,8 +2,10 @@ import { CreateBoard } from './board.js';
 import { CreateWhitePlayer, CreateBlackPlayer } from './player/player.js';
 import { CreateDie, totalPips, calcNewDiceSpritePositions } from './die.js';
 import { isMoveValid, moveResultsInCombat, validMoveExists } from './game-rules.js';
-import { getBoardSprite, addSpriteToSpace, removeSpriteFromSpace } from './board-display.js';
+import { getBoardSprite, addSpriteToSpace, removeSpriteFromSpace, onSkinChange } from './board-display.js';
+import { registerSkinChangeListener } from './layout.js';
 import { showNotification } from './overlay.js';
+import { updateAllSprites } from './sprites.js';
 
 export function CreateGame({ container, config: { whiteActorType, blackActorType } = {} }) {
     const board = CreateBoard({ sprite: getBoardSprite(), addSpriteToSpace, removeSpriteFromSpace });
@@ -16,7 +18,7 @@ export function CreateGame({ container, config: { whiteActorType, blackActorType
     const hasPlayerWon = (player) => player.pieces.every(piece => board.getIndex({ piece }) === 15);
 
     let gameAborted = false;
-    return {
+    const game = {
         gameRunning: false,
         dice: [CreateDie(), CreateDie(), CreateDie(), CreateDie()],
         currentPlayerRolled: false,
@@ -130,4 +132,7 @@ export function CreateGame({ container, config: { whiteActorType, blackActorType
             }
         },
     };
+    registerSkinChangeListener({ fnc: updateAllSprites });
+    registerSkinChangeListener({ fnc: onSkinChange, arg: { game } });
+    return game;
 }

@@ -32,3 +32,14 @@ function getRectOfSpace({ index, player }) {
 export function getBoardSprite() {
     return CreateSprite({ asset: ASSETS.BOARD });
 }
+
+export function onSkinChange({ game }) {
+    game.dice.forEach(die => die.updateSprite());
+    [...game.white.pieces, ...game.black.pieces]
+        .forEach(piece => {
+            const index = game.board.getIndex({ piece });
+            game.board.removePiece({ piece, index });
+            game.board.addPiece({ piece, index });
+        });
+    // playerindicator
+}
