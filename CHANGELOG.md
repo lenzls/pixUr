@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [0.6.0] – 2020-05-10
     - add skin changer
 
 ## [0.5.0] – 2020-05-09
