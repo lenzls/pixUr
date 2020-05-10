@@ -5,6 +5,7 @@ import { showNotification } from '../overlay.js'
 import { play } from '../sounds.js';
 import { currentSkinIndex, setCurrentSkin } from '../layout.js';
 import { createSelect, createSpriteButton, createToggleFullScreenButton } from './common.js';
+import { changeBackgroundMusic } from '../sounds.js';
 
 export function createMenuScene({ stateMachine }) {
     const container = new Container();
@@ -45,7 +46,7 @@ export function createMenuScene({ stateMachine }) {
         container.addChild(skin.container);
 
         container.addChild(createToggleFullScreenButton());
-        play('menu-music');
+        changeBackgroundMusic('menu-music');
     }
 
     return {

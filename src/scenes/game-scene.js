@@ -3,6 +3,7 @@ import { STATES } from '../state-machine.js';
 import { createBoxButton, createToggleFullScreenButton } from './common.js';
 import { COLOUR } from '../player/player.js';
 import { getCurrentSkin } from '../layout.js';
+import { changeBackgroundMusic } from '../sounds.js';
 
 export function createGameScene({ stateMachine, game }) {
     const container = new Container();
@@ -40,6 +41,7 @@ export function createGameScene({ stateMachine, game }) {
     }));
 
     container.addChild(createToggleFullScreenButton());
+    changeBackgroundMusic('fiest-music');
 
     return {
         container,
