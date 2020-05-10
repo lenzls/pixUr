@@ -4,7 +4,7 @@ import { ASSETS, CreateSprite } from '../sprites.js';
 import { showNotification } from '../overlay.js'
 import { play } from '../sounds.js';
 import { currentSkinIndex, setCurrentSkin } from '../layout.js';
-import { createSelect, createSpriteButton, createToggleFullScreenButton } from './common.js';
+import { createSelect, createSpriteButton, createToggleFullScreenButton, createVolumeSwitcher } from './common.js';
 import { changeBackgroundMusic } from '../sounds.js';
 
 export function createMenuScene({ stateMachine }) {
@@ -33,19 +33,19 @@ export function createMenuScene({ stateMachine }) {
             }));
         }
 
-        const skin = createSelect({
+        container.addChild(createSelect({
             options: [
                 { value: 0, asset: ASSETS.SKIN_SIMPLE_BUTTON },
                 { value: 1, asset: ASSETS.SKIN_BM_BUTTON },
             ],
             color: 0x7b8d9c,
             position: { x: 420, y: 355 },
-            onSelect: () => setCurrentSkin(skin.value),
+            onSelect: (value) => setCurrentSkin(value),
             initialSelection: currentSkinIndex,
-        });
-        container.addChild(skin.container);
+        }).container);
 
         container.addChild(createToggleFullScreenButton());
+        container.addChild(createVolumeSwitcher());
     }
 
     return {

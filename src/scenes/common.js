@@ -1,6 +1,7 @@
 import { Container, Graphics, Text } from '../engine.js';
 import { parentElement } from '../index.js';
 import { CreateSprite } from '../sprites.js';
+import { setMasterVolume } from '../sounds.js';
 
 export function createBoxButton({ text, color, position, onClick, transparency = 0.8 }) {
     const buttonText = new Text(text);
@@ -41,7 +42,7 @@ export function createSelect({ options, color, position, onSelect = () => {}, in
             this.selectedIndex = (this.selectedIndex + 1) % options.length;
             this.render();
             this.value = options[this.selectedIndex].value;
-            onSelect();
+            onSelect(this.value);
         },
         render() {
             const selected = options[this.selectedIndex];
@@ -68,6 +69,18 @@ export function createSelect({ options, color, position, onSelect = () => {}, in
     select.render();
     return select;
 }
+
+export const createVolumeSwitcher = () => createSelect({
+    options: [
+        { value: 1.0, text: '🔊' },
+        { value: 0.6, text: '🔉' },
+        { value: 0.3, text: '🔈' },
+        { value: 0.0, text: '🔇' },
+    ],
+    color: 0xff00ff,
+    position: { x: 500, y: 10 },
+    onSelect: (value) => setMasterVolume(value),
+}).container;
 
 export const createToggleFullScreenButton = () => createBoxButton({
     text: '⛶',

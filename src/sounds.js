@@ -16,3 +16,7 @@ export function changeBackgroundMusic(key, config = { loop: true }) {
     sound.stopAll();
     play(key, config);
 }
+
+export function setMasterVolume(volume) {
+    sound.volumeAll = volume;
+}
