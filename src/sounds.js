@@ -20,3 +20,7 @@ export function changeBackgroundMusic(key, config = { loop: true }) {
 export function setMasterVolume(volume) {
     sound.volumeAll = volume;
 }
+
+export function getMasterVolume() {
+    return sound.volumeAll;
+}
