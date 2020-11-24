@@ -9,7 +9,12 @@ The game can either be played in hot seat multiplayer or against the computer (y
 
 ![Sample screnshot Main Menu](./docs/screenshot-main-menu-2.png "Screenshot Main Menu")
 
-------
+-----
+
+Oh yeah, and there is some self made music in there. Please forgive me for that.
+
+
+## Skins
 
 There are two different skins to choose from:
 
@@ -26,9 +31,3 @@ Sadly in the current version this skin is a tad confusing, hence the creation of
 ![Screenshot Simple skin](./docs/screenshot-ingame-simple.png "Screenshot Simple skin")
 
 Just shows you the necessities without any artistic value.
-
-
------
-
-Oh yeah, and there is some self made music in there. Please forgive me for that.
-
