@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+    - add menu and ingame music
 
 ## [0.6.0] – 2020-05-10
     - add skin changer
