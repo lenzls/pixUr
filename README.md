@@ -22,3 +22,8 @@ Sadly in the current version this skin is a tad confusing, hence the creation of
 ![Screenshot Simple skin](./docs/screenshot-inagem-simple.png "Screenshot Simple skin")
 Just shows you the necessities without any artistic value.
 
+
+-----
+
+Oh yeah, and there is some self made music in there. Please forgive me for that.
+
